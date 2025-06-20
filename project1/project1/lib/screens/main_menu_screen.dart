@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/game_provider.dart';
 import 'game_screen.dart';
 import 'settings_screen.dart';
+import 'multiplayer_menu_screen.dart';
 
 class MainMenuScreen extends StatefulWidget {
   const MainMenuScreen({super.key});
@@ -178,6 +179,17 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                             context.read<GameProvider>().startNewGame();
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context) => const GameScreen()),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        _buildMenuButton(
+                          icon: Icons.people,
+                          text: 'MULTIPLAYER',
+                          color: const Color(0xFF9B59B6),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => const MultiplayerMenuScreen()),
                             );
                           },
                         ),
