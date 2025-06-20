@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "question": "Türkiye'nin başkenti neresidir?",
+    "options": ["İstanbul", "Ankara", "İzmir", "Bursa"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 2,
+    "question": "Hangi gezegen Güneş'e en yakındır?",
+    "options": ["Mars", "Venüs", "Merkür", "Dünya"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 3,
+    "question": "1 + 1 kaçtır?",
+    "options": ["1", "2", "3", "4"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 4,
+    "question": "Hangi renk gökkuşağında bulunmaz?",
+    "options": ["Kırmızı", "Kahverengi", "Mavi", "Yeşil"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 5,
+    "question": "Hangi hayvan en hızlı koşar?",
+    "options": ["Aslan", "Çita", "Leopar", "Kaplan"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 6,
+    "question": "Hangi element periyodik tabloda 'Fe' sembolü ile gösterilir?",
+    "options": ["Flor", "Demir", "Fosfor", "Fermiyum"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 7,
+    "question": "Hangi yıl Türkiye Cumhuriyeti kurulmuştur?",
+    "options": ["1920", "1921", "1922", "1923"],
+    "correctAnswer": 3
+  },
+  {
+    "id": 8,
+    "question": "Hangi okyanus en büyüktür?",
+    "options": ["Atlas Okyanusu", "Hint Okyanusu", "Pasifik Okyanusu", "Arktik Okyanusu"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 9,
+    "question": "Hangi spor dalında 'gol' terimi kullanılır?",
+    "options": ["Basketbol", "Futbol", "Voleybol", "Tenis"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 10,
+    "question": "Hangi mevsimde yapraklar dökülür?",
+    "options": ["İlkbahar", "Yaz", "Sonbahar", "Kış"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 11,
+    "question": "Hangi ülke en büyük yüzölçümüne sahiptir?",
+    "options": ["Çin", "ABD", "Rusya", "Kanada"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 12,
+    "question": "Hangi vitamin güneş ışığı ile vücutta üretilir?",
+    "options": ["A Vitamini", "B Vitamini", "C Vitamini", "D Vitamini"],
+    "correctAnswer": 3
+  },
+  {
+    "id": 13,
+    "question": "Hangi gezegen 'Kızıl Gezegen' olarak bilinir?",
+    "options": ["Venüs", "Mars", "Jüpiter", "Satürn"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 14,
+    "question": "Hangi yıl İstanbul fethedilmiştir?",
+    "options": ["1451", "1453", "1455", "1457"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 15,
+    "question": "Hangi element suyun yapısında bulunmaz?",
+    "options": ["Hidrojen", "Oksijen", "Azot", "Karbon"],
+    "correctAnswer": 3
+  },
+  {
+    "id": 16,
+    "question": "Hangi hayvan en uzun boyunlu memelidir?",
+    "options": ["Fil", "Zürafa", "Deve", "Antilop"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 17,
+    "question": "Hangi renk ana renklerden biri değildir?",
+    "options": ["Kırmızı", "Mavi", "Yeşil", "Sarı"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 18,
+    "question": "Hangi matematik işlemi 'çarpma' olarak bilinir?",
+    "options": ["+", "-", "×", "÷"],
+    "correctAnswer": 2
+  },
+  {
+    "id": 19,
+    "question": "Hangi ülke en çok nüfusa sahiptir?",
+    "options": ["Hindistan", "Çin", "ABD", "Endonezya"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 20,
+    "question": "Hangi element periyodik tabloda 'O' sembolü ile gösterilir?",
+    "options": ["Oksijen", "Osmiyum", "Oganesson", "Osmium"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 21,
+    "question": "Hangi yıl I. Dünya Savaşı başlamıştır?",
+    "options": ["1914", "1915", "1916", "1917"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 22,
+    "question": "Hangi okyanus en küçüktür?",
+    "options": ["Atlas Okyanusu", "Hint Okyanusu", "Pasifik Okyanusu", "Arktik Okyanusu"],
+    "correctAnswer": 3
+  },
+  {
+    "id": 23,
+    "question": "Hangi spor dalında 'basket' terimi kullanılır?",
+    "options": ["Basketbol", "Futbol", "Voleybol", "Tenis"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 24,
+    "question": "Hangi mevsimde çiçekler açar?",
+    "options": ["İlkbahar", "Yaz", "Sonbahar", "Kış"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 25,
+    "question": "Hangi gezegen en büyük gezegendir?",
+    "options": ["Mars", "Jüpiter", "Satürn", "Uranüs"],
+    "correctAnswer": 1
+  }
+] 
