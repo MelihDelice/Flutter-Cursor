@@ -4,6 +4,7 @@ import 'dart:math';
 enum GameStatus {
   waiting,
   playing,
+  showingResults,
   finished,
 }
 
