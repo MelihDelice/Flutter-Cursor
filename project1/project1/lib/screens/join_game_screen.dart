@@ -195,14 +195,13 @@ class _JoinGameScreenState extends State<JoinGameScreen>
           TextField(
             controller: _gameIdController,
             onChanged: (value) {
-              print('TextField onChanged: $value');
               setState(() {
                 _isGameIdEntered = value.trim().isNotEmpty;
               });
             },
             decoration: InputDecoration(
               labelText: 'Referans Kodu',
-              hintText: 'Örn: 1234567890',
+              hintText: 'Örn: ABC123',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: const BorderSide(color: Color(0xFF6C63FF)),
