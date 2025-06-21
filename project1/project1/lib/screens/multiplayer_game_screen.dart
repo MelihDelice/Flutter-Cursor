@@ -86,6 +86,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 return _buildGameScreen(multiplayerProvider, game);
               }
               
+              if (game.status == GameStatus.showingResults) {
+                return _buildShowingResultsScreen(multiplayerProvider, game);
+              }
+              
               if (game.status == GameStatus.finished) {
                 return _buildGameOverScreen(multiplayerProvider, game);
               }
@@ -270,6 +274,229 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         ),
         
         const Spacer(),
+      ],
+    );
+  }
+
+  Widget _buildShowingResultsScreen(MultiplayerProvider multiplayerProvider, MultiplayerGame game) {
+    if (game.questions.isEmpty || game.currentQuestionIndex >= game.questions.length) {
+      return _buildGameOverScreen(multiplayerProvider, game);
+    }
+    
+    final currentQuestion = game.questions[game.currentQuestionIndex];
+    final playerScore = game.playerScores[multiplayerProvider.playerId] ?? 0;
+    final opponentScore = game.playerScores.entries
+        .where((entry) => entry.key != multiplayerProvider.playerId)
+        .firstOrNull?.value ?? 0;
+    
+    return Column(
+      children: [
+        // Üst bar
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.9),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              GestureDetector(
+                onTap: () => _showExitConfirmation(context),
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: Color(0xFF6C63FF),
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildScoreDisplay('Sen', playerScore),
+                    _buildScoreDisplay('Rakip', opponentScore),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.blue.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.blue),
+                ),
+                child: Text(
+                  '${game.currentQuestionIndex + 1}/${game.questions.length}',
+                  style: const TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        
+        Expanded(
+          child: FadeTransition(
+            opacity: _fadeAnimation,
+            child: Container(
+              margin: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.95),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  // Soru
+                  Text(
+                    currentQuestion.question,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF2D3748),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 32),
+                  
+                  // Şıklar (sonuçlarla birlikte)
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: currentQuestion.options.length,
+                      itemBuilder: (context, index) {
+                        final option = currentQuestion.options[index];
+                        final isCorrect = index == currentQuestion.correctAnswer;
+                        final wasPlayerAnswer = game.playerAnswers[multiplayerProvider.playerId] == index;
+                        
+                        Color backgroundColor;
+                        Color borderColor;
+                        IconData? iconData;
+                        Color iconColor;
+                        
+                        if (isCorrect) {
+                          backgroundColor = Colors.green.withOpacity(0.1);
+                          borderColor = Colors.green;
+                          iconData = Icons.check_circle;
+                          iconColor = Colors.green;
+                        } else if (wasPlayerAnswer) {
+                          backgroundColor = Colors.red.withOpacity(0.1);
+                          borderColor = Colors.red;
+                          iconData = Icons.cancel;
+                          iconColor = Colors.red;
+                        } else {
+                          backgroundColor = Colors.grey[100]!;
+                          borderColor = Colors.grey[300]!;
+                          iconData = null;
+                          iconColor = Colors.grey;
+                        }
+                        
+                        return Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: backgroundColor,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: borderColor, width: 2),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 24,
+                                height: 24,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: isCorrect ? Colors.green : wasPlayerAnswer ? Colors.red : Colors.grey[300],
+                                ),
+                                child: iconData != null
+                                    ? Icon(
+                                        iconData,
+                                        color: Colors.white,
+                                        size: 16,
+                                      )
+                                    : null,
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  option,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: isCorrect 
+                                        ? Colors.green 
+                                        : wasPlayerAnswer 
+                                            ? Colors.red 
+                                            : const Color(0xFF2D3748),
+                                  ),
+                                ),
+                              ),
+                              if (iconData != null) ...[
+                                const SizedBox(width: 8),
+                                Icon(
+                                  iconData,
+                                  color: iconColor,
+                                  size: 24,
+                                ),
+                              ],
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  
+                  const SizedBox(height: 16),
+                  
+                  // Sonraki soruya geçiliyor mesajı
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.blue),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        const Text(
+                          'Sonraki soruya geçiliyor...',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -765,6 +992,21 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   void _leaveGame(MultiplayerProvider multiplayerProvider) {
     multiplayerProvider.leaveGame();
     Navigator.pop(context);
+  }
+
+  void _copyGameCode(String gameId) {
+    Clipboard.setData(ClipboardData(text: gameId));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Referans kodu kopyalandı!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  void _shareGameCode(String gameId) {
+    final message = 'Quiz oyununa katılmak için bu referans kodunu kullan: $gameId';
+    Share.share(message, subject: 'Quiz Oyunu Daveti');
   }
 
   Future<bool> _showExitConfirmation(BuildContext context) async {
