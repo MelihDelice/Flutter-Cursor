@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   void initState() {
     super.initState();
     _animationController = AnimationController(
-      duration: const Duration(seconds: 5),
+      duration: const Duration(seconds: 1),
       vsync: this,
     );
     _pulseController = AnimationController(
@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     _animationController.forward();
     _pulseController.repeat(reverse: true);
 
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 1), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const MainMenuScreen()),
       );
