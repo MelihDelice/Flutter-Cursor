@@ -185,18 +185,29 @@ class FirebaseService {
         }
       }
       
+      // Önce sonuçları göster (2 saniye)
+      final showingResultsGame = game.copyWith(
+        playerScores: updatedScores,
+        status: GameStatus.showingResults,
+      );
+      
+      await _database.child('games').child(gameId).update(showingResultsGame.toJson());
+      
+      // 2 saniye bekle
+      await Future.delayed(const Duration(seconds: 2));
+      
       // Sonraki soruya geç veya oyunu bitir
       final nextQuestionIndex = currentQuestionIndex + 1;
       final isGameFinished = nextQuestionIndex >= questions.length;
       
-      final updatedGame = game.copyWith(
+      final finalGame = game.copyWith(
         playerScores: updatedScores,
         playerAnswers: {}, // Cevap verilerini temizle
         currentQuestionIndex: nextQuestionIndex,
         status: isGameFinished ? GameStatus.finished : GameStatus.playing,
       );
       
-      await _database.child('games').child(gameId).update(updatedGame.toJson());
+      await _database.child('games').child(gameId).update(finalGame.toJson());
     } catch (e) {
       _messageController?.add('Skor güncelleme hatası: $e');
     }
