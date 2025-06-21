@@ -87,7 +87,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                   ),
                   // Skor
                   Container(
-                    margin: const EdgeInsets.only(right: 16),
+                    margin: const EdgeInsets.only(right: 8),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: const Color(0xFF4ECDC4),
@@ -107,6 +107,41 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
+                    ),
+                  ),
+                  // Kategori
+                  Container(
+                    margin: const EdgeInsets.only(right: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: _getCategoryColor(gameProvider.selectedCategory),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 5,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          _getCategoryIcon(gameProvider.selectedCategory),
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          gameProvider.selectedCategory,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -633,5 +668,47 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
       },
     );
     return result ?? false;
+  }
+
+  Color _getCategoryColor(String category) {
+    switch (category) {
+      case 'Tümü':
+        return const Color(0xFF6C63FF);
+      case 'Coğrafya':
+        return const Color(0xFF4ECDC4);
+      case 'Fen':
+        return const Color(0xFF45B7D1);
+      case 'Matematik':
+        return const Color(0xFFFF6B6B);
+      case 'Tarih':
+        return const Color(0xFFFFD93D);
+      case 'Spor':
+        return const Color(0xFF96CEB4);
+      case 'Genel':
+        return const Color(0xFF9B59B6);
+      default:
+        return const Color(0xFF95A5A6);
+    }
+  }
+
+  IconData _getCategoryIcon(String category) {
+    switch (category) {
+      case 'Tümü':
+        return Icons.all_inclusive;
+      case 'Coğrafya':
+        return Icons.public;
+      case 'Fen':
+        return Icons.science;
+      case 'Matematik':
+        return Icons.calculate;
+      case 'Tarih':
+        return Icons.history_edu;
+      case 'Spor':
+        return Icons.sports_soccer;
+      case 'Genel':
+        return Icons.quiz;
+      default:
+        return Icons.category;
+    }
   }
 } 

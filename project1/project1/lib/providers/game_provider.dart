@@ -18,6 +18,7 @@ class GameProvider extends ChangeNotifier {
   int? _selectedAnswer;
   int? _correctAnswer;
   bool _shouldAnimateNextQuestion = false;
+  String _selectedCategory = 'Tümü';
   
   // Zaman sınırlı mod için
   int _timeLeft = 60; // 60 saniye
@@ -46,6 +47,15 @@ class GameProvider extends ChangeNotifier {
   int get correctAnswers => _correctAnswers;
   int get wrongAnswers => _wrongAnswers;
   bool get soundEnabled => _soundEnabled;
+  String get selectedCategory => _selectedCategory;
+  
+  List<String> get categories {
+    if (_questions.isEmpty) return ['Tümü'];
+    final Set<String> categorySet = _questions.map((q) => q.category).toSet();
+    final List<String> categories = ['Tümü'] + categorySet.toList();
+    categories.sort();
+    return categories;
+  }
   
   double get successRate {
     if (_correctAnswers + _wrongAnswers == 0) return 0.0;
@@ -101,8 +111,23 @@ class GameProvider extends ChangeNotifier {
     }
   }
 
-  void startNewGame() {
-    _currentQuestions = List.from(_questions);
+  void setCategory(String category) {
+    _selectedCategory = category;
+    notifyListeners();
+  }
+
+  void startNewGame({String? category}) {
+    if (category != null) {
+      _selectedCategory = category;
+    }
+    
+    // Kategori seçimine göre soruları filtrele
+    if (_selectedCategory == 'Tümü') {
+      _currentQuestions = List.from(_questions);
+    } else {
+      _currentQuestions = _questions.where((q) => q.category == _selectedCategory).toList();
+    }
+    
     _currentQuestions.shuffle(Random());
     _currentQuestionIndex = 0;
     _score = 0;
