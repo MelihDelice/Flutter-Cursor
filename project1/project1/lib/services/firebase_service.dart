@@ -253,6 +253,13 @@ class FirebaseService {
       
       final game = MultiplayerGame.fromJson(gameData);
       
+      // Oyun devam ediyorsa, oyunu sonlandır
+      if (game.status == GameStatus.playing) {
+        final updatedGame = game.copyWith(status: GameStatus.finished);
+        await _database.child('games').child(gameId).update(updatedGame.toJson());
+        _messageController?.add('Oyuncu ayrıldı, oyun sonlandırıldı');
+      }
+      
       if (game.hostId == playerId) {
         // Host ayrıldı, oyunu sil
         await _database.child('games').child(gameId).remove();
@@ -264,6 +271,7 @@ class FirebaseService {
         final updatedGame = game.copyWith(
           guestId: null,
           playerScores: updatedScores,
+          status: GameStatus.finished, // Oyunu sonlandır
         );
         
         await _database.child('games').child(gameId).update(updatedGame.toJson());

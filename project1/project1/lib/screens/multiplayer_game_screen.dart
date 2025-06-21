@@ -514,6 +514,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         .where((entry) => entry.key != multiplayerProvider.playerId)
         .firstOrNull?.value ?? 0;
     
+    // Oyuncu ayrılma durumunu kontrol et
+    final isPlayerLeft = game.guestId == null && game.currentQuestionIndex < game.questions.length;
+    
     final isWinner = playerScore > opponentScore;
     final isDraw = playerScore == opponentScore;
     
@@ -600,13 +603,35 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  isWinner ? 'Tebrikler! Kazandın!' : isDraw ? 'Berabere!' : 'Kaybettin!',
+                  isPlayerLeft 
+                      ? 'Rakip Oyundan Ayrıldı' 
+                      : isWinner 
+                          ? 'Tebrikler! Kazandın!' 
+                          : isDraw 
+                              ? 'Berabere!' 
+                              : 'Kaybettin!',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: isWinner ? Colors.amber : isDraw ? Colors.blue : Colors.grey,
+                    color: isPlayerLeft 
+                        ? Colors.orange 
+                        : isWinner 
+                            ? Colors.amber 
+                            : isDraw 
+                                ? Colors.blue 
+                                : Colors.grey,
                   ),
                 ),
+                if (isPlayerLeft) ...[
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Oyun sonlandırıldı',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 24),
                 
                 // Skorlar
