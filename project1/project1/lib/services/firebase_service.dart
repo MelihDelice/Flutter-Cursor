@@ -10,6 +10,7 @@ class FirebaseService {
   StreamController<MultiplayerGame>? _gameController;
   StreamController<String>? _messageController;
   StreamSubscription<DatabaseEvent>? _gameSubscription;
+  Timer? _questionTimer;
   
   final _uuid = Uuid();
 
@@ -48,11 +49,13 @@ class FirebaseService {
     }
   }
 
-  Future<void> createGame(List<Question> questions) async {
+  Future<void> createGame(List<Question> questions, String category, String hostName) async {
     try {
       final game = MultiplayerGame.create(
         hostId: playerId,
+        hostName: hostName,
         questions: questions,
+        category: category,
       );
 
       _messageController?.add('Oyun oluşturuluyor: ${game.gameId}');
@@ -74,7 +77,7 @@ class FirebaseService {
     }
   }
 
-  Future<void> joinGame(String gameId) async {
+  Future<void> joinGame(String gameId, String playerName) async {
     try {
       _messageController?.add('Oyuna katılmaya çalışılıyor: $gameId');
       
@@ -104,17 +107,28 @@ class FirebaseService {
       final game = MultiplayerGame.fromJson(gameData);
       _messageController?.add('Oyun nesnesi oluşturuldu: ${game.gameId}');
       
-      if (game.guestId != null) {
-        _messageController?.add('Oyun dolu: ${game.guestId}');
+      // Oyuncunun zaten oyunda olup olmadığını kontrol et
+      if (game.isPlayerInGame(playerId)) {
+        _messageController?.add('Zaten oyundasın');
+        // Oyun değişikliklerini dinle
+        _listenToGame(gameId);
         return;
       }
 
-      _messageController?.add('Misafir olarak katılım sağlanıyor...');
+      // Oyuna katılabilir mi kontrol et
+      if (!game.canJoin()) {
+        _messageController?.add('Oyun dolu (${game.playerCount}/${game.maxPlayers}) veya başlamış');
+        return;
+      }
+
+      _messageController?.add('Oyuna katılım sağlanıyor...');
       
-      // Misafir olarak katıl
+      // Oyuncuları güncelle
+      final updatedPlayerIds = [...game.playerIds, playerId];
       final updatedGame = game.copyWith(
-        guestId: playerId,
+        playerIds: updatedPlayerIds,
         playerScores: {...game.playerScores, playerId: 0},
+        playerNames: {...game.playerNames, playerId: playerName},
       );
 
       await _database.child('games').child(gameId).update(updatedGame.toJson());
@@ -124,7 +138,7 @@ class FirebaseService {
       // Oyun değişikliklerini dinle
       _listenToGame(gameId);
       
-      _messageController?.add('Oyuna başarıyla katıldın!');
+      _messageController?.add('Oyuna başarıyla katıldın! (${updatedPlayerIds.length}/${game.maxPlayers})');
     } catch (e) {
       final errorMsg = 'Oyuna katılma hatası: $e';
       _messageController?.add(errorMsg);
@@ -154,8 +168,9 @@ class FirebaseService {
       
       await _database.child('games').child(gameId).update(updatedGame.toJson());
       
-      // Her iki oyuncu da cevap verdiğinde skorları güncelle
-      if (updatedAnswers.length >= 2) {
+      // Tüm oyuncular cevap verdiğinde skorları güncelle
+      if (updatedAnswers.length >= game.playerCount) {
+        _questionTimer?.cancel(); // Timer'ı iptal et
         await _processAnswers(gameId, updatedGame);
       }
     } catch (e) {
@@ -205,9 +220,15 @@ class FirebaseService {
         playerAnswers: {}, // Cevap verilerini temizle
         currentQuestionIndex: nextQuestionIndex,
         status: isGameFinished ? GameStatus.finished : GameStatus.playing,
+        questionStartTime: isGameFinished ? null : DateTime.now(),
       );
       
       await _database.child('games').child(gameId).update(finalGame.toJson());
+      
+      // Yeni soru için timer başlat (oyun bitmemişse)
+      if (!isGameFinished) {
+        _startQuestionTimer(gameId, game.questionTimeLimit);
+      }
     } catch (e) {
       _messageController?.add('Skor güncelleme hatası: $e');
     }
@@ -228,20 +249,28 @@ class FirebaseService {
       
       final game = MultiplayerGame.fromJson(gameData);
       
-      if (game.hostId != playerId) {
+      if (!game.isHost(playerId)) {
         _messageController?.add('Sadece oyun sahibi oyunu başlatabilir');
         return;
       }
       
-      if (game.guestId == null) {
-        _messageController?.add('Oyuncu bekleniyor');
+      if (game.playerCount < 2) {
+        _messageController?.add('En az 2 oyuncu gerekiyor (Şu an: ${game.playerCount})');
         return;
       }
 
-      final updatedGame = game.copyWith(status: GameStatus.playing);
+      // Oyunu başlat ve ilk soru için timer'ı ayarla
+      final now = DateTime.now();
+      final updatedGame = game.copyWith(
+        status: GameStatus.playing,
+        questionStartTime: now,
+      );
       await _database.child('games').child(gameId).update(updatedGame.toJson());
       
-      _messageController?.add('Oyun başlatıldı!');
+      // İlk soru için timer başlat
+      _startQuestionTimer(gameId, game.questionTimeLimit);
+      
+      _messageController?.add('Oyun başlatıldı! (${game.playerCount} oyuncu)');
     } catch (e) {
       _messageController?.add('Oyun başlatma hatası: $e');
     }
@@ -271,21 +300,24 @@ class FirebaseService {
         _messageController?.add('Oyuncu ayrıldı, oyun sonlandırıldı');
       }
       
-      if (game.hostId == playerId) {
+      if (game.isHost(playerId)) {
         // Host ayrıldı, oyunu sil
         await _database.child('games').child(gameId).remove();
-      } else if (game.guestId == playerId) {
-        // Guest ayrıldı
+        _messageController?.add('Oyun sahibi ayrıldı, oyun silindi');
+      } else if (game.isPlayerInGame(playerId)) {
+        // Oyuncu ayrıldı
+        final updatedPlayerIds = game.playerIds.where((id) => id != playerId).toList();
         final updatedScores = Map<String, int>.from(game.playerScores);
         updatedScores.remove(playerId);
         
         final updatedGame = game.copyWith(
-          guestId: null,
+          playerIds: updatedPlayerIds,
           playerScores: updatedScores,
-          status: GameStatus.finished, // Oyunu sonlandır
+          status: updatedPlayerIds.length < 2 ? GameStatus.finished : game.status,
         );
         
         await _database.child('games').child(gameId).update(updatedGame.toJson());
+        _messageController?.add('Oyundan ayrıldın (${updatedPlayerIds.length} oyuncu kaldı)');
       }
     } catch (e) {
       _messageController?.add('Oyundan çıkma hatası: $e');
@@ -327,7 +359,41 @@ class FirebaseService {
     );
   }
 
+  void _startQuestionTimer(String gameId, int timeLimit) {
+    _questionTimer?.cancel();
+    
+    _questionTimer = Timer(Duration(seconds: timeLimit), () {
+      _handleQuestionTimeout(gameId);
+    });
+  }
+
+  Future<void> _handleQuestionTimeout(String gameId) async {
+    try {
+      final snapshot = await _database.child('games').child(gameId).get();
+      if (!snapshot.exists) return;
+
+      final dynamic rawData = snapshot.value;
+      Map<String, dynamic> gameData;
+      if (rawData is Map) {
+        gameData = rawData.map((key, value) => MapEntry(key.toString(), value));
+      } else {
+        return;
+      }
+      
+      final game = MultiplayerGame.fromJson(gameData);
+      
+      // Oyun durumu kontrol et
+      if (game.status != GameStatus.playing) return;
+      
+      // Zaman doldu, skorları güncelle (cevap vermeyenler puan alamaz)
+      await _processAnswers(gameId, game);
+    } catch (e) {
+      _messageController?.add('Zaman aşımı işleme hatası: $e');
+    }
+  }
+
   void dispose() {
+    _questionTimer?.cancel();
     _gameSubscription?.cancel();
     _gameController?.close();
     _messageController?.close();
