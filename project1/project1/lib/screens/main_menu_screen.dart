@@ -173,13 +173,10 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                       children: [
                         _buildMenuButton(
                           icon: Icons.play_arrow,
-                          text: 'OYUNA BAŞLA',
+                          text: 'TEK OYUNCULU',
                           color: const Color(0xFF4ECDC4),
                           onPressed: () {
-                            context.read<GameProvider>().startNewGame();
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => const GameScreen()),
-                            );
+                            _showCategorySelectionDialog(context);
                           },
                         ),
                         const SizedBox(height: 20),
@@ -314,5 +311,194 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
         ),
       ),
     );
+  }
+
+  void _showCategorySelectionDialog(BuildContext context) {
+    final gameProvider = context.read<GameProvider>();
+    
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              gradient: const LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xFFFFF8E1), Color(0xFFFFE0B2)],
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Başlık
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF4ECDC4),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(
+                        Icons.category,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    const Text(
+                      'Kategori Seç',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF2D3748),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                
+                // Kategori listesi
+                Consumer<GameProvider>(
+                  builder: (context, provider, child) {
+                    return Column(
+                      children: provider.categories.map((category) {
+                        return Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(12),
+                              onTap: () {
+                                Navigator.of(context).pop();
+                                provider.startNewGame(category: category);
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) => const GameScreen()),
+                                );
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: _getCategoryColor(category).withOpacity(0.3),
+                                    width: 2,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: _getCategoryColor(category).withOpacity(0.1),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: _getCategoryColor(category),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Icon(
+                                        _getCategoryIcon(category),
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: Text(
+                                        category,
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xFF2D3748),
+                                        ),
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: _getCategoryColor(category),
+                                      size: 16,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  },
+                ),
+                
+                const SizedBox(height: 16),
+                
+                // İptal butonu
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text(
+                    'İptal',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Color _getCategoryColor(String category) {
+    switch (category) {
+      case 'Tümü':
+        return const Color(0xFF6C63FF);
+      case 'Coğrafya':
+        return const Color(0xFF4ECDC4);
+      case 'Fen':
+        return const Color(0xFF45B7D1);
+      case 'Matematik':
+        return const Color(0xFFFF6B6B);
+      case 'Tarih':
+        return const Color(0xFFFFD93D);
+      case 'Spor':
+        return const Color(0xFF96CEB4);
+      case 'Genel':
+        return const Color(0xFF9B59B6);
+      default:
+        return const Color(0xFF95A5A6);
+    }
+  }
+
+  IconData _getCategoryIcon(String category) {
+    switch (category) {
+      case 'Tümü':
+        return Icons.all_inclusive;
+      case 'Coğrafya':
+        return Icons.public;
+      case 'Fen':
+        return Icons.science;
+      case 'Matematik':
+        return Icons.calculate;
+      case 'Tarih':
+        return Icons.history_edu;
+      case 'Spor':
+        return Icons.sports_soccer;
+      case 'Genel':
+        return Icons.quiz;
+      default:
+        return Icons.category;
+    }
   }
 } 
