@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 enum GameStatus {
   waiting,
@@ -51,8 +52,16 @@ class MultiplayerGame {
   }
 
   static String generateGameId() {
-    return DateTime.now().millisecondsSinceEpoch.toString() + 
-           (1000 + DateTime.now().microsecond % 9000).toString();
+    const String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final random = Random();
+    String result = '';
+    
+    // 6 haneli alpha-numeric kod oluştur
+    for (int i = 0; i < 6; i++) {
+      result += chars[random.nextInt(chars.length)];
+    }
+    
+    return result;
   }
 
   MultiplayerGame copyWith({
