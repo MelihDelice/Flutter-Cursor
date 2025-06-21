@@ -760,16 +760,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     });
     
     multiplayerProvider.submitAnswer(_selectedAnswer!);
-    
-    // Cevap gönderildikten sonra kısa bir gecikme ile sıfırla
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        setState(() {
-          _selectedAnswer = null;
-          _isAnswerSubmitted = false;
-        });
-      }
-    });
   }
 
   void _leaveGame(MultiplayerProvider multiplayerProvider) {
