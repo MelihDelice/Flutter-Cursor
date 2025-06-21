@@ -308,93 +308,20 @@ class _CreateGameScreenState extends State<CreateGameScreen>
           ),
           const SizedBox(height: 8),
           const Text(
-            'Referans kodunu arkadaşlarınla paylaş',
+            'Oyun odası hazırlandı. Şimdi oyuna geçebilirsin.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey,
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 32),
           
-          // Referans kodu
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: const Color(0xFF6C63FF).withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFF6C63FF).withOpacity(0.3)),
-            ),
-            child: Column(
-              children: [
-                const Text(
-                  'Referans Kodu',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF6C63FF),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      _gameId ?? '',
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF2D3748),
-                        letterSpacing: 2,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    GestureDetector(
-                      onTap: () {
-                        if (_gameId != null && _gameId!.isNotEmpty) {
-                          Clipboard.setData(ClipboardData(text: _gameId!));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Referans kodu kopyalandı!'),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
-                        }
-                      },
-                      child: const Icon(
-                        Icons.copy,
-                        color: Color(0xFF6C63FF),
-                        size: 24,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-          
-          // Paylaş butonu
-          ElevatedButton.icon(
-            onPressed: () => _shareGameCode(),
-            icon: const Icon(Icons.share),
-            label: const Text('Paylaş'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          
-          // Oyuna başla butonu
+          // Oyuna geç butonu
           ElevatedButton.icon(
             onPressed: () => _startGame(),
             icon: const Icon(Icons.play_arrow),
-            label: const Text('Oyuna Başla'),
+            label: const Text('Oyun Odasına Geç'),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF6C63FF),
               foregroundColor: Colors.white,
@@ -432,10 +359,7 @@ class _CreateGameScreenState extends State<CreateGameScreen>
     }
   }
 
-  void _shareGameCode() {
-    final message = 'Quiz oyununa katılmak için bu referans kodunu kullan: $_gameId';
-    Share.share(message, subject: 'Quiz Oyunu Daveti');
-  }
+
 
   void _startGame() {
     if (_gameId != null) {
