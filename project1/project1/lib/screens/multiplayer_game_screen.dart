@@ -142,7 +142,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           child: Row(
             children: [
               GestureDetector(
-                onTap: () => _leaveGame(multiplayerProvider),
+                onTap: () => _showExitConfirmation(context),
                 child: const Icon(
                   Icons.arrow_back,
                   color: Color(0xFF6C63FF),
@@ -302,7 +302,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           child: Row(
             children: [
               GestureDetector(
-                onTap: () => _leaveGame(multiplayerProvider),
+                onTap: () => _showExitConfirmation(context),
                 child: const Icon(
                   Icons.arrow_back,
                   color: Color(0xFF6C63FF),

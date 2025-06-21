@@ -357,14 +357,11 @@ class _JoinGameScreenState extends State<JoinGameScreen>
     final gameId = _gameIdController.text.trim();
     if (gameId.isEmpty) return;
     
-    print('JoinGameScreen: Oyuna katılmaya çalışılıyor - $gameId');
-    
     await multiplayerProvider.joinGame(gameId);
     
     // Başarılı bağlantı durumunda oyun ekranına geç
     if (multiplayerProvider.successMessage != null && 
         multiplayerProvider.currentGameId != null) {
-      print('JoinGameScreen: Başarılı, oyun ekranına geçiliyor');
       // Kısa bir gecikme ile oyun ekranına geç
       Future.delayed(const Duration(seconds: 2), () {
         if (mounted) {
@@ -378,8 +375,6 @@ class _JoinGameScreenState extends State<JoinGameScreen>
           );
         }
       });
-    } else {
-      print('JoinGameScreen: Başarısız - ${multiplayerProvider.errorMessage}');
     }
   }
 } 
