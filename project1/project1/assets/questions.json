@@ -3,150 +3,245 @@
     "id": 1,
     "question": "Türkiye'nin başkenti neresidir?",
     "options": ["İstanbul", "Ankara", "İzmir", "Bursa"],
-    "correctAnswer": 1
+    "correctAnswer": 1,
+    "category": "Coğrafya"
   },
   {
     "id": 2,
     "question": "Hangi gezegen Güneş'e en yakındır?",
     "options": ["Mars", "Venüs", "Merkür", "Dünya"],
-    "correctAnswer": 2
+    "correctAnswer": 2,
+    "category": "Fen"
   },
   {
     "id": 3,
     "question": "1 + 1 kaçtır?",
     "options": ["1", "2", "3", "4"],
-    "correctAnswer": 1
+    "correctAnswer": 1,
+    "category": "Matematik"
   },
   {
     "id": 4,
     "question": "Hangi renk gökkuşağında bulunmaz?",
     "options": ["Kırmızı", "Kahverengi", "Mavi", "Yeşil"],
-    "correctAnswer": 1
+    "correctAnswer": 1,
+    "category": "Fen"
   },
   {
     "id": 5,
     "question": "Hangi hayvan en hızlı koşar?",
     "options": ["Aslan", "Çita", "Leopar", "Kaplan"],
-    "correctAnswer": 1
+    "correctAnswer": 1,
+    "category": "Genel"
   },
   {
     "id": 6,
     "question": "Hangi element periyodik tabloda 'Fe' sembolü ile gösterilir?",
     "options": ["Flor", "Demir", "Fosfor", "Fermiyum"],
-    "correctAnswer": 1
+    "correctAnswer": 1,
+    "category": "Fen"
   },
   {
     "id": 7,
     "question": "Hangi yıl Türkiye Cumhuriyeti kurulmuştur?",
     "options": ["1920", "1921", "1922", "1923"],
-    "correctAnswer": 3
+    "correctAnswer": 3,
+    "category": "Tarih"
   },
   {
     "id": 8,
     "question": "Hangi okyanus en büyüktür?",
     "options": ["Atlas Okyanusu", "Hint Okyanusu", "Pasifik Okyanusu", "Arktik Okyanusu"],
-    "correctAnswer": 2
+    "correctAnswer": 2,
+    "category": "Coğrafya"
   },
   {
     "id": 9,
     "question": "Hangi spor dalında 'gol' terimi kullanılır?",
     "options": ["Basketbol", "Futbol", "Voleybol", "Tenis"],
-    "correctAnswer": 1
+    "correctAnswer": 1,
+    "category": "Spor"
   },
   {
     "id": 10,
     "question": "Hangi mevsimde yapraklar dökülür?",
     "options": ["İlkbahar", "Yaz", "Sonbahar", "Kış"],
-    "correctAnswer": 2
+    "correctAnswer": 2,
+    "category": "Genel"
   },
   {
     "id": 11,
     "question": "Hangi ülke en büyük yüzölçümüne sahiptir?",
     "options": ["Çin", "ABD", "Rusya", "Kanada"],
-    "correctAnswer": 2
+    "correctAnswer": 2,
+    "category": "Coğrafya"
   },
   {
     "id": 12,
     "question": "Hangi vitamin güneş ışığı ile vücutta üretilir?",
     "options": ["A Vitamini", "B Vitamini", "C Vitamini", "D Vitamini"],
-    "correctAnswer": 3
+    "correctAnswer": 3,
+    "category": "Fen"
   },
   {
     "id": 13,
     "question": "Hangi gezegen 'Kızıl Gezegen' olarak bilinir?",
     "options": ["Venüs", "Mars", "Jüpiter", "Satürn"],
-    "correctAnswer": 1
+    "correctAnswer": 1,
+    "category": "Fen"
   },
   {
     "id": 14,
     "question": "Hangi yıl İstanbul fethedilmiştir?",
     "options": ["1451", "1453", "1455", "1457"],
-    "correctAnswer": 1
+    "correctAnswer": 1,
+    "category": "Tarih"
   },
   {
     "id": 15,
     "question": "Hangi element suyun yapısında bulunmaz?",
     "options": ["Hidrojen", "Oksijen", "Azot", "Karbon"],
-    "correctAnswer": 3
+    "correctAnswer": 3,
+    "category": "Fen"
   },
   {
     "id": 16,
     "question": "Hangi hayvan en uzun boyunlu memelidir?",
     "options": ["Fil", "Zürafa", "Deve", "Antilop"],
-    "correctAnswer": 1
+    "correctAnswer": 1,
+    "category": "Genel"
   },
   {
     "id": 17,
     "question": "Hangi renk ana renklerden biri değildir?",
     "options": ["Kırmızı", "Mavi", "Yeşil", "Sarı"],
-    "correctAnswer": 2
+    "correctAnswer": 2,
+    "category": "Genel"
   },
   {
     "id": 18,
-    "question": "Hangi matematik işlemi 'çarpma' olarak bilinir?",
-    "options": ["+", "-", "×", "÷"],
-    "correctAnswer": 2
+    "question": "5 × 7 kaçtır?",
+    "options": ["30", "35", "40", "45"],
+    "correctAnswer": 1,
+    "category": "Matematik"
   },
   {
     "id": 19,
     "question": "Hangi ülke en çok nüfusa sahiptir?",
     "options": ["Hindistan", "Çin", "ABD", "Endonezya"],
-    "correctAnswer": 1
+    "correctAnswer": 1,
+    "category": "Coğrafya"
   },
   {
     "id": 20,
     "question": "Hangi element periyodik tabloda 'O' sembolü ile gösterilir?",
     "options": ["Oksijen", "Osmiyum", "Oganesson", "Osmium"],
-    "correctAnswer": 0
+    "correctAnswer": 0,
+    "category": "Fen"
   },
   {
     "id": 21,
     "question": "Hangi yıl I. Dünya Savaşı başlamıştır?",
     "options": ["1914", "1915", "1916", "1917"],
-    "correctAnswer": 0
+    "correctAnswer": 0,
+    "category": "Tarih"
   },
   {
     "id": 22,
     "question": "Hangi okyanus en küçüktür?",
     "options": ["Atlas Okyanusu", "Hint Okyanusu", "Pasifik Okyanusu", "Arktik Okyanusu"],
-    "correctAnswer": 3
+    "correctAnswer": 3,
+    "category": "Coğrafya"
   },
   {
     "id": 23,
     "question": "Hangi spor dalında 'basket' terimi kullanılır?",
     "options": ["Basketbol", "Futbol", "Voleybol", "Tenis"],
-    "correctAnswer": 0
+    "correctAnswer": 0,
+    "category": "Spor"
   },
   {
     "id": 24,
     "question": "Hangi mevsimde çiçekler açar?",
     "options": ["İlkbahar", "Yaz", "Sonbahar", "Kış"],
-    "correctAnswer": 0
+    "correctAnswer": 0,
+    "category": "Genel"
   },
   {
     "id": 25,
     "question": "Hangi gezegen en büyük gezegendir?",
     "options": ["Mars", "Jüpiter", "Satürn", "Uranüs"],
-    "correctAnswer": 1
+    "correctAnswer": 1,
+    "category": "Fen"
+  },
+  {
+    "id": 26,
+    "question": "100 ÷ 4 kaçtır?",
+    "options": ["20", "25", "30", "35"],
+    "correctAnswer": 1,
+    "category": "Matematik"
+  },
+  {
+    "id": 27,
+    "question": "Hangi futbol takımı İstanbul'dan değildir?",
+    "options": ["Galatasaray", "Fenerbahçe", "Beşiktaş", "Trabzonspor"],
+    "correctAnswer": 3,
+    "category": "Spor"
+  },
+  {
+    "id": 28,
+    "question": "Osmanlı İmparatorluğu kaç yıl sürmüştür?",
+    "options": ["500 yıl", "600 yıl", "700 yıl", "800 yıl"],
+    "correctAnswer": 1,
+    "category": "Tarih"
+  },
+  {
+    "id": 29,
+    "question": "Hangi kıta en büyüktür?",
+    "options": ["Afrika", "Asya", "Avrupa", "Kuzey Amerika"],
+    "correctAnswer": 1,
+    "category": "Coğrafya"
+  },
+  {
+    "id": 30,
+    "question": "12 + 8 kaçtır?",
+    "options": ["18", "19", "20", "21"],
+    "correctAnswer": 2,
+    "category": "Matematik"
+  },
+  {
+    "id": 31,
+    "question": "Hangi element altın için kullanılan semboldür?",
+    "options": ["Au", "Ag", "Al", "Ar"],
+    "correctAnswer": 0,
+    "category": "Fen"
+  },
+  {
+    "id": 32,
+    "question": "Türkiye'nin en uzun nehri hangisidir?",
+    "options": ["Sakarya", "Kızılırmak", "Fırat", "Dicle"],
+    "correctAnswer": 1,
+    "category": "Coğrafya"
+  },
+  {
+    "id": 33,
+    "question": "Hangi olimpik sporda 'set' terimi kullanılır?",
+    "options": ["Basketbol", "Futbol", "Voleybol", "Yüzme"],
+    "correctAnswer": 2,
+    "category": "Spor"
+  },
+  {
+    "id": 34,
+    "question": "Atatürk hangi yıl doğmuştur?",
+    "options": ["1880", "1881", "1882", "1883"],
+    "correctAnswer": 1,
+    "category": "Tarih"
+  },
+  {
+    "id": 35,
+    "question": "9 × 9 kaçtır?",
+    "options": ["72", "81", "90", "99"],
+    "correctAnswer": 1,
+    "category": "Matematik"
   }
 ] 

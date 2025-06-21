@@ -138,12 +138,14 @@ class Question {
   final String question;
   final List<String> options;
   final int correctAnswer;
+  final String category;
 
   Question({
     required this.id,
     required this.question,
     required this.options,
     required this.correctAnswer,
+    this.category = 'Genel',
   });
 
   factory Question.fromJson(Map<String, dynamic> json) {
@@ -155,6 +157,7 @@ class Question {
             ?.map((option) => option.toString())
             .toList() ?? [],
         correctAnswer: json['correctAnswer'] as int? ?? 0,
+        category: json['category']?.toString() ?? 'Genel',
       );
     } catch (e) {
       print('Question.fromJson Error: $e');
@@ -169,6 +172,7 @@ class Question {
       'question': question,
       'options': options,
       'correctAnswer': correctAnswer,
+      'category': category,
     };
   }
 } 

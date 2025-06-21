@@ -3,12 +3,14 @@ class Question {
   final String question;
   final List<String> options;
   final int correctAnswer;
+  final String category;
 
   Question({
     required this.id,
     required this.question,
     required this.options,
     required this.correctAnswer,
+    required this.category,
   });
 
   factory Question.fromJson(Map<String, dynamic> json) {
@@ -17,6 +19,7 @@ class Question {
       question: json['question'],
       options: List<String>.from(json['options']),
       correctAnswer: json['correctAnswer'],
+      category: json['category'] ?? 'Genel',
     );
   }
 
@@ -26,6 +29,7 @@ class Question {
       'question': question,
       'options': options,
       'correctAnswer': correctAnswer,
+      'category': category,
     };
   }
 } 
