@@ -48,9 +48,9 @@ class MultiplayerProvider extends ChangeNotifier {
     _currentGame = game;
     _currentGameId = game.gameId;
     
-    if (game.hostId == _service.playerId) {
+    if (game.isHost(_service.playerId)) {
       _playerRole = PlayerRole.host;
-    } else if (game.guestId == _service.playerId) {
+    } else if (game.isPlayerInGame(_service.playerId)) {
       _playerRole = PlayerRole.guest;
     }
     
@@ -79,7 +79,7 @@ class MultiplayerProvider extends ChangeNotifier {
     _successMessage = null;
   }
 
-  Future<void> createGame(List<Question> questions) async {
+  Future<void> createGame(List<Question> questions, String category, String playerName) async {
     _isLoading = true;
     _clearMessages();
     notifyListeners();
@@ -91,11 +91,13 @@ class MultiplayerProvider extends ChangeNotifier {
       // Oyunu hemen oluştur ve ayarla
       _currentGame = MultiplayerGame.create(
         hostId: playerId,
+        hostName: playerName,
         questions: questions,
+        category: category,
       );
       _playerRole = PlayerRole.host;
       
-      await _service.createGame(questions);
+      await _service.createGame(questions, category, playerName);
       _successMessage = 'Oyun oluşturuldu! Referans kodunu arkadaşlarınla paylaş.';
     } catch (e) {
       _errorMessage = 'Oyun oluşturma hatası: $e';
@@ -105,13 +107,13 @@ class MultiplayerProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> joinGame(String gameId) async {
+  Future<void> joinGame(String gameId, String playerName) async {
     _isLoading = true;
     _clearMessages();
     notifyListeners();
 
     try {
-      await _service.joinGame(gameId);
+      await _service.joinGame(gameId, playerName);
       _currentGameId = gameId;
       _playerRole = PlayerRole.guest;
       _successMessage = 'Oyuna katıldın!';
@@ -135,6 +137,20 @@ class MultiplayerProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> submitSelectedAnswerOnTimeout(int? selectedAnswer) async {
+    if (_currentGameId == null || selectedAnswer == null) return;
+
+    try {
+      // Süre bittiğinde seçili cevabı otomatik gönder
+      await _service.submitAnswer(_currentGameId!, selectedAnswer);
+      _successMessage = 'Süre doldu, seçili cevabın gönderildi';
+      notifyListeners();
+    } catch (e) {
+      _errorMessage = 'Otomatik cevap gönderme hatası: $e';
+      notifyListeners();
+    }
+  }
+
   Future<void> startGame() async {
     if (_currentGameId == null || _playerRole != PlayerRole.host) return;
 
@@ -154,13 +170,23 @@ class MultiplayerProvider extends ChangeNotifier {
   }
 
   Future<void> leaveGame() async {
-    if (_currentGameId == null) return;
+    _isLoading = true;
+    _clearMessages();
+    notifyListeners();
 
     try {
-      await _service.leaveGame(_currentGameId!);
+      if (_currentGameId != null) {
+        await _service.leaveGame(_currentGameId!);
+      }
       _resetGame();
+      _successMessage = 'Oyundan çıkıldı';
     } catch (e) {
       _errorMessage = 'Oyundan çıkma hatası: $e';
+      print('MultiplayerProvider LeaveGame Error: $e');
+      // Hata durumunda da oyunu resetle
+      _resetGame();
+    } finally {
+      _isLoading = false;
       notifyListeners();
     }
   }
@@ -169,6 +195,7 @@ class MultiplayerProvider extends ChangeNotifier {
     _currentGame = null;
     _currentGameId = null;
     _playerRole = null;
+    _isLoading = false;
     _clearMessages();
     notifyListeners();
   }
