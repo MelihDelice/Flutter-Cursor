@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import '../providers/multiplayer_provider.dart';
 import '../models/multiplayer_game.dart';
 
@@ -243,7 +245,71 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 
                 const SizedBox(height: 24),
                 
+                // Referans kodu paylaşma (sadece host için)
                 if (isHost) ...[
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF6C63FF).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFF6C63FF).withOpacity(0.3)),
+                    ),
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Referans Kodu',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF6C63FF),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              game.gameId,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF2D3748),
+                                letterSpacing: 2,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            GestureDetector(
+                              onTap: () => _copyGameCode(game.gameId),
+                              child: const Icon(
+                                Icons.copy,
+                                color: Color(0xFF6C63FF),
+                                size: 24,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  
+                  // Paylaş butonu
+                  ElevatedButton.icon(
+                    onPressed: () => _shareGameCode(game.gameId),
+                    icon: const Icon(Icons.share),
+                    label: const Text('Paylaş'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  
+                  // Oyunu başlat butonu
                   ElevatedButton(
                     onPressed: hasGuest ? () => multiplayerProvider.startGame() : null,
                     style: ElevatedButton.styleFrom(
