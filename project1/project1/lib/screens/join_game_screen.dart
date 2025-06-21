@@ -224,70 +224,67 @@ class _JoinGameScreenState extends State<JoinGameScreen>
               letterSpacing: 1,
             ),
             textAlign: TextAlign.center,
-            maxLength: 20,
+            maxLength: 6,
           ),
           const SizedBox(height: 16),
           
-          // Debug bilgisi (geliştirme sırasında)
-          if (true) ...[
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.blue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
+          // Firebase bağlantı durumu
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                multiplayerProvider.isConnected 
+                    ? Icons.wifi 
+                    : Icons.wifi_off,
+                color: multiplayerProvider.isConnected 
+                    ? Colors.green 
+                    : Colors.red,
+                size: 16,
               ),
-              child: Text(
-                'Debug: isEntered=$_isGameIdEntered, isLoading=${multiplayerProvider.isLoading}, text="${_gameIdController.text.trim()}"',
-                style: const TextStyle(fontSize: 12, color: Colors.blue),
+              const SizedBox(width: 4),
+              Text(
+                multiplayerProvider.isConnected ? 'Bağlı' : 'Bağlantı Yok',
+                style: TextStyle(
+                  color: multiplayerProvider.isConnected 
+                      ? Colors.green 
+                      : Colors.red,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-          ],
+            ],
+          ),
+          const SizedBox(height: 16),
           
-          // Hata mesajları
-          if (multiplayerProvider.errorMessage != null) ...[
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.red.withOpacity(0.3)),
-              ),
-              child: Column(
-                children: [
-                  const Text(
-                    'Hata:',
+          // Durum mesajı
+          if (multiplayerProvider.errorMessage != null || multiplayerProvider.successMessage != null) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  multiplayerProvider.errorMessage != null 
+                      ? Icons.error_outline 
+                      : Icons.check_circle_outline,
+                  color: multiplayerProvider.errorMessage != null 
+                      ? Colors.red 
+                      : Colors.green,
+                  size: 16,
+                ),
+                const SizedBox(width: 4),
+                Flexible(
+                  child: Text(
+                    multiplayerProvider.errorMessage ?? multiplayerProvider.successMessage ?? '',
                     style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      color: multiplayerProvider.errorMessage != null 
+                          ? Colors.red 
+                          : Colors.green,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    multiplayerProvider.errorMessage!,
-                    style: const TextStyle(color: Colors.red, fontSize: 12),
                     textAlign: TextAlign.center,
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-          ],
-          
-          if (multiplayerProvider.successMessage != null) ...[
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.green.withOpacity(0.3)),
-              ),
-              child: Text(
-                multiplayerProvider.successMessage!,
-                style: const TextStyle(color: Colors.green),
-                textAlign: TextAlign.center,
-              ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
           ],

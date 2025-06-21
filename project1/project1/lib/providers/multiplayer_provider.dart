@@ -33,7 +33,7 @@ class MultiplayerProvider extends ChangeNotifier {
       _service.messageStream.listen(_onMessage);
       
       _isConnected = true;
-      _successMessage = 'Firebase bağlantısı başarılı!';
+      // Firebase bağlantısı başarılı - mesaja gerek yok, sadece bağlantı durumu yeterli
     } catch (e) {
       _errorMessage = 'Firebase bağlantı hatası: $e';
       _isConnected = false;

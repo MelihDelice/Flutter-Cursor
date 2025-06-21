@@ -39,7 +39,7 @@ class FirebaseService {
       // Sadece okuma testi yap
       await _database.child('test').get();
       
-      _messageController?.add('Firebase bağlantısı başarılı!');
+      // Firebase bağlantısı başarılı - mesaja gerek yok, sadece bağlantı durumu yeterli
     } catch (e) {
       final errorMsg = 'Firebase bağlantı hatası: $e';
       _messageController?.add(errorMsg);

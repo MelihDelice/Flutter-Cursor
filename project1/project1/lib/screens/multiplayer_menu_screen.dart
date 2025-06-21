@@ -201,66 +201,36 @@ class _MultiplayerMenuScreenState extends State<MultiplayerMenuScreen>
                           ],
                         ),
                         
-                        if (!multiplayerProvider.isConnected) ...[
+                        // Durum mesajı
+                        if (multiplayerProvider.errorMessage != null || multiplayerProvider.successMessage != null) ...[
                           const SizedBox(height: 12),
-                          const Text(
-                            'Firebase bağlantısı kuruluyor...',
-                            style: TextStyle(
-                              color: Colors.orange,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          const Text(
-                            'Multiplayer oyun için Firebase bağlantısı gerekli',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ] else ...[
-                          const SizedBox(height: 12),
-                          const Text(
-                            'Firebase bağlantısı kuruldu!',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                        
-                        if (multiplayerProvider.errorMessage != null) ...[
-                          const SizedBox(height: 12),
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Colors.red.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.red.withOpacity(0.3)),
-                            ),
-                            child: Text(
-                              multiplayerProvider.errorMessage!,
-                              style: const TextStyle(color: Colors.red, fontSize: 12),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                        
-                        if (multiplayerProvider.successMessage != null) ...[
-                          const SizedBox(height: 12),
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Colors.green.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.green.withOpacity(0.3)),
-                            ),
-                            child: Text(
-                              multiplayerProvider.successMessage!,
-                              style: const TextStyle(color: Colors.green, fontSize: 12),
-                              textAlign: TextAlign.center,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                multiplayerProvider.errorMessage != null 
+                                    ? Icons.error_outline 
+                                    : Icons.check_circle_outline,
+                                color: multiplayerProvider.errorMessage != null 
+                                    ? Colors.red 
+                                    : Colors.green,
+                                size: 16,
+                              ),
+                              const SizedBox(width: 4),
+                              Flexible(
+                                child: Text(
+                                  multiplayerProvider.errorMessage ?? multiplayerProvider.successMessage ?? '',
+                                  style: TextStyle(
+                                    color: multiplayerProvider.errorMessage != null 
+                                        ? Colors.red 
+                                        : Colors.green,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ],

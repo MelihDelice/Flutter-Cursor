@@ -189,19 +189,57 @@ class _CreateGameScreenState extends State<CreateGameScreen>
           ),
           const SizedBox(height: 24),
           
+          // Firebase bağlantı durumu
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                multiplayerProvider.isConnected 
+                    ? Icons.wifi 
+                    : Icons.wifi_off,
+                color: multiplayerProvider.isConnected 
+                    ? Colors.green 
+                    : Colors.red,
+                size: 16,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                multiplayerProvider.isConnected ? 'Bağlı' : 'Bağlantı Yok',
+                style: TextStyle(
+                  color: multiplayerProvider.isConnected 
+                      ? Colors.green 
+                      : Colors.red,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          
+          // Durum mesajı
           if (multiplayerProvider.errorMessage != null) ...[
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.red.withOpacity(0.3)),
-              ),
-              child: Text(
-                multiplayerProvider.errorMessage!,
-                style: const TextStyle(color: Colors.red),
-                textAlign: TextAlign.center,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.error_outline,
+                  color: Colors.red,
+                  size: 16,
+                ),
+                const SizedBox(width: 4),
+                Flexible(
+                  child: Text(
+                    multiplayerProvider.errorMessage!,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
           ],
