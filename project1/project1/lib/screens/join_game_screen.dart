@@ -4,7 +4,12 @@ import '../providers/multiplayer_provider.dart';
 import 'multiplayer_game_screen.dart';
 
 class JoinGameScreen extends StatefulWidget {
-  const JoinGameScreen({super.key});
+  final String playerName;
+  
+  const JoinGameScreen({
+    super.key,
+    required this.playerName,
+  });
 
   @override
   State<JoinGameScreen> createState() => _JoinGameScreenState();
@@ -357,7 +362,7 @@ class _JoinGameScreenState extends State<JoinGameScreen>
     final gameId = _gameIdController.text.trim();
     if (gameId.isEmpty) return;
     
-    await multiplayerProvider.joinGame(gameId);
+    await multiplayerProvider.joinGame(gameId, widget.playerName);
     
     // Başarılı bağlantı durumunda oyun ekranına geç
     if (multiplayerProvider.successMessage != null && 

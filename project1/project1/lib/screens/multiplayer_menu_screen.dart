@@ -4,6 +4,7 @@ import '../providers/multiplayer_provider.dart';
 import '../providers/game_provider.dart';
 import 'create_game_screen.dart';
 import 'join_game_screen.dart';
+import 'name_input_screen.dart';
 
 class MultiplayerMenuScreen extends StatefulWidget {
   const MultiplayerMenuScreen({super.key});
@@ -317,21 +318,43 @@ class _MultiplayerMenuScreenState extends State<MultiplayerMenuScreen>
     );
   }
 
-  void _navigateToCreateGame() {
-    Navigator.push(
+  void _navigateToCreateGame() async {
+    // Önce isim giriş ekranını göster
+    final String? playerName = await Navigator.push<String>(
       context,
       MaterialPageRoute(
-        builder: (context) => const CreateGameScreen(),
+        builder: (context) => const NameInputScreen(),
       ),
     );
+
+    if (playerName != null && mounted) {
+      // İsim alındıktan sonra oyun oluşturma ekranına git
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CreateGameScreen(playerName: playerName),
+        ),
+      );
+    }
   }
 
-  void _navigateToJoinGame() {
-    Navigator.push(
+  void _navigateToJoinGame() async {
+    // Önce isim giriş ekranını göster
+    final String? playerName = await Navigator.push<String>(
       context,
       MaterialPageRoute(
-        builder: (context) => const JoinGameScreen(),
+        builder: (context) => const NameInputScreen(),
       ),
     );
+
+    if (playerName != null && mounted) {
+      // İsim alındıktan sonra oyuna katılma ekranına git
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => JoinGameScreen(playerName: playerName),
+        ),
+      );
+    }
   }
 } 

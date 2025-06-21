@@ -4,11 +4,17 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../providers/multiplayer_provider.dart';
 import '../providers/game_provider.dart';
-import '../models/multiplayer_game.dart';
+import '../models/multiplayer_game.dart' as mg;
+import '../models/question.dart' as q;
 import 'multiplayer_game_screen.dart';
 
 class CreateGameScreen extends StatefulWidget {
-  const CreateGameScreen({super.key});
+  final String playerName;
+  
+  const CreateGameScreen({
+    super.key,
+    required this.playerName,
+  });
 
   @override
   State<CreateGameScreen> createState() => _CreateGameScreenState();
@@ -21,6 +27,7 @@ class _CreateGameScreenState extends State<CreateGameScreen>
   late Animation<Offset> _slideAnimation;
   String? _gameId;
   bool _isGameCreated = false;
+  String _selectedCategory = 'Tümü';
 
   @override
   void initState() {
@@ -244,6 +251,73 @@ class _CreateGameScreenState extends State<CreateGameScreen>
             const SizedBox(height: 16),
           ],
           
+          // Kategori seçimi
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade50,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.grey.shade200),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Kategori Seç',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF2D3748),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                DropdownButtonFormField<String>(
+                  value: _selectedCategory,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: Color(0xFF6C63FF)),
+                    ),
+                  ),
+                  items: gameProvider.categories.map((String category) {
+                    return DropdownMenuItem<String>(
+                      value: category,
+                      child: Row(
+                        children: [
+                          Icon(
+                            _getCategoryIcon(category),
+                            color: _getCategoryColor(category),
+                            size: 20,
+                          ),
+                          const SizedBox(width: 12),
+                          Text(category),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        _selectedCategory = newValue;
+                      });
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+          
           ElevatedButton(
             onPressed: multiplayerProvider.isLoading
                 ? null
@@ -337,25 +411,78 @@ class _CreateGameScreenState extends State<CreateGameScreen>
   }
 
   Future<void> _createGame(MultiplayerProvider multiplayerProvider, GameProvider gameProvider) async {
+    // Kategori seçimine göre soruları filtrele
+    List<q.Question> filteredQuestions;
+    if (_selectedCategory == 'Tümü') {
+      filteredQuestions = List.from(gameProvider.questions);
+    } else {
+      filteredQuestions = gameProvider.questions.where((question) => question.category == _selectedCategory).toList();
+    }
+    
     // Rastgele sorular seç
-    final questions = gameProvider.questions.take(10).toList();
-    questions.shuffle();
+    filteredQuestions.shuffle();
+    final questions = filteredQuestions.take(10).toList();
     
     // Multiplayer oyun için soruları dönüştür
-    final multiplayerQuestions = questions.map((q) => Question(
-      id: q.id,
-      question: q.question,
-      options: q.options,
-      correctAnswer: q.correctAnswer,
-    )).toList();
+    final multiplayerQuestions = questions.map((question) => 
+      // multiplayer_game.dart'taki Question sınıfını kullan
+      mg.Question(
+        id: question.id,
+        question: question.question,
+        options: question.options,
+        correctAnswer: question.correctAnswer,
+        category: question.category,
+      )).toList();
     
-    await multiplayerProvider.createGame(multiplayerQuestions);
+    await multiplayerProvider.createGame(multiplayerQuestions, _selectedCategory, widget.playerName);
     
     if (multiplayerProvider.successMessage != null) {
       setState(() {
         _gameId = multiplayerProvider.currentGameId;
         _isGameCreated = true;
       });
+    }
+  }
+
+  Color _getCategoryColor(String category) {
+    switch (category) {
+      case 'Tümü':
+        return const Color(0xFF6C63FF);
+      case 'Coğrafya':
+        return const Color(0xFF4ECDC4);
+      case 'Fen':
+        return const Color(0xFF45B7D1);
+      case 'Matematik':
+        return const Color(0xFFFF6B6B);
+      case 'Tarih':
+        return const Color(0xFFFFD93D);
+      case 'Spor':
+        return const Color(0xFF96CEB4);
+      case 'Genel':
+        return const Color(0xFF9B59B6);
+      default:
+        return const Color(0xFF95A5A6);
+    }
+  }
+
+  IconData _getCategoryIcon(String category) {
+    switch (category) {
+      case 'Tümü':
+        return Icons.all_inclusive;
+      case 'Coğrafya':
+        return Icons.public;
+      case 'Fen':
+        return Icons.science;
+      case 'Matematik':
+        return Icons.calculate;
+      case 'Tarih':
+        return Icons.history_edu;
+      case 'Spor':
+        return Icons.sports_soccer;
+      case 'Genel':
+        return Icons.quiz;
+      default:
+        return Icons.category;
     }
   }
 
