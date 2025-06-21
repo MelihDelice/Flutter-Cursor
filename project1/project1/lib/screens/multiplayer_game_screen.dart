@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   int? _selectedAnswer;
   bool _isAnswerSubmitted = false;
   int _lastQuestionIndex = -1;
+  Timer? _uiTimer;
+  int _remainingTime = 8;
 
   @override
   void initState() {
@@ -56,13 +59,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   @override
   void dispose() {
     _animationController.dispose();
+    _uiTimer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => _showExitConfirmation(context),
+      onWillPop: () async {
+        final multiplayerProvider = Provider.of<MultiplayerProvider>(context, listen: false);
+        _leaveGame(multiplayerProvider);
+        return false; // Navigation'ı _leaveGame handle ediyor
+      },
       child: Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -129,7 +137,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
   Widget _buildWaitingScreen(MultiplayerProvider multiplayerProvider, MultiplayerGame game) {
     final isHost = multiplayerProvider.playerRole == PlayerRole.host;
-    final hasGuest = game.guestId != null;
+    final playerCount = game.playerCount;
     
     return Column(
       children: [
@@ -235,14 +243,53 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 const SizedBox(height: 24),
                 
                 // Oyuncu durumu
+                Text(
+                  'Oyuncular: $playerCount/${game.maxPlayers}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF2D3748),
+                  ),
+                ),
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _buildPlayerStatus('Sen', true, isHost ? 'Host' : 'Misafir'),
-                    _buildPlayerStatus('Rakip', hasGuest, hasGuest ? 'Bağlandı' : 'Bekleniyor'),
+                    _buildPlayerStatus('Sen', true, isHost ? 'Host' : 'Oyuncu'),
+                    _buildPlayerStatus('Diğerleri', playerCount > 1, playerCount > 1 ? '${playerCount - 1} Bağlandı' : 'Bekleniyor'),
                   ],
                 ),
                 
+                const SizedBox(height: 24),
+                
+                // Kategori bilgisi
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: _getCategoryColor(game.category).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: _getCategoryColor(game.category).withOpacity(0.3)),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        _getCategoryIcon(game.category),
+                        color: _getCategoryColor(game.category),
+                        size: 24,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        'Kategori: ${game.category}',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: _getCategoryColor(game.category),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 24),
                 
                 // Referans kodu paylaşma (sadece host için)
@@ -311,9 +358,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   
                   // Oyunu başlat butonu
                   ElevatedButton(
-                    onPressed: hasGuest ? () => multiplayerProvider.startGame() : null,
+                    onPressed: playerCount >= 2 ? () => multiplayerProvider.startGame() : null,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: hasGuest ? const Color(0xFF6C63FF) : Colors.grey,
+                      backgroundColor: playerCount >= 2 ? const Color(0xFF6C63FF) : Colors.grey,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                       shape: RoundedRectangleBorder(
@@ -321,7 +368,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                     ),
                     child: Text(
-                      hasGuest ? 'Oyunu Başlat' : 'Oyuncu Bekleniyor...',
+                      playerCount >= 2 ? 'Oyunu Başlat ($playerCount oyuncu)' : 'En az 2 oyuncu gerekiyor...',
                       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -351,9 +398,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     
     final currentQuestion = game.questions[game.currentQuestionIndex];
     final playerScore = game.playerScores[multiplayerProvider.playerId] ?? 0;
-    final opponentScore = game.playerScores.entries
-        .where((entry) => entry.key != multiplayerProvider.playerId)
-        .firstOrNull?.value ?? 0;
+    final topOpponent = game.getTopOpponent(multiplayerProvider.playerId);
+    final opponentScore = topOpponent?.value ?? 0;
+    final opponentName = topOpponent != null ? game.getPlayerName(topOpponent.key) : 'Rakip';
     
     return Column(
       children: [
@@ -386,7 +433,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _buildScoreDisplay('Sen', playerScore),
-                    _buildScoreDisplay('Rakip', opponentScore),
+                    _buildScoreDisplay(opponentName, opponentScore),
                   ],
                 ),
               ),
@@ -581,15 +628,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             _isAnswerSubmitted = false;
             _lastQuestionIndex = game.currentQuestionIndex;
           });
+          _startUITimer();
         }
       });
     }
     
     final currentQuestion = game.questions[game.currentQuestionIndex];
     final playerScore = game.playerScores[multiplayerProvider.playerId] ?? 0;
-    final opponentScore = game.playerScores.entries
-        .where((entry) => entry.key != multiplayerProvider.playerId)
-        .firstOrNull?.value ?? 0;
+    final topOpponent = game.getTopOpponent(multiplayerProvider.playerId);
+    final opponentScore = topOpponent?.value ?? 0;
+    final opponentName = topOpponent != null ? game.getPlayerName(topOpponent.key) : 'Rakip';
     
     return Column(
       children: [
@@ -622,7 +670,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _buildScoreDisplay('Sen', playerScore),
-                    _buildScoreDisplay('Rakip', opponentScore),
+                    _buildTimerDisplay(game),
+                    _buildScoreDisplay(opponentName, opponentScore),
                   ],
                 ),
               ),
@@ -783,12 +832,28 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                       ),
                     ] else ...[
-                      const Text(
-                        'Cevabın gönderildi, diğer oyuncu bekleniyor...',
-                        style: TextStyle(
-                          color: Colors.orange,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      Column(
+                        children: [
+                          const Text(
+                            'Cevabın gönderildi, diğer oyuncular bekleniyor...',
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          if (multiplayerProvider.successMessage != null) ...[
+                            const SizedBox(height: 8),
+                            Text(
+                              multiplayerProvider.successMessage!,
+                              style: const TextStyle(
+                                color: Colors.green,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ],
                       ),
                     ],
                   ],
@@ -803,12 +868,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
   Widget _buildGameOverScreen(MultiplayerProvider multiplayerProvider, MultiplayerGame game) {
     final playerScore = game.playerScores[multiplayerProvider.playerId] ?? 0;
-    final opponentScore = game.playerScores.entries
-        .where((entry) => entry.key != multiplayerProvider.playerId)
-        .firstOrNull?.value ?? 0;
+    final topOpponent = game.getTopOpponent(multiplayerProvider.playerId);
+    final opponentScore = topOpponent?.value ?? 0;
+    final opponentName = topOpponent != null ? game.getPlayerName(topOpponent.key) : 'Rakip';
     
     // Oyuncu ayrılma durumunu kontrol et
-    final isPlayerLeft = game.guestId == null && game.currentQuestionIndex < game.questions.length;
+    final isPlayerLeft = game.playerCount < 2 && game.currentQuestionIndex < game.questions.length;
     
     final isWinner = playerScore > opponentScore;
     final isDraw = playerScore == opponentScore;
@@ -932,7 +997,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _buildFinalScoreDisplay('Sen', playerScore, isWinner),
-                    _buildFinalScoreDisplay('Rakip', opponentScore, !isWinner && !isDraw),
+                    _buildFinalScoreDisplay(opponentName, opponentScore, !isWinner && !isDraw),
                   ],
                 ),
                 
@@ -1022,6 +1087,41 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
+  Widget _buildTimerDisplay(MultiplayerGame game) {
+    // Kalan süreyi hesapla
+    int remainingTime = 8;
+    if (game.questionStartTime != null) {
+      final elapsed = DateTime.now().difference(game.questionStartTime!).inSeconds;
+      remainingTime = (game.questionTimeLimit - elapsed).clamp(0, game.questionTimeLimit);
+    }
+
+    // Renk seçimi
+    Color timerColor = Colors.green;
+    if (remainingTime <= 3) {
+      timerColor = Colors.red;
+    } else if (remainingTime <= 5) {
+      timerColor = Colors.orange;
+    }
+
+    return Column(
+      children: [
+        Icon(
+          Icons.timer,
+          color: timerColor,
+          size: 16,
+        ),
+        Text(
+          '${remainingTime}s',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: timerColor,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildFinalScoreDisplay(String name, int score, bool isWinner) {
     return Column(
       children: [
@@ -1055,9 +1155,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     multiplayerProvider.submitAnswer(_selectedAnswer!);
   }
 
-  void _leaveGame(MultiplayerProvider multiplayerProvider) {
-    multiplayerProvider.leaveGame();
-    Navigator.pop(context);
+  void _leaveGame(MultiplayerProvider multiplayerProvider) async {
+    try {
+      // Oyundan çık
+      await multiplayerProvider.leaveGame();
+      
+      // Ana menüye dön (tüm multiplayer ekranlarını temizle)
+      if (mounted) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+    } catch (e) {
+      print('Leave game error: $e');
+      // Hata durumunda da ana menüye dön
+      if (mounted) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+    }
   }
 
   void _copyGameCode(String gameId) {
@@ -1075,6 +1188,33 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     Share.share(message, subject: 'Quiz Oyunu Daveti');
   }
 
+  void _startUITimer() {
+    _uiTimer?.cancel();
+    _uiTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (mounted) {
+        final multiplayerProvider = Provider.of<MultiplayerProvider>(context, listen: false);
+        final game = multiplayerProvider.currentGame;
+        
+        if (game != null && game.questionStartTime != null) {
+          final elapsed = DateTime.now().difference(game.questionStartTime!).inSeconds;
+          final remainingTime = (game.questionTimeLimit - elapsed).clamp(0, game.questionTimeLimit);
+          
+          // Süre bittiyse ve cevap seçilmişse otomatik gönder
+          if (remainingTime <= 0 && _selectedAnswer != null && !_isAnswerSubmitted) {
+            setState(() {
+              _isAnswerSubmitted = true;
+            });
+            multiplayerProvider.submitSelectedAnswerOnTimeout(_selectedAnswer);
+          }
+        }
+        
+        setState(() {
+          // Timer UI'ı güncellemek için setState çağırıyoruz
+        });
+      }
+    });
+  }
+
   Future<bool> _showExitConfirmation(BuildContext context) async {
     final result = await showDialog<bool>(
       context: context,
@@ -1088,11 +1228,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               child: const Text('İptal'),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 Navigator.of(context).pop(true);
                 // Multiplayer oyundan çık
                 final multiplayerProvider = Provider.of<MultiplayerProvider>(context, listen: false);
-                multiplayerProvider.leaveGame();
+                _leaveGame(multiplayerProvider);
               },
               child: const Text('Çık'),
             ),
@@ -1101,5 +1241,47 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       },
     );
     return result ?? false;
+  }
+
+  Color _getCategoryColor(String category) {
+    switch (category) {
+      case 'Tümü':
+        return const Color(0xFF6C63FF);
+      case 'Coğrafya':
+        return const Color(0xFF4ECDC4);
+      case 'Fen':
+        return const Color(0xFF45B7D1);
+      case 'Matematik':
+        return const Color(0xFFFF6B6B);
+      case 'Tarih':
+        return const Color(0xFFFFD93D);
+      case 'Spor':
+        return const Color(0xFF96CEB4);
+      case 'Genel':
+        return const Color(0xFF9B59B6);
+      default:
+        return const Color(0xFF95A5A6);
+    }
+  }
+
+  IconData _getCategoryIcon(String category) {
+    switch (category) {
+      case 'Tümü':
+        return Icons.all_inclusive;
+      case 'Coğrafya':
+        return Icons.public;
+      case 'Fen':
+        return Icons.science;
+      case 'Matematik':
+        return Icons.calculate;
+      case 'Tarih':
+        return Icons.history_edu;
+      case 'Spor':
+        return Icons.sports_soccer;
+      case 'Genel':
+        return Icons.quiz;
+      default:
+        return Icons.category;
+    }
   }
 } 
