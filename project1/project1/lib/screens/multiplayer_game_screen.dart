@@ -22,6 +22,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   late Animation<Offset> _slideAnimation;
   int? _selectedAnswer;
   bool _isAnswerSubmitted = false;
+  int _lastQuestionIndex = -1;
 
   @override
   void initState() {
@@ -276,6 +277,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   Widget _buildGameScreen(MultiplayerProvider multiplayerProvider, MultiplayerGame game) {
     if (game.questions.isEmpty || game.currentQuestionIndex >= game.questions.length) {
       return _buildGameOverScreen(multiplayerProvider, game);
+    }
+    
+    // Soru değiştiğinde state'i sıfırla
+    if (_lastQuestionIndex != game.currentQuestionIndex) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() {
+            _selectedAnswer = null;
+            _isAnswerSubmitted = false;
+            _lastQuestionIndex = game.currentQuestionIndex;
+          });
+        }
+      });
     }
     
     final currentQuestion = game.questions[game.currentQuestionIndex];
