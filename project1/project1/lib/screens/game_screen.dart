@@ -45,8 +45,10 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFFFF8E1),
+    return WillPopScope(
+      onWillPop: () => _showExitConfirmation(context),
+      child: Scaffold(
+        backgroundColor: const Color(0xFFFFF8E1),
       appBar: AppBar(
         title: const Text(
           'Quiz Oyunu',
@@ -146,6 +148,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
           return _buildQuestionScreen(context, gameProvider, currentQuestion);
         },
       ),
+    ),
     );
   }
 
@@ -602,5 +605,33 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  Future<bool> _showExitConfirmation(BuildContext context) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Oyundan Çık'),
+          content: const Text('Oyundan çıkmak istediğinizden emin misiniz? İlerlemeniz kaybolacak.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('İptal'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+                // Oyunu sonlandır
+                final gameProvider = Provider.of<GameProvider>(context, listen: false);
+                gameProvider.resetGame();
+              },
+              child: const Text('Çık'),
+            ),
+          ],
+        );
+      },
+    );
+    return result ?? false;
   }
 } 

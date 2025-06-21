@@ -58,7 +58,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () => _showExitConfirmation(context),
+      child: Scaffold(
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -92,6 +94,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
         ),
       ),
+    ),
     );
   }
 
@@ -733,5 +736,33 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   void _leaveGame(MultiplayerProvider multiplayerProvider) {
     multiplayerProvider.leaveGame();
     Navigator.pop(context);
+  }
+
+  Future<bool> _showExitConfirmation(BuildContext context) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Oyundan Çık'),
+          content: const Text('Oyundan çıkmak istediğinizden emin misiniz? Oyun sonlandırılacak.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('İptal'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+                // Multiplayer oyundan çık
+                final multiplayerProvider = Provider.of<MultiplayerProvider>(context, listen: false);
+                multiplayerProvider.leaveGame();
+              },
+              child: const Text('Çık'),
+            ),
+          ],
+        );
+      },
+    );
+    return result ?? false;
   }
 } 
