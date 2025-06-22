@@ -1,0 +1,17 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" fill="#f8f9fa"/>
+  <g transform="translate(128, 128)">
+    <!-- Basketbol topu -->
+    <circle cx="0" cy="0" r="35" fill="#ff6b35" stroke="#e55a2b" stroke-width="3"/>
+    <!-- Top çizgileri -->
+    <path d="M-35 0 Q-17.5 -17.5 0 0 Q17.5 -17.5 35 0 Q17.5 17.5 0 0 Q-17.5 17.5 -35 0" 
+          fill="none" stroke="#2c3e50" stroke-width="2"/>
+    <path d="M0 -35 Q17.5 -17.5 0 0 Q17.5 17.5 0 35 Q-17.5 17.5 0 0 Q-17.5 -17.5 0 -35" 
+          fill="none" stroke="#2c3e50" stroke-width="2"/>
+    <!-- Pota -->
+    <rect x="-40" y="-50" width="80" height="5" fill="none" stroke="#2c3e50" stroke-width="3"/>
+    <rect x="-5" y="-50" width="10" height="20" fill="none" stroke="#2c3e50" stroke-width="3"/>
+    <!-- Başlık -->
+    <text x="0" y="70" text-anchor="middle" font-family="Arial" font-size="18" fill="#2c3e50" font-weight="bold">BASKETBOL</text>
+  </g>
+</svg> 

@@ -1,0 +1,22 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" fill="#f8f9fa"/>
+  <g transform="translate(128, 128)">
+    <!-- Güneş -->
+    <circle cx="0" cy="0" r="25" fill="#f39c12" stroke="#e67e22" stroke-width="3"/>
+    <!-- Güneş ışınları -->
+    <line x1="-35" y1="-35" x2="-45" y2="-45" stroke="#f39c12" stroke-width="2"/>
+    <line x1="35" y1="-35" x2="45" y2="-45" stroke="#f39c12" stroke-width="2"/>
+    <line x1="-35" y1="35" x2="-45" y2="45" stroke="#f39c12" stroke-width="2"/>
+    <line x1="35" y1="35" x2="45" y2="45" stroke="#f39c12" stroke-width="2"/>
+    <!-- Gezegen yörüngeleri -->
+    <circle cx="0" cy="0" r="50" fill="none" stroke="#bdc3c7" stroke-width="1" opacity="0.5"/>
+    <circle cx="0" cy="0" r="70" fill="none" stroke="#bdc3c7" stroke-width="1" opacity="0.5"/>
+    <circle cx="0" cy="0" r="90" fill="none" stroke="#bdc3c7" stroke-width="1" opacity="0.5"/>
+    <!-- Gezegenler -->
+    <circle cx="0" cy="-50" r="5" fill="#3498db"/> <!-- Dünya -->
+    <circle cx="0" cy="-70" r="4" fill="#e74c3c"/> <!-- Mars -->
+    <circle cx="0" cy="-90" r="8" fill="#f39c12"/> <!-- Jüpiter -->
+    <!-- Başlık -->
+    <text x="0" y="110" text-anchor="middle" font-family="Arial" font-size="16" fill="#2c3e50" font-weight="bold">GÜNEŞ SİSTEMİ</text>
+  </g>
+</svg> 

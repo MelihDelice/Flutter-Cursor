@@ -1,4 +1,4 @@
-name: project1
+name: versusmind
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -69,6 +69,14 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/geography/
+    - assets/images/science/
+    - assets/images/math/
+    - assets/images/history/
+    - assets/images/sports/
+    - assets/images/animals/
+    - assets/images/colors/
+    - assets/images/seasons/
     - assets/sounds/
     - assets/questions.json
 

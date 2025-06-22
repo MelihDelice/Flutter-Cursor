@@ -1,6 +1,6 @@
-# Quiz Oyunu
+# VersusMind
 
-Modern ve eğlenceli bir quiz oyunu uygulaması. Hem tek oyunculu hem de çok oyunculu (multiplayer) modları destekler.
+Bu uygulama bir cartoon temalı, oyunlaştırılmış bilgi yarışmasıdır.
 
 ## Özellikler
 

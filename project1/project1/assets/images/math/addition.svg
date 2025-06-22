@@ -1,0 +1,22 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" fill="#f8f9fa"/>
+  <g transform="translate(128, 128)">
+    <!-- Matematik işlemi: 5 + 3 = 8 -->
+    <text x="-40" y="0" font-family="Arial" font-size="48" fill="#e74c3c" font-weight="bold">5</text>
+    <text x="-10" y="0" font-family="Arial" font-size="48" fill="#3498db" font-weight="bold">+</text>
+    <text x="20" y="0" font-family="Arial" font-size="48" fill="#e74c3c" font-weight="bold">3</text>
+    <text x="50" y="0" font-family="Arial" font-size="48" fill="#2c3e50" font-weight="bold">=</text>
+    <text x="80" y="0" font-family="Arial" font-size="48" fill="#27ae60" font-weight="bold">8</text>
+    <!-- Görsel temsil -->
+    <circle cx="-60" cy="40" r="8" fill="#e74c3c"/>
+    <circle cx="-50" cy="40" r="8" fill="#e74c3c"/>
+    <circle cx="-40" cy="40" r="8" fill="#e74c3c"/>
+    <circle cx="-30" cy="40" r="8" fill="#e74c3c"/>
+    <circle cx="-20" cy="40" r="8" fill="#e74c3c"/>
+    <circle cx="0" cy="40" r="8" fill="#3498db"/>
+    <circle cx="10" cy="40" r="8" fill="#3498db"/>
+    <circle cx="20" cy="40" r="8" fill="#3498db"/>
+    <!-- Başlık -->
+    <text x="0" y="80" text-anchor="middle" font-family="Arial" font-size="16" fill="#2c3e50" font-weight="bold">TOPLAMA İŞLEMİ</text>
+  </g>
+</svg> 

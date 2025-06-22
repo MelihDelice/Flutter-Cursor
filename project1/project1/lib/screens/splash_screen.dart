@@ -91,10 +91,19 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                           ),
                         ],
                       ),
-                      child: const Icon(
-                        Icons.quiz,
-                        size: 60,
-                        color: Color(0xFFFF6B6B),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(30),
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(
+                              Icons.quiz,
+                              size: 60,
+                              color: Color(0xFFFF6B6B),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   );
@@ -162,7 +171,23 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                 ),
               ),
               const SizedBox(height: 30),
-              
+              // Uygulama adı
+              const Text(
+                'VersusMind',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  letterSpacing: 2,
+                  shadows: [
+                    Shadow(
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 4.0,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+              ),
               // Loading noktaları
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

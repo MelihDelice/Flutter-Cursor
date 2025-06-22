@@ -1,0 +1,15 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" fill="#f8f9fa"/>
+  <g transform="translate(128, 128)">
+    <!-- Futbol topu -->
+    <circle cx="0" cy="0" r="40" fill="#f39c12" stroke="#e67e22" stroke-width="3"/>
+    <!-- Top desenleri -->
+    <path d="M-40 0 Q-20 -20 0 0 Q20 -20 40 0 Q20 20 0 0 Q-20 20 -40 0" fill="#e67e22" opacity="0.7"/>
+    <path d="M0 -40 Q20 -20 0 0 Q20 20 0 40 Q-20 20 0 0 Q-20 -20 0 -40" fill="#e67e22" opacity="0.7"/>
+    <!-- Kale -->
+    <rect x="-60" y="-30" width="20" height="60" fill="none" stroke="#2c3e50" stroke-width="3"/>
+    <rect x="40" y="-30" width="20" height="60" fill="none" stroke="#2c3e50" stroke-width="3"/>
+    <!-- Başlık -->
+    <text x="0" y="70" text-anchor="middle" font-family="Arial" font-size="18" fill="#2c3e50" font-weight="bold">FUTBOL</text>
+  </g>
+</svg> 

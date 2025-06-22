@@ -1,0 +1,23 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" fill="#f8f9fa"/>
+  <g transform="translate(128, 128)">
+    <!-- Oksijen atomu çekirdeği -->
+    <circle cx="0" cy="0" r="18" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+    <!-- Elektron yörüngeleri -->
+    <circle cx="0" cy="0" r="45" fill="none" stroke="#e74c3c" stroke-width="2" opacity="0.6"/>
+    <circle cx="0" cy="0" r="55" fill="none" stroke="#e74c3c" stroke-width="2" opacity="0.4"/>
+    <!-- Elektronlar -->
+    <circle cx="0" cy="-45" r="5" fill="#e74c3c"/>
+    <circle cx="0" cy="45" r="5" fill="#e74c3c"/>
+    <circle cx="0" cy="-55" r="5" fill="#e74c3c"/>
+    <circle cx="0" cy="55" r="5" fill="#e74c3c"/>
+    <circle cx="-45" cy="0" r="5" fill="#e74c3c"/>
+    <circle cx="45" cy="0" r="5" fill="#e74c3c"/>
+    <!-- Element sembolü -->
+    <text x="0" y="5" text-anchor="middle" font-family="Arial" font-size="22" fill="white" font-weight="bold">O</text>
+    <!-- Atom numarası -->
+    <text x="0" y="25" text-anchor="middle" font-family="Arial" font-size="12" fill="#2c3e50" font-weight="bold">8</text>
+    <!-- Başlık -->
+    <text x="0" y="80" text-anchor="middle" font-family="Arial" font-size="18" fill="#2c3e50" font-weight="bold">OKSİJEN</text>
+  </g>
+</svg> 

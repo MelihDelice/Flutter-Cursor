@@ -1,0 +1,17 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" fill="#f8f9fa"/>
+  <g transform="translate(128, 128)">
+    <!-- Hidrojen atomu çekirdeği -->
+    <circle cx="0" cy="0" r="15" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+    <!-- Elektron yörüngesi -->
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#3498db" stroke-width="2" opacity="0.6"/>
+    <!-- Tek elektron -->
+    <circle cx="0" cy="-40" r="6" fill="#e74c3c"/>
+    <!-- Element sembolü -->
+    <text x="0" y="5" text-anchor="middle" font-family="Arial" font-size="20" fill="white" font-weight="bold">H</text>
+    <!-- Atom numarası -->
+    <text x="0" y="25" text-anchor="middle" font-family="Arial" font-size="12" fill="#2c3e50" font-weight="bold">1</text>
+    <!-- Başlık -->
+    <text x="0" y="70" text-anchor="middle" font-family="Arial" font-size="18" fill="#2c3e50" font-weight="bold">HİDROJEN</text>
+  </g>
+</svg> 

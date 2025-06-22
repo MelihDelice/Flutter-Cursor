@@ -26,286 +26,128 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background.png'),
-            fit: BoxFit.cover,
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFFFFF6E0), Color(0xFFE0F7FA)],
           ),
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black.withOpacity(0.3),
-                Colors.black.withOpacity(0.5),
-              ],
-            ),
-          ),
-          child: SafeArea(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Başlık
-                    Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 15,
-                            offset: const Offset(0, 8),
+        child: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Logo ve başlık
+                  Column(
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.08),
+                              blurRadius: 16,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Image.asset(
+                            'assets/images/logo.png',
+                            fit: BoxFit.contain,
                           ),
-                        ],
+                        ),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFFF6B6B),
-                              borderRadius: BorderRadius.circular(15),
+                      const SizedBox(height: 18),
+                      const Text(
+                        'VersusMind',
+                        style: TextStyle(
+                          fontSize: 38,
+                          fontWeight: FontWeight.w900,
+                          color: Color(0xFF2C3E50),
+                          letterSpacing: 1.5,
+                          shadows: [
+                            Shadow(
+                              color: Color(0x33FF6B6B),
+                              blurRadius: 8,
+                              offset: Offset(0, 3),
                             ),
-                            child: const Icon(
-                              Icons.quiz,
-                              size: 30,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(width: 15),
-                          const Text(
-                            'QUIZ OYUNU',
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF2C3E50),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 40),
-                    
-                    // Skor kartı
-                    Consumer<GameProvider>(
-                      builder: (context, gameProvider, child) {
-                        return Container(
-                          padding: const EdgeInsets.all(25),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: 10,
-                                offset: const Offset(0, 5),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  _buildScoreItem(
-                                    Icons.emoji_events,
-                                    'En Yüksek',
-                                    '${gameProvider.highScore}',
-                                    const Color(0xFFFFD93D),
-                                  ),
-                                  Container(
-                                    width: 1,
-                                    height: 50,
-                                    color: Colors.grey.withOpacity(0.3),
-                                  ),
-                                  _buildScoreItem(
-                                    Icons.score,
-                                    'Son Skor',
-                                    '${gameProvider.score}',
-                                    const Color(0xFF4ECDC4),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 20),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                                decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
-                                    colors: [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
-                                  ),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Icon(
-                                      Icons.trending_up,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      'Başarım: %${gameProvider.successRate.toInt()}',
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 40),
-                    
-                    // Butonlar
-                    Column(
-                      children: [
-                        _buildMenuButton(
-                          icon: Icons.play_arrow,
-                          text: 'TEK OYUNCULU',
-                          color: const Color(0xFF4ECDC4),
-                          onPressed: () {
-                            _showCategorySelectionDialog(context);
-                          },
+                    ],
+                  ),
+                  const SizedBox(height: 32),
+                  // Minimal skor satırı
+                  Consumer<GameProvider>(
+                    builder: (context, gameProvider, child) {
+                      return Text(
+                        'En Yüksek: ${gameProvider.highScore}   Son Skor: ${gameProvider.score}   Başarım: %${gameProvider.successRate.toInt()}',
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Color(0xFF4ECDC4),
+                          fontWeight: FontWeight.w600,
                         ),
-                        const SizedBox(height: 20),
-                        _buildMenuButton(
-                          icon: Icons.people,
-                          text: 'MULTIPLAYER',
-                          color: const Color(0xFF9B59B6),
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => const MultiplayerMenuScreen()),
-                            );
-                          },
+                        textAlign: TextAlign.center,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 40),
+                  // Cartoon temalı büyük butonlar
+                  _CartoonMenuButton(
+                    icon: Icons.play_arrow,
+                    text: 'TEK OYUNCULU',
+                    color: const Color(0xFFFFD93D),
+                    onPressed: () {
+                      _showCategorySelectionDialog(context);
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  _CartoonMenuButton(
+                    icon: Icons.people,
+                    text: 'ÇOK OYUNCULU',
+                    color: const Color(0xFF4ECDC4),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MultiplayerMenuScreen(),
                         ),
-                        const SizedBox(height: 20),
-                        _buildMenuButton(
-                          icon: Icons.settings,
-                          text: 'AYARLAR',
-                          color: const Color(0xFFFF6B6B),
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => const SettingsScreen()),
-                            );
-                          },
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  _CartoonMenuButton(
+                    icon: Icons.settings,
+                    text: 'AYARLAR',
+                    color: const Color(0xFFFF6B6B),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsScreen(),
                         ),
-                      ],
+                      );
+                    },
+                  ),
+                  const Spacer(),
+                  // Alt kısımda cartoon karakter
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Image.asset(
+                      'assets/images/animals/cheetah.png',
+                      width: 80,
+                      height: 80,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildScoreItem(IconData icon, String label, String value, Color color) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Icon(
-            icon,
-            size: 24,
-            color: Colors.white,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-            color: Colors.grey,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF2C3E50),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildMenuButton({
-    required IconData icon,
-    required String text,
-    required Color color,
-    required VoidCallback onPressed,
-  }) {
-    return Container(
-      width: double.infinity,
-      height: 70,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: color.withOpacity(0.3),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20),
-          onTap: onPressed,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Icon(
-                    icon,
-                    size: 24,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Text(
-                  text,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2C3E50),
-                  ),
-                ),
-                const Spacer(),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: color,
-                  size: 20,
-                ),
-              ],
             ),
           ),
         ),
@@ -500,5 +342,64 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
       default:
         return Icons.category;
     }
+  }
+}
+
+// Cartoon temalı buton widget'ı
+typedef VoidCallback = void Function();
+
+class _CartoonMenuButton extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final Color color;
+  final VoidCallback onPressed;
+
+  const _CartoonMenuButton({
+    required this.icon,
+    required this.text,
+    required this.color,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 60,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          foregroundColor: Colors.white,
+          elevation: 6,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          shadowColor: color.withOpacity(0.3),
+        ),
+        onPressed: onPressed,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 30),
+            const SizedBox(width: 16),
+            Text(
+              text,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
+                shadows: [
+                  Shadow(
+                    color: Colors.white24,
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 } 
