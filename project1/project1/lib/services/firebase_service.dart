@@ -11,6 +11,7 @@ class FirebaseService {
   StreamController<String>? _messageController;
   StreamSubscription<DatabaseEvent>? _gameSubscription;
   Timer? _questionTimer;
+  Timer? _speedModeTimer;
   
   final _uuid = Uuid();
 
@@ -169,8 +170,11 @@ class FirebaseService {
       
       await _database.child('games').child(gameId).update(updatedGame.toJson());
       
-      // Tüm oyuncular cevap verdiğinde skorları güncelle
-      if (updatedAnswers.length >= game.playerCount) {
+      // Hızlı modda: cevap verildiğinde hemen sonraki soruya geç
+      // Normal modda: tüm oyuncular cevap verdiğinde skorları güncelle
+      if (game.gameMode == GameMode.speed) {
+        await _processAnswers(gameId, updatedGame);
+      } else if (updatedAnswers.length >= game.playerCount) {
         _questionTimer?.cancel(); // Timer'ı iptal et
         await _processAnswers(gameId, updatedGame);
       }
@@ -268,8 +272,12 @@ class FirebaseService {
       );
       await _database.child('games').child(gameId).update(updatedGame.toJson());
       
-      // İlk soru için timer başlat
-      _startQuestionTimer(gameId, game.questionTimeLimit);
+      // Timer başlat (mod'a göre)
+      if (game.gameMode == GameMode.speed) {
+        _startSpeedModeTimer(gameId);
+      } else {
+        _startQuestionTimer(gameId, game.questionTimeLimit);
+      }
       
       _messageController?.add('Oyun başlatıldı! (${game.playerCount} oyuncu)');
     } catch (e) {
@@ -393,8 +401,41 @@ class FirebaseService {
     }
   }
 
+  void _startSpeedModeTimer(String gameId) {
+    _speedModeTimer?.cancel();
+    
+    // Her saniye güncelle
+    _speedModeTimer = Timer.periodic(const Duration(seconds: 1), (timer) async {
+      try {
+        final snapshot = await _database.child('games').child(gameId).get();
+        if (snapshot.exists) {
+          final gameData = Map<String, dynamic>.from(snapshot.value as Map);
+          final game = MultiplayerGame.fromJson(gameData);
+          
+          if (game.speedModeRemainingTime != null && game.speedModeRemainingTime! > 0) {
+            // Süreyi 1 azalt
+            final updatedGame = game.copyWith(
+              speedModeRemainingTime: game.speedModeRemainingTime! - 1,
+            );
+            await _database.child('games').child(gameId).update(updatedGame.toJson());
+          } else {
+            // Süre bitti, oyunu sonlandır
+            timer.cancel();
+            final finishedGame = game.copyWith(status: GameStatus.finished);
+            await _database.child('games').child(gameId).update(finishedGame.toJson());
+            _messageController?.add('Süre doldu! Oyun bitti.');
+          }
+        }
+      } catch (e) {
+        print('Speed mode timer error: $e');
+        timer.cancel();
+      }
+    });
+  }
+
   void dispose() {
     _questionTimer?.cancel();
+    _speedModeTimer?.cancel();
     _gameSubscription?.cancel();
     _gameController?.close();
     _messageController?.close();

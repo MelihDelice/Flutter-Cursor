@@ -1088,7 +1088,38 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   }
 
   Widget _buildTimerDisplay(MultiplayerGame game) {
-    // Kalan süreyi hesapla
+    // Hızlı mod timer'ı
+    if (game.gameMode == GameMode.speed) {
+      final remainingTime = game.speedModeRemainingTime ?? 0;
+      
+      // Renk seçimi
+      Color timerColor = Colors.green;
+      if (remainingTime <= 10) {
+        timerColor = Colors.red;
+      } else if (remainingTime <= 30) {
+        timerColor = Colors.orange;
+      }
+
+      return Column(
+        children: [
+          Icon(
+            Icons.flash_on,
+            color: timerColor,
+            size: 16,
+          ),
+          Text(
+            '${remainingTime}s',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: timerColor,
+            ),
+          ),
+        ],
+      );
+    }
+
+    // Normal mod timer'ı
     int remainingTime = 8;
     if (game.questionStartTime != null) {
       final elapsed = DateTime.now().difference(game.questionStartTime!).inSeconds;
