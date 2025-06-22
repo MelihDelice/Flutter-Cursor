@@ -8,6 +8,11 @@ enum GameStatus {
   finished,
 }
 
+enum GameMode {
+  normal,  // Normal mod: her soru için 8 saniye
+  speed,   // Hızlı mod: toplam 80 saniye
+}
+
 enum PlayerRole {
   host,
   guest,
@@ -28,6 +33,8 @@ class MultiplayerGame {
   final DateTime? questionStartTime;
   final int questionTimeLimit;
   final int maxPlayers;
+  final GameMode gameMode;
+  final int? speedModeRemainingTime; // Hızlı modda kalan süre (saniye)
 
   MultiplayerGame({
     required this.gameId,
@@ -44,6 +51,8 @@ class MultiplayerGame {
     this.questionStartTime,
     this.questionTimeLimit = 8,
     this.maxPlayers = 150,
+    this.gameMode = GameMode.normal,
+    this.speedModeRemainingTime,
   });
 
   factory MultiplayerGame.create({
@@ -52,6 +61,7 @@ class MultiplayerGame {
     required List<Question> questions,
     required String category,
     int maxPlayers = 150,
+    GameMode gameMode = GameMode.normal,
   }) {
     return MultiplayerGame(
       gameId: generateGameId(),
@@ -68,6 +78,8 @@ class MultiplayerGame {
       questionStartTime: null,
       questionTimeLimit: 8,
       maxPlayers: maxPlayers,
+      gameMode: gameMode,
+      speedModeRemainingTime: gameMode == GameMode.speed ? 80 : null,
     );
   }
 
@@ -99,6 +111,8 @@ class MultiplayerGame {
     DateTime? questionStartTime,
     int? questionTimeLimit,
     int? maxPlayers,
+    GameMode? gameMode,
+    int? speedModeRemainingTime,
   }) {
     return MultiplayerGame(
       gameId: gameId ?? this.gameId,
@@ -115,6 +129,8 @@ class MultiplayerGame {
       questionStartTime: questionStartTime ?? this.questionStartTime,
       questionTimeLimit: questionTimeLimit ?? this.questionTimeLimit,
       maxPlayers: maxPlayers ?? this.maxPlayers,
+      gameMode: gameMode ?? this.gameMode,
+      speedModeRemainingTime: speedModeRemainingTime ?? this.speedModeRemainingTime,
     );
   }
 
@@ -134,6 +150,8 @@ class MultiplayerGame {
       'questionStartTime': questionStartTime?.toIso8601String(),
       'questionTimeLimit': questionTimeLimit,
       'maxPlayers': maxPlayers,
+      'gameMode': gameMode.toString(),
+      'speedModeRemainingTime': speedModeRemainingTime,
     };
   }
 
@@ -166,6 +184,11 @@ class MultiplayerGame {
             : null,
         questionTimeLimit: json['questionTimeLimit'] as int? ?? 8,
         maxPlayers: json['maxPlayers'] as int? ?? 150,
+        gameMode: GameMode.values.firstWhere(
+          (e) => e.toString() == json['gameMode']?.toString(),
+          orElse: () => GameMode.normal,
+        ),
+        speedModeRemainingTime: json['speedModeRemainingTime'] as int?,
       );
     } catch (e) {
       print('MultiplayerGame.fromJson Error: $e');
