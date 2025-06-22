@@ -28,6 +28,7 @@ class _CreateGameScreenState extends State<CreateGameScreen>
   String? _gameId;
   bool _isGameCreated = false;
   String _selectedCategory = 'Tümü';
+  mg.GameMode _selectedGameMode = mg.GameMode.normal;
 
   @override
   void initState() {
@@ -251,6 +252,161 @@ class _CreateGameScreenState extends State<CreateGameScreen>
             const SizedBox(height: 16),
           ],
           
+          // Oyun modu seçimi
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade50,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.grey.shade200),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Oyun Modu Seç',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF2D3748),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Column(
+                  children: [
+                    // Normal Mod
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedGameMode = mg.GameMode.normal;
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: _selectedGameMode == mg.GameMode.normal 
+                              ? const Color(0xFF6C63FF).withOpacity(0.1)
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: _selectedGameMode == mg.GameMode.normal 
+                                ? const Color(0xFF6C63FF)
+                                : Colors.grey.shade300,
+                            width: 2,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.timer,
+                              color: _selectedGameMode == mg.GameMode.normal 
+                                  ? const Color(0xFF6C63FF)
+                                  : Colors.grey,
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Normal Mod',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: _selectedGameMode == mg.GameMode.normal 
+                                          ? const Color(0xFF6C63FF)
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'Her soru için 8 saniye süre',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (_selectedGameMode == mg.GameMode.normal)
+                              const Icon(
+                                Icons.check_circle,
+                                color: Color(0xFF6C63FF),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    // Hızlı Mod
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedGameMode = mg.GameMode.speed;
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: _selectedGameMode == mg.GameMode.speed 
+                              ? Colors.orange.withOpacity(0.1)
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: _selectedGameMode == mg.GameMode.speed 
+                                ? Colors.orange
+                                : Colors.grey.shade300,
+                            width: 2,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.flash_on,
+                              color: _selectedGameMode == mg.GameMode.speed 
+                                  ? Colors.orange
+                                  : Colors.grey,
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Hızlı Mod',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: _selectedGameMode == mg.GameMode.speed 
+                                          ? Colors.orange
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'Toplam 80 saniye, cevaplayan hemen geçer',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (_selectedGameMode == mg.GameMode.speed)
+                              const Icon(
+                                Icons.check_circle,
+                                color: Colors.orange,
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+          
           // Kategori seçimi
           Container(
             width: double.infinity,
@@ -434,7 +590,7 @@ class _CreateGameScreenState extends State<CreateGameScreen>
         category: question.category,
       )).toList();
     
-    await multiplayerProvider.createGame(multiplayerQuestions, _selectedCategory, widget.playerName);
+    await multiplayerProvider.createGame(multiplayerQuestions, _selectedCategory, widget.playerName, _selectedGameMode);
     
     if (multiplayerProvider.successMessage != null) {
       setState(() {

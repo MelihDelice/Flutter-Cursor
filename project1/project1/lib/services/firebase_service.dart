@@ -49,13 +49,14 @@ class FirebaseService {
     }
   }
 
-  Future<void> createGame(List<Question> questions, String category, String hostName) async {
+  Future<void> createGame(List<Question> questions, String category, String hostName, [GameMode gameMode = GameMode.normal]) async {
     try {
       final game = MultiplayerGame.create(
         hostId: playerId,
         hostName: hostName,
         questions: questions,
         category: category,
+        gameMode: gameMode,
       );
 
       _messageController?.add('Oyun oluşturuluyor: ${game.gameId}');

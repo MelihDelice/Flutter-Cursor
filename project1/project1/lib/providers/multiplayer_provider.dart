@@ -79,7 +79,7 @@ class MultiplayerProvider extends ChangeNotifier {
     _successMessage = null;
   }
 
-  Future<void> createGame(List<Question> questions, String category, String playerName) async {
+  Future<void> createGame(List<Question> questions, String category, String playerName, [GameMode gameMode = GameMode.normal]) async {
     _isLoading = true;
     _clearMessages();
     notifyListeners();
@@ -94,10 +94,11 @@ class MultiplayerProvider extends ChangeNotifier {
         hostName: playerName,
         questions: questions,
         category: category,
+        gameMode: gameMode,
       );
       _playerRole = PlayerRole.host;
       
-      await _service.createGame(questions, category, playerName);
+      await _service.createGame(questions, category, playerName, gameMode);
       _successMessage = 'Oyun oluşturuldu! Referans kodunu arkadaşlarınla paylaş.';
     } catch (e) {
       _errorMessage = 'Oyun oluşturma hatası: $e';
