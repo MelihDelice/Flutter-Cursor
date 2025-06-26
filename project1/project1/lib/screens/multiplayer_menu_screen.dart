@@ -64,7 +64,7 @@ class _MultiplayerMenuScreenState extends State<MultiplayerMenuScreen>
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/background.png'),
+            image: AssetImage('assets/images/mainbackground.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -81,7 +81,7 @@ class _MultiplayerMenuScreenState extends State<MultiplayerMenuScreen>
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -93,7 +93,7 @@ class _MultiplayerMenuScreenState extends State<MultiplayerMenuScreen>
                       ),
                       child: const Icon(
                         Icons.arrow_back,
-                        color: Color(0xFF6C63FF),
+                        color: Color(0xFF4ECDC4),
                         size: 24,
                       ),
                     ),
@@ -112,6 +112,7 @@ class _MultiplayerMenuScreenState extends State<MultiplayerMenuScreen>
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
+                    fontFamily: 'Ubuntu',
                     shadows: [
                       Shadow(
                         offset: Offset(2, 2),
@@ -197,6 +198,7 @@ class _MultiplayerMenuScreenState extends State<MultiplayerMenuScreen>
                                 color: multiplayerProvider.isConnected 
                                     ? Colors.green 
                                     : Colors.red,
+                                fontFamily: 'Ubuntu',
                               ),
                             ),
                           ],
@@ -227,6 +229,7 @@ class _MultiplayerMenuScreenState extends State<MultiplayerMenuScreen>
                                         : Colors.green,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
+                                    fontFamily: 'Ubuntu',
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -294,6 +297,7 @@ class _MultiplayerMenuScreenState extends State<MultiplayerMenuScreen>
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF2D3748),
+                      fontFamily: 'Ubuntu',
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -302,6 +306,7 @@ class _MultiplayerMenuScreenState extends State<MultiplayerMenuScreen>
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey[600],
+                      fontFamily: 'Ubuntu',
                     ),
                   ),
                 ],

@@ -75,7 +75,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/background.png'),
+            image: AssetImage('assets/images/mainbackground.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -128,6 +128,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.w600,
+              fontFamily: 'Ubuntu',
             ),
           ),
         ],
@@ -187,6 +188,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   style: TextStyle(
                     color: Colors.orange,
                     fontWeight: FontWeight.w600,
+                    fontFamily: 'Ubuntu',
                   ),
                 ),
               ),
@@ -227,6 +229,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF2D3748),
+                    fontFamily: 'Ubuntu',
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -238,26 +241,70 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
+                    fontFamily: 'Ubuntu',
                   ),
                 ),
                 const SizedBox(height: 24),
                 
                 // Oyuncu durumu
-                Text(
-                  'Oyuncular: $playerCount/${game.maxPlayers}',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF2D3748),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.blue.withOpacity(0.3)),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildPlayerStatus('Sen', true, isHost ? 'Host' : 'Oyuncu'),
-                    _buildPlayerStatus('Diğerleri', playerCount > 1, playerCount > 1 ? '${playerCount - 1} Bağlandı' : 'Bekleniyor'),
-                  ],
+                  child: Column(
+                    children: [
+                      Text(
+                        'Oyuncular: $playerCount/${game.maxPlayers}',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF2D3748),
+                          fontFamily: 'Ubuntu',
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildPlayerStatus('Sen', true, isHost ? 'Host' : 'Oyuncu'),
+                          _buildPlayerStatus(
+                            'Diğerleri', 
+                            playerCount > 1, 
+                            playerCount > 1 
+                                ? '${playerCount - 1} Oyuncu Bağlandı' 
+                                : 'Oyuncu Bekleniyor'
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      // Oyun başlatma durumu
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: playerCount >= 2 ? Colors.green.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: playerCount >= 2 ? Colors.green : Colors.orange,
+                            width: 1,
+                          ),
+                        ),
+                        child: Text(
+                          playerCount >= 2 
+                              ? 'Oyun başlatılabilir! (Host + 1 oyuncu)' 
+                              : 'En az 1 oyuncu gerekiyor',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: playerCount >= 2 ? Colors.green : Colors.orange,
+                            fontFamily: 'Ubuntu',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 
                 const SizedBox(height: 24),
@@ -285,6 +332,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: _getCategoryColor(game.category),
+                          fontFamily: 'Ubuntu',
                         ),
                       ),
                     ],
@@ -309,6 +357,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Color(0xFF6C63FF),
+                            fontFamily: 'Ubuntu',
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -320,17 +369,51 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF2D3748),
-                                letterSpacing: 2,
+                                color: Color(0xFF6C63FF),
+                                fontFamily: 'Ubuntu',
                               ),
                             ),
                             const SizedBox(width: 12),
+                            
+                            // Kopyala butonu
                             GestureDetector(
-                              onTap: () => _copyGameCode(game.gameId),
-                              child: const Icon(
-                                Icons.copy,
-                                color: Color(0xFF6C63FF),
-                                size: 24,
+                              onTap: () {
+                                Clipboard.setData(ClipboardData(text: game.gameId));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Referans kodu kopyalandı!'),
+                                    backgroundColor: Color(0xFF6C63FF),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF6C63FF),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Icon(
+                                  Icons.copy,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+                              ),
+                            ),
+                            
+                            const SizedBox(width: 8),
+                            
+                            // Paylaş butonu
+                            ElevatedButton.icon(
+                              onPressed: () => _shareGameCode(game.gameId),
+                              icon: const Icon(Icons.share),
+                              label: const Text('Paylaş', style: TextStyle(fontFamily: 'Ubuntu')),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
                               ),
                             ),
                           ],
@@ -340,36 +423,35 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                   const SizedBox(height: 16),
                   
-                  // Paylaş butonu
-                  ElevatedButton.icon(
-                    onPressed: () => _shareGameCode(game.gameId),
-                    icon: const Icon(Icons.share),
-                    label: const Text('Paylaş'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  
                   // Oyunu başlat butonu
-                  ElevatedButton(
-                    onPressed: playerCount >= 2 ? () => multiplayerProvider.startGame() : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: playerCount >= 2 ? const Color(0xFF6C63FF) : Colors.grey,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                  Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: playerCount >= 2 ? () => multiplayerProvider.startGame() : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: playerCount >= 2 ? const Color(0xFF6C63FF) : Colors.grey,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        elevation: playerCount >= 2 ? 4 : 0,
                       ),
-                    ),
-                    child: Text(
-                      playerCount >= 2 ? 'Oyunu Başlat ($playerCount oyuncu)' : 'En az 2 oyuncu gerekiyor...',
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (playerCount >= 2) ...[
+                            const Icon(Icons.play_arrow, size: 24),
+                            const SizedBox(width: 8),
+                          ],
+                          Text(
+                            playerCount >= 2 
+                                ? 'Oyunu Başlat ($playerCount oyuncu)' 
+                                : 'En az 1 oyuncu gerekiyor (Host + 1 oyuncu)',
+                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, fontFamily: 'Ubuntu'),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ] else ...[
@@ -378,6 +460,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     style: TextStyle(
                       color: Colors.orange,
                       fontWeight: FontWeight.w600,
+                      fontFamily: 'Ubuntu',
                     ),
                   ),
                 ],
@@ -449,6 +532,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   style: const TextStyle(
                     color: Colors.blue,
                     fontWeight: FontWeight.w600,
+                    fontFamily: 'Ubuntu',
                   ),
                 ),
               ),
@@ -482,6 +566,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF2D3748),
+                      fontFamily: 'Ubuntu',
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -555,6 +640,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                         : wasPlayerAnswer 
                                             ? Colors.red 
                                             : const Color(0xFF2D3748),
+                                    fontFamily: 'Ubuntu',
                                   ),
                                 ),
                               ),
@@ -600,6 +686,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           style: TextStyle(
                             color: Colors.blue,
                             fontWeight: FontWeight.w600,
+                            fontFamily: 'Ubuntu',
                           ),
                         ),
                       ],

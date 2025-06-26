@@ -23,7 +23,7 @@ class _NameInputScreenState extends State<NameInputScreen> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/background.png'),
+            image: AssetImage('assets/images/mainbackground.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -40,7 +40,7 @@ class _NameInputScreenState extends State<NameInputScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -52,7 +52,7 @@ class _NameInputScreenState extends State<NameInputScreen> {
                       ),
                       child: const Icon(
                         Icons.arrow_back,
-                        color: Color(0xFF6C63FF),
+                        color: Color(0xFF4ECDC4),
                         size: 24,
                       ),
                     ),
@@ -68,6 +68,7 @@ class _NameInputScreenState extends State<NameInputScreen> {
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
+                    fontFamily: 'Ubuntu',
                     shadows: [
                       Shadow(
                         offset: Offset(2, 2),
@@ -154,6 +155,7 @@ class _NameInputScreenState extends State<NameInputScreen> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
+                                fontFamily: 'Ubuntu',
                               ),
                             ),
                           ),

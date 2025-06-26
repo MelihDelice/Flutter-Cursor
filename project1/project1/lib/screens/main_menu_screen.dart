@@ -26,10 +26,9 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFFFFF6E0), Color(0xFFE0F7FA)],
+          image: DecorationImage(
+            image: AssetImage('assets/images/mainbackground.jpg'),
+            fit: BoxFit.cover,
           ),
         ),
         child: SafeArea(
@@ -43,25 +42,11 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   Column(
                     children: [
                       Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.08),
-                              blurRadius: 16,
-                              offset: const Offset(0, 8),
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Image.asset(
-                            'assets/images/logo.png',
-                            fit: BoxFit.contain,
-                          ),
+                        width: 140,
+                        height: 140,
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          fit: BoxFit.contain,
                         ),
                       ),
                       const SizedBox(height: 18),
@@ -70,11 +55,12 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                         style: TextStyle(
                           fontSize: 38,
                           fontWeight: FontWeight.w900,
-                          color: Color(0xFF2C3E50),
+                          color: Colors.white,
                           letterSpacing: 1.5,
+                          fontFamily: 'Ubuntu',
                           shadows: [
                             Shadow(
-                              color: Color(0x33FF6B6B),
+                              color: Colors.black54,
                               blurRadius: 8,
                               offset: Offset(0, 3),
                             ),
@@ -91,61 +77,66 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                         'En Yüksek: ${gameProvider.highScore}   Son Skor: ${gameProvider.score}   Başarım: %${gameProvider.successRate.toInt()}',
                         style: const TextStyle(
                           fontSize: 15,
-                          color: Color(0xFF4ECDC4),
+                          color: Colors.white,
                           fontWeight: FontWeight.w600,
+                          fontFamily: 'Ubuntu',
+                          shadows: [
+                            Shadow(
+                              color: Colors.black54,
+                              blurRadius: 4,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
                         ),
                         textAlign: TextAlign.center,
                       );
                     },
                   ),
                   const SizedBox(height: 40),
-                  // Cartoon temalı büyük butonlar
-                  _CartoonMenuButton(
-                    icon: Icons.play_arrow,
-                    text: 'TEK OYUNCULU',
-                    color: const Color(0xFFFFD93D),
-                    onPressed: () {
-                      _showCategorySelectionDialog(context);
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  _CartoonMenuButton(
-                    icon: Icons.people,
-                    text: 'ÇOK OYUNCULU',
-                    color: const Color(0xFF4ECDC4),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MultiplayerMenuScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  _CartoonMenuButton(
-                    icon: Icons.settings,
-                    text: 'AYARLAR',
-                    color: const Color(0xFFFF6B6B),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SettingsScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  const Spacer(),
-                  // Alt kısımda cartoon karakter
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: Image.asset(
-                      'assets/images/animals/cheetah.png',
-                      width: 80,
-                      height: 80,
+                  // Modern menü butonları
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _ModernMenuButton(
+                            icon: Icons.play_arrow_rounded,
+                            text: 'TEK OYUNCULU',
+                            onPressed: () {
+                              _showCategorySelectionDialog(context);
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          _ModernMenuButton(
+                            icon: Icons.people_rounded,
+                            text: 'ÇOK OYUNCULU',
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MultiplayerMenuScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          _ModernMenuButton(
+                            icon: Icons.settings_rounded,
+                            text: 'AYARLAR',
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SettingsScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
+                  const SizedBox(height: 40),
                 ],
               ),
             ),
@@ -345,59 +336,67 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   }
 }
 
-// Cartoon temalı buton widget'ı
+// Modern menü buton widget'ı
 typedef VoidCallback = void Function();
 
-class _CartoonMenuButton extends StatelessWidget {
+class _ModernMenuButton extends StatelessWidget {
   final IconData icon;
   final String text;
-  final Color color;
   final VoidCallback onPressed;
 
-  const _CartoonMenuButton({
+  const _ModernMenuButton({
     required this.icon,
     required this.text,
-    required this.color,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: double.infinity,
       height: 60,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          foregroundColor: Colors.white,
-          elevation: 6,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
           ),
-          shadowColor: color.withOpacity(0.3),
-        ),
-        onPressed: onPressed,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 30),
-            const SizedBox(width: 16),
-            Text(
-              text,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.2,
-                shadows: [
-                  Shadow(
-                    color: Colors.white24,
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(5),
+          onTap: onPressed,
+          child: Container(
+            width: double.infinity,
+            height: 60,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Icon(icon, size: 24, color: Colors.black87),
+                const SizedBox(width: 16),
+                Text(
+                  text,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                    fontFamily: 'Ubuntu',
                   ),
-                ],
-              ),
+                ),
+                const Spacer(),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                  color: Colors.black54,
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

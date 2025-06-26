@@ -16,11 +16,13 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   late AnimationController _imageController;
   late AnimationController _correctController;
   late AnimationController _wrongController;
+  late AnimationController _clockShakeController;
   late Animation<double> _questionAnimation;
   late Animation<double> _optionAnimation;
   late Animation<double> _imageAnimation;
   late Animation<double> _correctAnimation;
   late Animation<double> _wrongAnimation;
+  late Animation<double> _clockShakeAnimation;
 
   @override
   void initState() {
@@ -45,6 +47,10 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 400),
       vsync: this,
     );
+    _clockShakeController = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
     
     _questionAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _questionController, curve: Curves.easeInOut),
@@ -61,6 +67,9 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
     _wrongAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _wrongController, curve: Curves.elasticOut),
     );
+    _clockShakeAnimation = Tween<double>(begin: -0.1, end: 0.1).animate(
+      CurvedAnimation(parent: _clockShakeController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -70,6 +79,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
     _imageController.dispose();
     _correctController.dispose();
     _wrongController.dispose();
+    _clockShakeController.dispose();
     super.dispose();
   }
 
@@ -78,358 +88,123 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
     return WillPopScope(
       onWillPop: () => _showExitConfirmation(context),
       child: Scaffold(
-        backgroundColor: const Color(0xFF87CEEB), // Açık mavi cartoon gökyüzü
-        appBar: AppBar(
-          title: const Text(
-            '🎮 VersusMind 🎮',
-            style: TextStyle(
-              color: Colors.white, 
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/mainbackground.jpg'),
+              fit: BoxFit.cover,
             ),
           ),
-          backgroundColor: const Color(0xFFFF6B6B),
-          elevation: 0,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
-            ),
-          ),
-          actions: [
-            Consumer<GameProvider>(
-              builder: (context, gameProvider, child) {
-                return Row(
-                  children: [
-                    // Zamanlayıcı
-                    Container(
-                      margin: const EdgeInsets.only(right: 8),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: _getTimeColor(gameProvider.timeLeft),
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 8,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.timer, color: Colors.white, size: 16),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${gameProvider.timeLeft}s',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Skor
-                    Container(
-                      margin: const EdgeInsets.only(right: 8),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF4ECDC4),
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 8,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.star, color: Colors.white, size: 16),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${gameProvider.score}',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Kategori
-                    Container(
-                      margin: const EdgeInsets.only(right: 16),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: _getCategoryColor(gameProvider.selectedCategory),
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 8,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            _getCategoryIcon(gameProvider.selectedCategory),
-                            color: Colors.white,
-                            size: 16,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            gameProvider.selectedCategory,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
-        body: Consumer<GameProvider>(
-          builder: (context, gameProvider, child) {
-            if (!gameProvider.isGameActive) {
-              return _buildGameOverScreen(context, gameProvider);
-            }
-
-            final currentQuestion = gameProvider.currentQuestion;
-            if (currentQuestion == null) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Color(0xFFFF6B6B),
-                ),
-              );
-            }
-
-            // Animasyonları sadece yeni soru geldiğinde başlat
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (gameProvider.shouldAnimateNextQuestion) {
-                _questionController.reset();
-                _optionController.reset();
-                _imageController.reset();
-                Future.delayed(const Duration(milliseconds: 50), () {
-                  _questionController.forward();
-                  _optionController.forward();
-                  _imageController.forward();
-                });
-              } else if (!_questionController.isAnimating && !_optionController.isAnimating) {
-                _questionController.forward();
-                _optionController.forward();
-                _imageController.forward();
-              }
-            });
-
-            return _buildQuestionScreen(context, gameProvider, currentQuestion);
-          },
-        ),
-      ),
-    );
-  }
-
-  Color _getTimeColor(int timeLeft) {
-    if (timeLeft > 30) return const Color(0xFF4ECDC4);
-    if (timeLeft > 15) return const Color(0xFFFFD93D);
-    return const Color(0xFFFF6B6B);
-  }
-
-  Widget _buildQuestionScreen(BuildContext context, GameProvider gameProvider, currentQuestion) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color(0xFF87CEEB), Color(0xFF98FB98)],
-        ),
-      ),
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // Progress bar
+              // App Bar
               Container(
-                height: 8,
+                padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 16),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: FractionallySizedBox(
-                  alignment: Alignment.centerLeft,
-                  widthFactor: (gameProvider.currentQuestionIndex + 1) / gameProvider.currentQuestions.length,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
-                      ),
-                      borderRadius: BorderRadius.circular(4),
+                  color: const Color(0xFFFF6B6B),
+                  borderRadius: const BorderRadius.vertical(
+                    bottom: Radius.circular(20),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
                     ),
-                  ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 16),
-              
-              // Question number
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  '${gameProvider.currentQuestionIndex + 1}/${gameProvider.currentQuestions.length}',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Color(0xFF2C3E50),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              
-              // Question image (if exists)
-              if (currentQuestion.imageUrl != null) ...[
-                AnimatedBuilder(
-                  animation: _imageAnimation,
-                  builder: (context, child) {
-                    return Transform.scale(
-                      scale: _imageAnimation.value,
+                child: Row(
+                  children: [
+                    // Geri butonu
+                    GestureDetector(
+                      onTap: () => _showExitConfirmation(context),
                       child: Container(
-                        width: double.infinity,
-                        height: 180,
-                        margin: const EdgeInsets.only(bottom: 16),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 8,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Image.asset(
-                            currentQuestion.imageUrl!,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                color: const Color(0xFFF8F9FA),
-                                child: const Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.image,
-                                        size: 40,
-                                        color: Color(0xFFADB5BD),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Text(
-                                        'Resim Yükleniyor...',
-                                        style: TextStyle(
-                                          color: Color(0xFFADB5BD),
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                        child: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            '🎮 VersusMind 🎮',
+                            style: TextStyle(
+                              color: Colors.white, 
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Consumer<GameProvider>(
+                            builder: (context, gameProvider, child) {
+                              return Text(
+                                gameProvider.selectedCategory,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               );
                             },
                           ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ],
-              
-              // Question text
-              AnimatedBuilder(
-                animation: _questionAnimation,
-                builder: (context, child) {
-                  return FadeTransition(
-                    opacity: _questionAnimation,
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 8,
-                            offset: const Offset(0, 4),
-                          ),
                         ],
                       ),
-                      child: Text(
-                        currentQuestion.question,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Color(0xFF2C3E50),
-                          fontWeight: FontWeight.w600,
-                          height: 1.4,
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: currentQuestion.imageUrl != null ? 2 : 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
                     ),
-                  );
-                },
-              ),
-              const SizedBox(height: 20),
-              
-              // Options - Full screen height
-              Expanded(
-                child: AnimatedBuilder(
-                  animation: _optionAnimation,
-                  builder: (context, child) {
-                    return ListView.builder(
-                      itemCount: currentQuestion.options.length,
-                      itemBuilder: (context, index) {
-                        final delay = index * 0.1;
-                        
-                        return FadeTransition(
-                          opacity: Tween<double>(begin: 0.0, end: 1.0).animate(
-                            CurvedAnimation(
-                              parent: _optionController,
-                              curve: Interval(delay, delay + 0.3, curve: Curves.easeInOut),
-                            ),
+                    const Spacer(),
+                    Consumer<GameProvider>(
+                      builder: (context, gameProvider, child) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF4ECDC4),
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                blurRadius: 8,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 6.0),
-                            child: _buildOptionButton(
-                              context,
-                              gameProvider,
-                              currentQuestion,
-                              index,
-                            ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.check_circle, color: Colors.white, size: 16),
+                              const SizedBox(width: 4),
+                              Text(
+                                '${gameProvider.correctAnswers}',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
                         );
                       },
-                    );
+                    ),
+                  ],
+                ),
+              ),
+              // Ana içerik
+              Expanded(
+                child: Consumer<GameProvider>(
+                  builder: (context, gameProvider, child) {
+                    if (!gameProvider.isGameActive) {
+                      return _buildGameOverScreen(gameProvider);
+                    } else {
+                      return _buildGameContent(gameProvider);
+                    }
                   },
                 ),
               ),
@@ -440,176 +215,184 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildOptionButton(BuildContext context, GameProvider gameProvider, currentQuestion, int index) {
-    final isSelected = gameProvider.selectedAnswer == index;
-    final isCorrect = gameProvider.correctAnswer == index;
-    final isWrong = isSelected && !isCorrect;
-    
-    Color backgroundColor = Colors.white;
-    Color borderColor = const Color(0xFFE9ECEF);
-    Color textColor = const Color(0xFF2C3E50);
-    Color iconColor = const Color(0xFF6C757D);
-    
-    if (gameProvider.isAnswering) {
-      if (isCorrect) {
-        backgroundColor = const Color(0xFF4ECDC4);
-        borderColor = const Color(0xFF4ECDC4);
-        textColor = Colors.white;
-        iconColor = Colors.white;
-      } else if (isWrong) {
-        backgroundColor = const Color(0xFFFF6B6B);
-        borderColor = const Color(0xFFFF6B6B);
-        textColor = Colors.white;
-        iconColor = Colors.white;
-      }
-    } else if (isSelected) {
-      backgroundColor = const Color(0xFFFFD93D);
-      borderColor = const Color(0xFFFFD93D);
-      textColor = const Color(0xFF2C3E50);
-      iconColor = const Color(0xFF2C3E50);
+  Color _getTimeColor(int timeLeft) {
+    if (timeLeft > 45) return const Color(0xFF4ECDC4); // Yeşil - çok zaman var
+    if (timeLeft > 30) return const Color(0xFF45B7D1); // Mavi - yeterli zaman
+    if (timeLeft > 15) return const Color(0xFFFFD93D); // Sarı - dikkat
+    if (timeLeft > 5) return const Color(0xFFFF8C42);  // Turuncu - az zaman
+    return const Color(0xFFFF6B6B); // Kırmızı - çok az zaman
+  }
+
+  Widget _buildGameContent(GameProvider gameProvider) {
+    final currentQuestion = gameProvider.currentQuestion;
+    if (currentQuestion == null) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
     }
-    
-    return GestureDetector(
-      onTap: gameProvider.isAnswering ? null : () {
-        gameProvider.answerQuestion(index);
-        // Animasyon başlat
-        if (index == currentQuestion.correctAnswer) {
-          _correctController.reset();
-          _correctController.forward();
-        } else {
-          _wrongController.reset();
-          _wrongController.forward();
-        }
-      },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-        width: double.infinity,
-        height: 70,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: borderColor, width: 3),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            const SizedBox(width: 20),
-            // Şık harfi
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: borderColor,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Center(
-                child: Text(
-                  String.fromCharCode(65 + index), // A, B, C, D
-                  style: TextStyle(
-                    color: gameProvider.isAnswering && (isCorrect || isWrong) 
-                        ? Colors.white 
-                        : const Color(0xFF2C3E50),
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 20),
-            // Şık metni
-            Expanded(
-              child: Text(
-                currentQuestion.options[index],
-                style: TextStyle(
-                  fontSize: 16,
-                  color: textColor,
-                  fontWeight: FontWeight.w600,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            // Animasyonlu ikonlar
-            if (gameProvider.isAnswering && isCorrect)
-              AnimatedBuilder(
-                animation: _correctController,
-                builder: (context, child) {
-                  return Transform.scale(
-                    scale: _correctAnimation.value,
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 20),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            blurRadius: 8,
-                            offset: const Offset(0, 4),
+
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          // Süre çemberi - ortada
+          Center(
+            child: Consumer<GameProvider>(
+              builder: (context, gameProvider, child) {
+                // Son 10 saniye kala çalar saat animasyonu başlat
+                if (gameProvider.timeLeft <= 10 && gameProvider.timeLeft > 0) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    if (!_clockShakeController.isAnimating) {
+                      _clockShakeController.repeat(reverse: true);
+                    }
+                  });
+                } else {
+                  _clockShakeController.stop();
+                }
+
+                return Container(
+                  width: 80,
+                  height: 80,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      // Dış çember - süre göstergesi
+                      SizedBox(
+                        width: 80,
+                        height: 80,
+                        child: CircularProgressIndicator(
+                          value: gameProvider.timeLeft / 60.0, // 60 saniye toplam süre
+                          strokeWidth: 6,
+                          backgroundColor: Colors.grey.withOpacity(0.3),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            _getTimeColor(gameProvider.timeLeft),
                           ),
-                        ],
+                        ),
                       ),
-                      child: const Icon(
-                        Icons.check_circle,
-                        color: Color(0xFF4ECDC4),
-                        size: 28,
+                      // İç kısım - saat resmi (arka plan olmadan)
+                      AnimatedBuilder(
+                        animation: _clockShakeAnimation,
+                        builder: (context, child) {
+                          return Transform.rotate(
+                            angle: _clockShakeAnimation.value,
+                            child: Container(
+                              width: 60,
+                              height: 60,
+                              child: ClipOval(
+                                child: Image.asset(
+                                  'assets/images/clock_time.png',
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      width: 60,
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.2),
+                                            blurRadius: 8,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.access_time,
+                                        size: 30,
+                                        color: Color(0xFF4ECDC4),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                    ),
-                  );
-                },
-              ),
-            if (gameProvider.isAnswering && isWrong)
-              AnimatedBuilder(
-                animation: _wrongController,
-                builder: (context, child) {
-                  return Transform.scale(
-                    scale: _wrongAnimation.value,
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 20),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            blurRadius: 8,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.cancel,
-                        color: Color(0xFFFF6B6B),
-                        size: 28,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            const SizedBox(width: 20),
-          ],
-        ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          
+          const SizedBox(height: 30),
+          
+          // Kompakt soru kartı
+          Expanded(
+            child: _buildQuestionScreen(context, gameProvider, currentQuestion),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildGameOverScreen(BuildContext context, GameProvider gameProvider) {
+  Widget _buildQuestionScreen(BuildContext context, GameProvider gameProvider, currentQuestion) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          // Sabit boyutlu soru kartı
+          Container(
+            width: double.infinity,
+            height: 120, // Sabit yükseklik
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.06),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Center(
+              child: Text(
+                currentQuestion.question,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Color(0xFF2C3E50),
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Ubuntu',
+                  height: 1.4,
+                ),
+                textAlign: TextAlign.center,
+                maxLines: 4, // Maksimum 4 satır
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          
+          // Sabit boyutlu şıklar
+          Expanded(
+            child: ListView.separated(
+              itemCount: currentQuestion.options.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 12),
+              itemBuilder: (context, index) {
+                return _FixedSizeOptionButton(
+                  text: currentQuestion.options[index],
+                  isSelected: gameProvider.selectedAnswer == index,
+                  isCorrect: gameProvider.isAnswering && gameProvider.correctAnswer == index,
+                  isWrong: gameProvider.isAnswering && gameProvider.selectedAnswer == index && gameProvider.correctAnswer != index,
+                  onTap: () {
+                    if (!gameProvider.isAnswering) {
+                      gameProvider.answerQuestion(index);
+                    }
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGameOverScreen(GameProvider gameProvider) {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -893,6 +676,86 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _FixedSizeOptionButton extends StatelessWidget {
+  final String text;
+  final bool isSelected;
+  final bool isCorrect;
+  final bool isWrong;
+  final VoidCallback onTap;
+
+  const _FixedSizeOptionButton({
+    required this.text,
+    required this.isSelected,
+    required this.isCorrect,
+    required this.isWrong,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Color backgroundColor = Colors.white;
+    Color borderColor = const Color(0xFFE9ECEF);
+    Color textColor = const Color(0xFF2D3748);
+    FontWeight fontWeight = FontWeight.w500;
+    if (isCorrect) {
+      backgroundColor = const Color(0xFF4ECDC4);
+      borderColor = const Color(0xFF4ECDC4);
+      textColor = Colors.white;
+      fontWeight = FontWeight.bold;
+    } else if (isWrong) {
+      backgroundColor = const Color(0xFFFF6B6B);
+      borderColor = const Color(0xFFFF6B6B);
+      textColor = Colors.white;
+      fontWeight = FontWeight.bold;
+    } else if (isSelected) {
+      backgroundColor = const Color(0xFFF6F6F6);
+      borderColor = const Color(0xFF4ECDC4);
+      textColor = const Color(0xFF2D3748);
+      fontWeight = FontWeight.bold;
+    }
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          width: double.infinity,
+          height: 70, // Sabit yükseklik
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: borderColor, width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 6,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: 16,
+                color: textColor,
+                fontWeight: fontWeight,
+                fontFamily: 'Ubuntu',
+                height: 1.3,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 2, // Maksimum 2 satır
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ),
       ),
     );
   }

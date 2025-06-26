@@ -69,7 +69,7 @@ class _CreateGameScreenState extends State<CreateGameScreen>
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/background.png'),
+            image: AssetImage('assets/images/mainbackground.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -78,7 +78,7 @@ class _CreateGameScreenState extends State<CreateGameScreen>
             children: [
               // Geri butonu
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: GestureDetector(
@@ -86,19 +86,19 @@ class _CreateGameScreenState extends State<CreateGameScreen>
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.9),
-                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
+                            color: Colors.black.withOpacity(0.08),
+                            blurRadius: 12,
+                            offset: const Offset(0, 4),
                           ),
                         ],
                       ),
                       child: const Icon(
                         Icons.arrow_back,
-                        color: Color(0xFF6C63FF),
+                        color: Color(0xFF4ECDC4),
                         size: 24,
                       ),
                     ),
@@ -114,14 +114,16 @@ class _CreateGameScreenState extends State<CreateGameScreen>
                 child: const Text(
                   'Oyun Oluştur',
                   style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 36,
+                    fontWeight: FontWeight.w900,
                     color: Colors.white,
+                    letterSpacing: 1.2,
+                    fontFamily: 'Ubuntu',
                     shadows: [
                       Shadow(
-                        offset: Offset(2, 2),
-                        blurRadius: 4,
                         color: Colors.black54,
+                        blurRadius: 8,
+                        offset: Offset(0, 3),
                       ),
                     ],
                   ),
@@ -157,407 +159,381 @@ class _CreateGameScreenState extends State<CreateGameScreen>
 
   Widget _buildCreateGameSection(MultiplayerProvider multiplayerProvider, GameProvider gameProvider) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 32),
+      margin: const EdgeInsets.symmetric(horizontal: 24),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
-        borderRadius: BorderRadius.circular(16),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
       child: Column(
         children: [
-          const Icon(
-            Icons.add_circle_outline,
-            color: Color(0xFF6C63FF),
-            size: 64,
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFD93D),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: const Icon(
+              Icons.add_circle_outline,
+              color: Colors.white,
+              size: 40,
+            ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           const Text(
-            'Yeni Oyun Oluştur',
+            'Yeni Oyun',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF2D3748),
-            ),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Arkadaşlarınla birlikte oynayabileceğin bir oyun oluştur',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey,
+              color: Color(0xFF2C3E50),
             ),
           ),
           const SizedBox(height: 24),
           
-          // Firebase bağlantı durumu
+          // Oyun modu seçimi
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                multiplayerProvider.isConnected 
-                    ? Icons.wifi 
-                    : Icons.wifi_off,
-                color: multiplayerProvider.isConnected 
-                    ? Colors.green 
-                    : Colors.red,
-                size: 16,
+              Expanded(
+                child: _buildModeCard(
+                  title: 'Normal',
+                  subtitle: '8s',
+                  icon: Icons.timer,
+                  color: const Color(0xFF4ECDC4),
+                  isSelected: _selectedGameMode == mg.GameMode.normal,
+                  onTap: () => setState(() => _selectedGameMode = mg.GameMode.normal),
+                ),
               ),
-              const SizedBox(width: 4),
-              Text(
-                multiplayerProvider.isConnected ? 'Bağlı' : 'Bağlantı Yok',
-                style: TextStyle(
-                  color: multiplayerProvider.isConnected 
-                      ? Colors.green 
-                      : Colors.red,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildModeCard(
+                  title: 'Hızlı',
+                  subtitle: '80s',
+                  icon: Icons.flash_on,
+                  color: const Color(0xFFFF6B6B),
+                  isSelected: _selectedGameMode == mg.GameMode.speed,
+                  onTap: () => setState(() => _selectedGameMode = mg.GameMode.speed),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
           
-          // Durum mesajı
-          if (multiplayerProvider.errorMessage != null) ...[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.error_outline,
-                  color: Colors.red,
-                  size: 16,
-                ),
-                const SizedBox(width: 4),
-                Flexible(
-                  child: Text(
-                    multiplayerProvider.errorMessage!,
-                    style: const TextStyle(
-                      color: Colors.red,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-          ],
-          
-          // Oyun modu seçimi
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade50,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.shade200),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Oyun Modu Seç',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2D3748),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Column(
-                  children: [
-                    // Normal Mod
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedGameMode = mg.GameMode.normal;
-                        });
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: _selectedGameMode == mg.GameMode.normal 
-                              ? const Color(0xFF6C63FF).withOpacity(0.1)
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: _selectedGameMode == mg.GameMode.normal 
-                                ? const Color(0xFF6C63FF)
-                                : Colors.grey.shade300,
-                            width: 2,
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.timer,
-                              color: _selectedGameMode == mg.GameMode.normal 
-                                  ? const Color(0xFF6C63FF)
-                                  : Colors.grey,
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Normal Mod',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: _selectedGameMode == mg.GameMode.normal 
-                                          ? const Color(0xFF6C63FF)
-                                          : Colors.black,
-                                    ),
-                                  ),
-                                  const Text(
-                                    'Her soru için 8 saniye süre',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            if (_selectedGameMode == mg.GameMode.normal)
-                              const Icon(
-                                Icons.check_circle,
-                                color: Color(0xFF6C63FF),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    // Hızlı Mod
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedGameMode = mg.GameMode.speed;
-                        });
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: _selectedGameMode == mg.GameMode.speed 
-                              ? Colors.orange.withOpacity(0.1)
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: _selectedGameMode == mg.GameMode.speed 
-                                ? Colors.orange
-                                : Colors.grey.shade300,
-                            width: 2,
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.flash_on,
-                              color: _selectedGameMode == mg.GameMode.speed 
-                                  ? Colors.orange
-                                  : Colors.grey,
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Hızlı Mod',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: _selectedGameMode == mg.GameMode.speed 
-                                          ? Colors.orange
-                                          : Colors.black,
-                                    ),
-                                  ),
-                                  const Text(
-                                    'Toplam 80 saniye, cevaplayan hemen geçer',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            if (_selectedGameMode == mg.GameMode.speed)
-                              const Icon(
-                                Icons.check_circle,
-                                color: Colors.orange,
-                              ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
           const SizedBox(height: 24),
           
           // Kategori seçimi
           Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: Colors.grey.shade50,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.shade200),
+              color: const Color(0xFFF8F9FA),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: const Color(0xFFE9ECEF)),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Kategori Seç',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2D3748),
-                  ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                value: _selectedCategory,
+                isExpanded: true,
+                icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF4ECDC4)),
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Color(0xFF2C3E50),
+                  fontWeight: FontWeight.w500,
                 ),
-                const SizedBox(height: 12),
-                DropdownButtonFormField<String>(
-                  value: _selectedCategory,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: Colors.grey.shade300),
+                items: gameProvider.categories.map((String category) {
+                  return DropdownMenuItem<String>(
+                    value: category,
+                    child: Row(
+                      children: [
+                        Icon(
+                          _getCategoryIcon(category),
+                          color: _getCategoryColor(category),
+                          size: 20,
+                        ),
+                        const SizedBox(width: 12),
+                        Text(category),
+                      ],
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: Colors.grey.shade300),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: const BorderSide(color: Color(0xFF6C63FF)),
-                    ),
-                  ),
-                  items: gameProvider.categories.map((String category) {
-                    return DropdownMenuItem<String>(
-                      value: category,
-                      child: Row(
-                        children: [
-                          Icon(
-                            _getCategoryIcon(category),
-                            color: _getCategoryColor(category),
-                            size: 20,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(category),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      setState(() {
-                        _selectedCategory = newValue;
-                      });
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-          
-          ElevatedButton(
-            onPressed: multiplayerProvider.isLoading
-                ? null
-                : () => _createGame(multiplayerProvider, gameProvider),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF6C63FF),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  if (newValue != null) {
+                    setState(() {
+                      _selectedCategory = newValue;
+                    });
+                  }
+                },
               ),
             ),
-            child: multiplayerProvider.isLoading
-                ? const SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          ),
+          
+          const SizedBox(height: 32),
+          
+          // Oyun oluştur butonu
+          SizedBox(
+            width: double.infinity,
+            height: 52,
+            child: ElevatedButton(
+              onPressed: multiplayerProvider.isLoading
+                  ? null
+                  : () => _createGame(multiplayerProvider, gameProvider),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFFFD93D),
+                foregroundColor: Colors.white,
+                elevation: 6,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                shadowColor: const Color(0xFFFFD93D).withOpacity(0.3),
+              ),
+              child: multiplayerProvider.isLoading
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.play_arrow, size: 24),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Oyun Oluştur',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.5,
+                            fontFamily: 'Ubuntu',
+                            shadows: [
+                              const Shadow(
+                                color: Colors.white24,
+                                blurRadius: 4,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  )
-                : const Text(
-                    'Oyun Oluştur',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                  ),
+            ),
           ),
         ],
       ),
     );
   }
 
+  Widget _buildModeCard({
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Color color,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: isSelected ? color.withOpacity(0.1) : Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isSelected ? color : const Color(0xFFE9ECEF),
+            width: 2,
+          ),
+        ),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? color : const Color(0xFFBDC3C7),
+              size: 20,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: isSelected ? color : const Color(0xFF2C3E50),
+                fontFamily: 'Ubuntu',
+              ),
+            ),
+            Text(
+              subtitle,
+              style: TextStyle(
+                fontSize: 10,
+                color: isSelected ? color.withOpacity(0.7) : const Color(0xFF7F8C8D),
+                fontFamily: 'Ubuntu',
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildGameCreatedSection(MultiplayerProvider multiplayerProvider) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 32),
-      padding: const EdgeInsets.all(24),
+      margin: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
-        borderRadius: BorderRadius.circular(16),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
       child: Column(
         children: [
-          const Icon(
-            Icons.check_circle,
-            color: Colors.green,
-            size: 64,
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: const Color(0xFF4ECDC4),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: const Icon(
+              Icons.check_circle,
+              color: Colors.white,
+              size: 48,
+            ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           const Text(
             'Oyun Oluşturuldu!',
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF2D3748),
+              color: Color(0xFF2C3E50),
+              fontFamily: 'Ubuntu',
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           const Text(
             'Oyun odası hazırlandı. Şimdi oyuna geçebilirsin.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.grey,
+              color: Color(0xFF7F8C8D),
+              height: 1.4,
+              fontFamily: 'Ubuntu',
             ),
           ),
           const SizedBox(height: 32),
           
+          // Referans kodu
+          if (_gameId != null) ...[
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF8F9FA),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: const Color(0xFFE9ECEF)),
+              ),
+              child: Column(
+                children: [
+                  const Text(
+                    'Referans Kodu',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Color(0xFF7F8C8D),
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Ubuntu',
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        _gameId!,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF2C3E50),
+                          letterSpacing: 2,
+                          fontFamily: 'Ubuntu',
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      GestureDetector(
+                        onTap: () {
+                          Clipboard.setData(ClipboardData(text: _gameId!));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Referans kodu kopyalandı!'),
+                              backgroundColor: Color(0xFF4ECDC4),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF4ECDC4),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(
+                            Icons.copy,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+          ],
+          
           // Oyuna geç butonu
-          ElevatedButton.icon(
-            onPressed: () => _startGame(),
-            icon: const Icon(Icons.play_arrow),
-            label: const Text('Oyun Odasına Geç'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF6C63FF),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+          SizedBox(
+            width: double.infinity,
+            height: 56,
+            child: ElevatedButton(
+              onPressed: () => _startGame(),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF4ECDC4),
+                foregroundColor: Colors.white,
+                elevation: 6,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                shadowColor: const Color(0xFF4ECDC4).withOpacity(0.3),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.play_arrow, size: 28),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Oyun Odasına Geç',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.0,
+                      shadows: [
+                        const Shadow(
+                          color: Colors.white24,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -594,7 +570,7 @@ class _CreateGameScreenState extends State<CreateGameScreen>
     
     if (multiplayerProvider.successMessage != null) {
       setState(() {
-        _gameId = multiplayerProvider.currentGameId;
+        _gameId = multiplayerProvider.currentGame?.gameId ?? multiplayerProvider.currentGameId;
         _isGameCreated = true;
       });
     }
@@ -641,8 +617,6 @@ class _CreateGameScreenState extends State<CreateGameScreen>
         return Icons.category;
     }
   }
-
-
 
   void _startGame() {
     if (_gameId != null) {

@@ -88,17 +88,28 @@ class MultiplayerProvider extends ChangeNotifier {
       final gameId = MultiplayerGame.generateGameId();
       _currentGameId = gameId;
       
-      // Oyunu hemen oluştur ve ayarla
-      _currentGame = MultiplayerGame.create(
+      // Oyunu hemen oluştur ve ayarla - aynı gameId kullan
+      _currentGame = MultiplayerGame(
+        gameId: gameId,
         hostId: playerId,
-        hostName: playerName,
+        playerIds: [playerId],
+        status: GameStatus.waiting,
         questions: questions,
+        currentQuestionIndex: 0,
+        playerScores: {playerId: 0},
+        playerAnswers: {},
+        playerNames: {playerId: playerName},
+        createdAt: DateTime.now(),
         category: category,
+        questionStartTime: null,
+        questionTimeLimit: 8,
+        maxPlayers: 150,
         gameMode: gameMode,
+        speedModeRemainingTime: gameMode == GameMode.speed ? 80 : null,
       );
       _playerRole = PlayerRole.host;
       
-      await _service.createGame(questions, category, playerName, gameMode);
+      await _service.createGame(questions, category, playerName, gameId, gameMode);
       _successMessage = 'Oyun oluşturuldu! Referans kodunu arkadaşlarınla paylaş.';
     } catch (e) {
       _errorMessage = 'Oyun oluşturma hatası: $e';

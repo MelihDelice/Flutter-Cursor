@@ -10,24 +10,16 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _soundEnabled = true;
   bool _vibrationEnabled = true;
-  double _fontSize = 18.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Ayarlar'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ),
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.blue, Colors.purple],
+          image: DecorationImage(
+            image: AssetImage('assets/images/mainbackground.jpg'),
+            fit: BoxFit.cover,
           ),
         ),
         child: SafeArea(
@@ -36,12 +28,43 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Geri butonu
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Color(0xFF4ECDC4),
+                        size: 24,
+                      ),
+                    ),
+                  ),
+                ),
+                
+                const SizedBox(height: 40),
+                
+                // Başlık
                 const Text(
-                  'Oyun Ayarları',
+                  'Ayarlar',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
+                    fontFamily: 'Ubuntu',
                     shadows: [
                       Shadow(
                         offset: Offset(2.0, 2.0),
@@ -51,212 +74,50 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30),
+                
+                const SizedBox(height: 40),
                 
                 // Ses ayarı
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.white, width: 2),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Ses Efektleri',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Consumer<GameProvider>(
-                        builder: (context, gameProvider, child) {
-                          return Switch(
-                            value: gameProvider.soundEnabled,
-                            onChanged: (value) {
-                              gameProvider.toggleSound();
-                            },
-                            activeColor: Colors.green,
-                          );
+                _SettingsCard(
+                  icon: Icons.volume_up_rounded,
+                  title: 'Ses Efektleri',
+                  child: Consumer<GameProvider>(
+                    builder: (context, gameProvider, child) {
+                      return Switch(
+                        value: gameProvider.soundEnabled,
+                        onChanged: (value) {
+                          gameProvider.toggleSound();
                         },
-                      ),
-                    ],
+                        activeColor: const Color(0xFF4ECDC4),
+                        activeTrackColor: const Color(0xFF4ECDC4).withOpacity(0.3),
+                        inactiveThumbColor: Colors.grey[400],
+                        inactiveTrackColor: Colors.grey[300],
+                      );
+                    },
                   ),
                 ),
+                
                 const SizedBox(height: 20),
                 
                 // Titreşim ayarı
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.white, width: 2),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Titreşim',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Switch(
-                        value: _vibrationEnabled,
-                        onChanged: (value) {
-                          setState(() {
-                            _vibrationEnabled = value;
-                          });
-                        },
-                        activeColor: Colors.green,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-                
-                // Font boyutu ayarı
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.white, width: 2),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Font Boyutu',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Slider(
-                        value: _fontSize,
-                        min: 14.0,
-                        max: 24.0,
-                        divisions: 10,
-                        activeColor: Colors.green,
-                        inactiveColor: Colors.white.withOpacity(0.3),
-                        onChanged: (value) {
-                          setState(() {
-                            _fontSize = value;
-                          });
-                        },
-                      ),
-                      Text(
-                        '${_fontSize.toInt()}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 30),
-                
-                // İstatistikler
-                Consumer<GameProvider>(
-                  builder: (context, gameProvider, child) {
-                    return Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.white, width: 2),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'İstatistikler',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 15),
-                          Text(
-                            'En Yüksek Skor: ${gameProvider.highScore}',
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Toplam Soru: ${gameProvider.questions.length}',
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
-                              ),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Text(
-                              'Başarım: %${gameProvider.successRate.toInt()}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-                const Spacer(),
-                
-                // Skor sıfırlama butonu
-                SizedBox(
-                  width: double.infinity,
-                  height: 60,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _showResetDialog(context);
+                _SettingsCard(
+                  icon: Icons.vibration_rounded,
+                  title: 'Titreşim',
+                  child: Switch(
+                    value: _vibrationEnabled,
+                    onChanged: (value) {
+                      setState(() {
+                        _vibrationEnabled = value;
+                      });
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      elevation: 5,
-                    ),
-                    child: const Text(
-                      'SKORU SIFIRLA',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    activeColor: const Color(0xFF4ECDC4),
+                    activeTrackColor: const Color(0xFF4ECDC4).withOpacity(0.3),
+                    inactiveThumbColor: Colors.grey[400],
+                    inactiveTrackColor: Colors.grey[300],
                   ),
                 ),
+                
+                const Spacer(),
               ],
             ),
           ),
@@ -264,37 +125,64 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
   }
+}
 
-  void _showResetDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Skoru Sıfırla'),
-          content: const Text('En yüksek skorunuzu sıfırlamak istediğinizden emin misiniz?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('İptal'),
+class _SettingsCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final Widget child;
+
+  const _SettingsCard({
+    required this.icon,
+    required this.title,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFF4ECDC4).withOpacity(0.1),
+              borderRadius: BorderRadius.circular(10),
             ),
-            TextButton(
-              onPressed: () {
-                context.read<GameProvider>().resetHighScore();
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Skor sıfırlandı!'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              },
-              child: const Text('Sıfırla'),
+            child: Icon(
+              icon,
+              color: const Color(0xFF4ECDC4),
+              size: 24,
             ),
-          ],
-        );
-      },
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF2D3748),
+                fontFamily: 'Ubuntu',
+              ),
+            ),
+          ),
+          child,
+        ],
+      ),
     );
   }
 } 

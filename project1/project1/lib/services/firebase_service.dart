@@ -50,14 +50,25 @@ class FirebaseService {
     }
   }
 
-  Future<void> createGame(List<Question> questions, String category, String hostName, [GameMode gameMode = GameMode.normal]) async {
+  Future<void> createGame(List<Question> questions, String category, String hostName, String gameId, [GameMode gameMode = GameMode.normal]) async {
     try {
-      final game = MultiplayerGame.create(
+      final game = MultiplayerGame(
+        gameId: gameId,
         hostId: playerId,
-        hostName: hostName,
+        playerIds: [playerId],
+        status: GameStatus.waiting,
         questions: questions,
+        currentQuestionIndex: 0,
+        playerScores: {playerId: 0},
+        playerAnswers: {},
+        playerNames: {playerId: hostName},
+        createdAt: DateTime.now(),
         category: category,
+        questionStartTime: null,
+        questionTimeLimit: 8,
+        maxPlayers: 150,
         gameMode: gameMode,
+        speedModeRemainingTime: gameMode == GameMode.speed ? 80 : null,
       );
 
       _messageController?.add('Oyun oluşturuluyor: ${game.gameId}');
@@ -91,12 +102,7 @@ class FirebaseService {
         return;
       }
 
-      _messageController?.add('Oyun bulundu, veri işleniyor...');
-      
       final dynamic rawData = snapshot.value;
-      _messageController?.add('Ham veri alındı: ${rawData.runtimeType}');
-      
-      // Veri tipini güvenli şekilde dönüştür
       Map<String, dynamic> gameData;
       if (rawData is Map) {
         gameData = rawData.map((key, value) => MapEntry(key.toString(), value));
@@ -104,15 +110,11 @@ class FirebaseService {
         throw Exception('Beklenmeyen veri formatı: ${rawData.runtimeType}');
       }
       
-      _messageController?.add('Oyun verisi dönüştürüldü: ${gameData.keys}');
-      
       final game = MultiplayerGame.fromJson(gameData);
-      _messageController?.add('Oyun nesnesi oluşturuldu: ${game.gameId}');
       
       // Oyuncunun zaten oyunda olup olmadığını kontrol et
       if (game.isPlayerInGame(playerId)) {
         _messageController?.add('Zaten oyundasın');
-        // Oyun değişikliklerini dinle
         _listenToGame(gameId);
         return;
       }
@@ -125,22 +127,22 @@ class FirebaseService {
 
       _messageController?.add('Oyuna katılım sağlanıyor...');
       
-      // Oyuncuları güncelle
+      // Oyuncuları güncelle - sadece gerekli alanları güncelle
       final updatedPlayerIds = [...game.playerIds, playerId];
-      final updatedGame = game.copyWith(
-        playerIds: updatedPlayerIds,
-        playerScores: {...game.playerScores, playerId: 0},
-        playerNames: {...game.playerNames, playerId: playerName},
-      );
+      final updates = <String, dynamic>{
+        'playerIds': updatedPlayerIds,
+        'playerScores/$playerId': 0,
+        'playerNames/$playerId': playerName,
+      };
 
-      await _database.child('games').child(gameId).update(updatedGame.toJson());
+      await _database.child('games').child(gameId).update(updates);
       
       _messageController?.add('Oyun güncellendi, dinleme başlatılıyor...');
       
       // Oyun değişikliklerini dinle
       _listenToGame(gameId);
       
-      _messageController?.add('Oyuna başarıyla katıldın! (${updatedPlayerIds.length}/${game.maxPlayers})');
+      _messageController?.add('Oyuna başarıyla katıldın!');
     } catch (e) {
       final errorMsg = 'Oyuna katılma hatası: $e';
       _messageController?.add(errorMsg);

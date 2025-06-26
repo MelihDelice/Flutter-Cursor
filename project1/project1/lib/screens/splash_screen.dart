@@ -158,6 +158,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
+                        fontFamily: 'Ubuntu',
                         shadows: [
                           Shadow(
                             offset: Offset(2.0, 2.0),
@@ -179,6 +180,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   letterSpacing: 2,
+                  fontFamily: 'Ubuntu',
                   shadows: [
                     Shadow(
                       offset: Offset(2.0, 2.0),
