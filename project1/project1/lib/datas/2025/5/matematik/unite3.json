@@ -1,0 +1,708 @@
+{
+    "UnitName": "Geometri - Dikdörtgenin Çevre ve Alanı",
+    "questions": [
+        {
+            "question": "Temel uzunluk ölçü birimi aşağıdakilerden hangisidir?",
+            "answer_options": [
+                {
+                    "text": "Metre"
+                },
+                {
+                    "text": "Santimetre"
+                },
+                {
+                    "text": "Kilometre"
+                },
+                {
+                    "text": "Milimetre"
+                }
+            ],
+            "correct_answer": "Metre",
+            "rationale": "Temel uzunluk ölçü birimi metredir. Diğer birimler metrenin katları veya askatlarıdır."
+        },
+        {
+            "question": "Kitabın üst yüzünün kenar uzunluklarını ölçmek için en uygun ölçü birimi aşağıdakilerden hangisidir?",
+            "answer_options": [
+                {
+                    "text": "Kilometre"
+                },
+                {
+                    "text": "Metre"
+                },
+                {
+                    "text": "Santimetre"
+                },
+                {
+                    "text": "Milimetre"
+                }
+            ],
+            "correct_answer": "Santimetre",
+            "rationale": "Kitap gibi küçük nesnelerin kenar uzunluklarını ölçmek için santimetre en uygun birimdir."
+        },
+        {
+            "question": "Sınıfın tabanının kenar uzunluklarını ölçmek için en uygun ölçü birimi aşağıdakilerden hangisidir?",
+            "answer_options": [
+                {
+                    "text": "Kilometre"
+                },
+                {
+                    "text": "Metre"
+                },
+                {
+                    "text": "Santimetre"
+                },
+                {
+                    "text": "Milimetre"
+                }
+            ],
+            "correct_answer": "Metre",
+            "rationale": "Sınıf gibi büyük alanların kenar uzunluklarını ölçmek için metre en uygun birimdir."
+        },
+        {
+            "question": "1 metre kaç santimetreye eşittir?",
+            "answer_options": [
+                {
+                    "text": "10 cm"
+                },
+                {
+                    "text": "100 cm"
+                },
+                {
+                    "text": "1000 cm"
+                },
+                {
+                    "text": "10000 cm"
+                }
+            ],
+            "correct_answer": "100 cm",
+            "rationale": "1 metre = 100 santimetre'dir."
+        },
+        {
+            "question": "Kenar uzunlukları 5 cm ve 8 cm olan dikdörtgenin çevre uzunluğu kaç santimetredir?",
+            "answer_options": [
+                {
+                    "text": "13 cm"
+                },
+                {
+                    "text": "26 cm"
+                },
+                {
+                    "text": "40 cm"
+                },
+                {
+                    "text": "20 cm"
+                }
+            ],
+            "correct_answer": "26 cm",
+            "rationale": "Dikdörtgenin çevre uzunluğu = 2 x (kısa kenar + uzun kenar) = 2 x (5 + 8) = 2 x 13 = 26 cm"
+        },
+        {
+            "question": "Kenar uzunlukları 6 cm ve 12 cm olan dikdörtgenin çevre uzunluğu kaç santimetredir?",
+            "answer_options": [
+                {
+                    "text": "18 cm"
+                },
+                {
+                    "text": "36 cm"
+                },
+                {
+                    "text": "72 cm"
+                },
+                {
+                    "text": "24 cm"
+                }
+            ],
+            "correct_answer": "36 cm",
+            "rationale": "Dikdörtgenin çevre uzunluğu = 2 x (kısa kenar + uzun kenar) = 2 x (6 + 12) = 2 x 18 = 36 cm"
+        },
+        {
+            "question": "Çevre uzunluğu 20 cm olan dikdörtgenin kenar uzunlukları 4 cm ve 6 cm ise, diğer kenar uzunlukları kaç santimetredir?",
+            "answer_options": [
+                {
+                    "text": "4 cm ve 6 cm"
+                },
+                {
+                    "text": "5 cm ve 5 cm"
+                },
+                {
+                    "text": "3 cm ve 7 cm"
+                },
+                {
+                    "text": "2 cm ve 8 cm"
+                }
+            ],
+            "correct_answer": "4 cm ve 6 cm",
+            "rationale": "Çevre = 2 x (a + b) = 20 cm. 2 x (4 + 6) = 2 x 10 = 20 cm olduğundan kenar uzunlukları 4 cm ve 6 cm'dir."
+        },
+        {
+            "question": "Kenar uzunlukları 3 cm ve 5 cm olan dikdörtgenin alanı kaç santimetrekaredir?",
+            "answer_options": [
+                {
+                    "text": "8 cm²"
+                },
+                {
+                    "text": "15 cm²"
+                },
+                {
+                    "text": "16 cm²"
+                },
+                {
+                    "text": "30 cm²"
+                }
+            ],
+            "correct_answer": "15 cm²",
+            "rationale": "Dikdörtgenin alanı = kısa kenar x uzun kenar = 3 x 5 = 15 cm²"
+        },
+        {
+            "question": "Kenar uzunlukları 7 cm ve 9 cm olan dikdörtgenin alanı kaç santimetrekaredir?",
+            "answer_options": [
+                {
+                    "text": "16 cm²"
+                },
+                {
+                    "text": "32 cm²"
+                },
+                {
+                    "text": "63 cm²"
+                },
+                {
+                    "text": "126 cm²"
+                }
+            ],
+            "correct_answer": "63 cm²",
+            "rationale": "Dikdörtgenin alanı = kısa kenar x uzun kenar = 7 x 9 = 63 cm²"
+        },
+        {
+            "question": "Alanı 84 metrekare olan dikdörtgenin bir kenar uzunluğu 7 metre ise, diğer kenar uzunluğu kaç metredir?",
+            "answer_options": [
+                {
+                    "text": "12 metre"
+                },
+                {
+                    "text": "11 metre"
+                },
+                {
+                    "text": "13 metre"
+                },
+                {
+                    "text": "14 metre"
+                }
+            ],
+            "correct_answer": "12 metre",
+            "rationale": "Alan = kısa kenar x uzun kenar. 84 = 7 x uzun kenar. Uzun kenar = 84 ÷ 7 = 12 metre"
+        },
+        {
+            "question": "Alanı 121 metrekare olan dikdörtgenin bir kenar uzunluğu 11 metre ise, diğer kenar uzunluğu kaç metredir?",
+            "answer_options": [
+                {
+                    "text": "10 metre"
+                },
+                {
+                    "text": "11 metre"
+                },
+                {
+                    "text": "12 metre"
+                },
+                {
+                    "text": "13 metre"
+                }
+            ],
+            "correct_answer": "11 metre",
+            "rationale": "Alan = kısa kenar x uzun kenar. 121 = 11 x diğer kenar. Diğer kenar = 121 ÷ 11 = 11 metre"
+        },
+        {
+            "question": "Alanı 104 metrekare olan dikdörtgenin bir kenar uzunluğu 13 metre ise, diğer kenar uzunluğu kaç metredir?",
+            "answer_options": [
+                {
+                    "text": "7 metre"
+                },
+                {
+                    "text": "8 metre"
+                },
+                {
+                    "text": "9 metre"
+                },
+                {
+                    "text": "10 metre"
+                }
+            ],
+            "correct_answer": "8 metre",
+            "rationale": "Alan = kısa kenar x uzun kenar. 104 = 13 x diğer kenar. Diğer kenar = 104 ÷ 13 = 8 metre"
+        },
+        {
+            "question": "Çevre uzunluğu 16 cm olan dikdörtgenin kenar uzunlukları santimetre cinsinden doğal sayı ise, kaç farklı dikdörtgen çizilebilir?",
+            "answer_options": [
+                {
+                    "text": "2"
+                },
+                {
+                    "text": "3"
+                },
+                {
+                    "text": "4"
+                },
+                {
+                    "text": "5"
+                }
+            ],
+            "correct_answer": "4",
+            "rationale": "Çevre = 2 x (a + b) = 16 cm. a + b = 8 cm. Olası kenar uzunlukları: (1,7), (2,6), (3,5), (4,4). Toplam 4 farklı dikdörtgen."
+        },
+        {
+            "question": "Çevre uzunluğu 12 cm olan kare çizilebilir mi?",
+            "answer_options": [
+                {
+                    "text": "Evet, kenar uzunluğu 3 cm olan kare"
+                },
+                {
+                    "text": "Evet, kenar uzunluğu 4 cm olan kare"
+                },
+                {
+                    "text": "Hayır, çizilemez"
+                },
+                {
+                    "text": "Evet, kenar uzunluğu 6 cm olan kare"
+                }
+            ],
+            "correct_answer": "Evet, kenar uzunluğu 3 cm olan kare",
+            "rationale": "Karenin çevre uzunluğu = 4 x kenar uzunluğu. 12 = 4 x kenar uzunluğu. Kenar uzunluğu = 12 ÷ 4 = 3 cm"
+        },
+        {
+            "question": "Aynı alana sahip dikdörtgenlerin çevre uzunlukları her zaman aynı mıdır?",
+            "answer_options": [
+                {
+                    "text": "Evet, her zaman aynıdır"
+                },
+                {
+                    "text": "Hayır, farklı olabilir"
+                },
+                {
+                    "text": "Sadece kareler için aynıdır"
+                },
+                {
+                    "text": "Sadece eşkenar dikdörtgenler için aynıdır"
+                }
+            ],
+            "correct_answer": "Hayır, farklı olabilir",
+            "rationale": "Aynı alana sahip dikdörtgenlerin çevre uzunlukları farklı olabilir. Örneğin: 4x6=24 cm² (çevre=20 cm) ve 2x12=24 cm² (çevre=28 cm)"
+        },
+        {
+            "question": "Aynı çevre uzunluğuna sahip dikdörtgenlerin alanları her zaman aynı mıdır?",
+            "answer_options": [
+                {
+                    "text": "Evet, her zaman aynıdır"
+                },
+                {
+                    "text": "Hayır, farklı olabilir"
+                },
+                {
+                    "text": "Sadece kareler için aynıdır"
+                },
+                {
+                    "text": "Sadece eşkenar dikdörtgenler için aynıdır"
+                }
+            ],
+            "correct_answer": "Hayır, farklı olabilir",
+            "rationale": "Aynı çevre uzunluğuna sahip dikdörtgenlerin alanları farklı olabilir. Örneğin: 4x6 (çevre=20 cm, alan=24 cm²) ve 5x5 (çevre=20 cm, alan=25 cm²)"
+        },
+        {
+            "question": "Kenar uzunlukları 30 m ve 40 m olan dikdörtgen şeklindeki arsanın alanı kaç metrekaredir?",
+            "answer_options": [
+                {
+                    "text": "70 m²"
+                },
+                {
+                    "text": "1200 m²"
+                },
+                {
+                    "text": "140 m²"
+                },
+                {
+                    "text": "2400 m²"
+                }
+            ],
+            "correct_answer": "1200 m²",
+            "rationale": "Arsanın alanı = 30 x 40 = 1200 m²"
+        },
+        {
+            "question": "Kenar uzunlukları 30 m ve 40 m olan dikdörtgen şeklindeki arsanın çevre uzunluğu kaç metredir?",
+            "answer_options": [
+                {
+                    "text": "70 metre"
+                },
+                {
+                    "text": "140 metre"
+                },
+                {
+                    "text": "1200 metre"
+                },
+                {
+                    "text": "2400 metre"
+                }
+            ],
+            "correct_answer": "140 metre",
+            "rationale": "Arsanın çevre uzunluğu = 2 x (30 + 40) = 2 x 70 = 140 metre"
+        },
+        {
+            "question": "Taban alanı 480 m² olan ev, kenar uzunlukları 30 m ve 40 m olan dikdörtgen arsaya sığar mı?",
+            "answer_options": [
+                {
+                    "text": "Evet, sığar"
+                },
+                {
+                    "text": "Hayır, sığmaz"
+                },
+                {
+                    "text": "Sadece belirli şekillerde sığar"
+                },
+                {
+                    "text": "Arsa alanı yetersiz"
+                }
+            ],
+            "correct_answer": "Evet, sığar",
+            "rationale": "Arsa alanı = 30 x 40 = 1200 m². Ev alanı = 480 m². 480 < 1200 olduğundan ev arsaya sığar."
+        },
+        {
+            "question": "Kenar uzunlukları 400 cm ve 500 cm olan dikdörtgen şeklindeki salonun alanı kaç metrekaredir?",
+            "answer_options": [
+                {
+                    "text": "20 m²"
+                },
+                {
+                    "text": "200 m²"
+                },
+                {
+                    "text": "2000 m²"
+                },
+                {
+                    "text": "20000 m²"
+                }
+            ],
+            "correct_answer": "20 m²",
+            "rationale": "400 cm = 4 m, 500 cm = 5 m. Salon alanı = 4 x 5 = 20 m²"
+        },
+        {
+            "question": "Eni 20 cm, boyu 20 cm olan kare şeklindeki parke taşının alanı kaç santimetrekaredir?",
+            "answer_options": [
+                {
+                    "text": "40 cm²"
+                },
+                {
+                    "text": "80 cm²"
+                },
+                {
+                    "text": "400 cm²"
+                },
+                {
+                    "text": "800 cm²"
+                }
+            ],
+            "correct_answer": "400 cm²",
+            "rationale": "Kare şeklindeki parke taşının alanı = 20 x 20 = 400 cm²"
+        },
+        {
+            "question": "Eni 50 cm, boyu 20 cm olan dikdörtgen şeklindeki parke taşının alanı kaç santimetrekaredir?",
+            "answer_options": [
+                {
+                    "text": "70 cm²"
+                },
+                {
+                    "text": "100 cm²"
+                },
+                {
+                    "text": "1000 cm²"
+                },
+                {
+                    "text": "140 cm²"
+                }
+            ],
+            "correct_answer": "1000 cm²",
+            "rationale": "Dikdörtgen şeklindeki parke taşının alanı = 50 x 20 = 1000 cm²"
+        },
+        {
+            "question": "Eni 25 cm, boyu 10 cm olan dikdörtgen şeklindeki parke taşının alanı kaç santimetrekaredir?",
+            "answer_options": [
+                {
+                    "text": "35 cm²"
+                },
+                {
+                    "text": "70 cm²"
+                },
+                {
+                    "text": "250 cm²"
+                },
+                {
+                    "text": "500 cm²"
+                }
+            ],
+            "correct_answer": "250 cm²",
+            "rationale": "Dikdörtgen şeklindeki parke taşının alanı = 25 x 10 = 250 cm²"
+        },
+        {
+            "question": "Bir güneş panelinin kenar uzunlukları sırasıyla 2 ve 3 birimdir. Bu güneş panelinin alanı kaç birim karedir?",
+            "answer_options": [
+                {
+                    "text": "5 birim kare"
+                },
+                {
+                    "text": "6 birim kare"
+                },
+                {
+                    "text": "10 birim kare"
+                },
+                {
+                    "text": "12 birim kare"
+                }
+            ],
+            "correct_answer": "6 birim kare",
+            "rationale": "Güneş panelinin alanı = 2 x 3 = 6 birim kare"
+        },
+        {
+            "question": "Bir güneş panelinin kenar uzunlukları sırasıyla 2 ve 3 birimdir. Bu güneş panelinin çevre uzunluğu kaç birimdir?",
+            "answer_options": [
+                {
+                    "text": "5 birim"
+                },
+                {
+                    "text": "6 birim"
+                },
+                {
+                    "text": "10 birim"
+                },
+                {
+                    "text": "12 birim"
+                }
+            ],
+            "correct_answer": "10 birim",
+            "rationale": "Güneş panelinin çevre uzunluğu = 2 x (2 + 3) = 2 x 5 = 10 birim"
+        },
+        {
+            "question": "Alanı 30 m² olan dikdörtgen şeklindeki kaykay pistinin kenar uzunlukları metre cinsinden doğal sayı ise, kaç farklı dikdörtgen çizilebilir?",
+            "answer_options": [
+                {
+                    "text": "2"
+                },
+                {
+                    "text": "3"
+                },
+                {
+                    "text": "4"
+                },
+                {
+                    "text": "5"
+                }
+            ],
+            "correct_answer": "4",
+            "rationale": "Alan = 30 m². Olası kenar uzunlukları: (1,30), (2,15), (3,10), (5,6). Toplam 4 farklı dikdörtgen."
+        },
+        {
+            "question": "Çevre uzunluğu 18 metre olan dikdörtgen şeklindeki halının alanı 18 metrekare ise, kenar uzunlukları kaç metredir?",
+            "answer_options": [
+                {
+                    "text": "3 metre ve 6 metre"
+                },
+                {
+                    "text": "2 metre ve 9 metre"
+                },
+                {
+                    "text": "4 metre ve 5 metre"
+                },
+                {
+                    "text": "1 metre ve 18 metre"
+                }
+            ],
+            "correct_answer": "3 metre ve 6 metre",
+            "rationale": "Çevre = 2 x (a + b) = 18 m. a + b = 9 m. Alan = a x b = 18 m². 3 x 6 = 18 ve 3 + 6 = 9 olduğundan kenar uzunlukları 3 m ve 6 m'dir."
+        },
+        {
+            "question": "Kenar uzunlukları doğal sayı olan dikdörtgen şeklindeki arsanın alanı 80 metrekare ise, bu arsanın çevre uzunluğu aşağıdakilerden hangisi olamaz?",
+            "answer_options": [
+                {
+                    "text": "36 metre"
+                },
+                {
+                    "text": "42 metre"
+                },
+                {
+                    "text": "48 metre"
+                },
+                {
+                    "text": "64 metre"
+                }
+            ],
+            "correct_answer": "64 metre",
+            "rationale": "Alan = 80 m². Olası kenar uzunlukları: (1,80), (2,40), (4,20), (5,16), (8,10). Çevre uzunlukları: 162, 84, 48, 42, 36 metre. 64 metre bu listede yok."
+        },
+        {
+            "question": "Aşağıdaki dikdörtgenlerden hangisinin alanı en büyüktür?",
+            "answer_options": [
+                {
+                    "text": "Kenar uzunlukları 4 cm ve 6 cm olan dikdörtgen"
+                },
+                {
+                    "text": "Kenar uzunlukları 3 cm ve 8 cm olan dikdörtgen"
+                },
+                {
+                    "text": "Kenar uzunlukları 5 cm ve 5 cm olan dikdörtgen"
+                },
+                {
+                    "text": "Kenar uzunlukları 2 cm ve 12 cm olan dikdörtgen"
+                }
+            ],
+            "correct_answer": "Kenar uzunlukları 5 cm ve 5 cm olan dikdörtgen",
+            "rationale": "Alanlar: 4x6=24 cm², 3x8=24 cm², 5x5=25 cm², 2x12=24 cm². En büyük alan 25 cm² olan karedir."
+        },
+        {
+            "question": "Aşağıdaki dikdörtgenlerden hangisinin çevre uzunluğu en büyüktür?",
+            "answer_options": [
+                {
+                    "text": "Kenar uzunlukları 4 cm ve 6 cm olan dikdörtgen"
+                },
+                {
+                    "text": "Kenar uzunlukları 3 cm ve 8 cm olan dikdörtgen"
+                },
+                {
+                    "text": "Kenar uzunlukları 5 cm ve 5 cm olan dikdörtgen"
+                },
+                {
+                    "text": "Kenar uzunlukları 2 cm ve 12 cm olan dikdörtgen"
+                }
+            ],
+            "correct_answer": "Kenar uzunlukları 2 cm ve 12 cm olan dikdörtgen",
+            "rationale": "Çevre uzunlukları: 2x(4+6)=20 cm, 2x(3+8)=22 cm, 2x(5+5)=20 cm, 2x(2+12)=28 cm. En büyük çevre 28 cm'dir."
+        },
+        {
+            "question": "Çevre uzunluğu 20 metre olan dikdörtgen şeklindeki halının alanı 24 metrekare ise, kenar uzunlukları kaç metredir?",
+            "answer_options": [
+                {
+                    "text": "4 metre ve 6 metre"
+                },
+                {
+                    "text": "3 metre ve 7 metre"
+                },
+                {
+                    "text": "5 metre ve 5 metre"
+                },
+                {
+                    "text": "2 metre ve 8 metre"
+                }
+            ],
+            "correct_answer": "4 metre ve 6 metre",
+            "rationale": "Çevre = 2 x (a + b) = 20 m. a + b = 10 m. Alan = a x b = 24 m². 4 x 6 = 24 ve 4 + 6 = 10 olduğundan kenar uzunlukları 4 m ve 6 m'dir."
+        },
+        {
+            "question": "Alanı 24 metrekare olan dikdörtgen şeklindeki halının çevre uzunluğu 20 metre ise, kenar uzunlukları kaç metredir?",
+            "answer_options": [
+                {
+                    "text": "4 metre ve 6 metre"
+                },
+                {
+                    "text": "3 metre ve 8 metre"
+                },
+                {
+                    "text": "5 metre ve 5 metre"
+                },
+                {
+                    "text": "2 metre ve 12 metre"
+                }
+            ],
+            "correct_answer": "4 metre ve 6 metre",
+            "rationale": "Alan = a x b = 24 m². Çevre = 2 x (a + b) = 20 m. a + b = 10 m. 4 x 6 = 24 ve 4 + 6 = 10 olduğundan kenar uzunlukları 4 m ve 6 m'dir."
+        },
+        {
+            "question": "Çitlerin 1 metresi 1125 TL olan kaykay pistinin çevre uzunluğu 20 metre ise, çit maliyeti kaç TL'dir?",
+            "answer_options": [
+                {
+                    "text": "22 500 TL"
+                },
+                {
+                    "text": "20 000 TL"
+                },
+                {
+                    "text": "25 000 TL"
+                },
+                {
+                    "text": "18 000 TL"
+                }
+            ],
+            "correct_answer": "22 500 TL",
+            "rationale": "Çit maliyeti = Çevre uzunluğu x Birim fiyat = 20 x 1125 = 22 500 TL"
+        },
+        {
+            "question": "Aşağıdaki dikdörtgenlerden hangisinin alanı 36 metrekaredir?",
+            "answer_options": [
+                {
+                    "text": "Kenar uzunlukları 4 metre ve 9 metre olan dikdörtgen"
+                },
+                {
+                    "text": "Kenar uzunlukları 6 metre ve 6 metre olan dikdörtgen"
+                },
+                {
+                    "text": "Kenar uzunlukları 3 metre ve 12 metre olan dikdörtgen"
+                },
+                {
+                    "text": "Hepsi"
+                }
+            ],
+            "correct_answer": "Hepsi",
+            "rationale": "Alanlar: 4x9=36 m², 6x6=36 m², 3x12=36 m². Hepsinin alanı 36 metrekaredir."
+        },
+        {
+            "question": "Aşağıdaki dikdörtgenlerden hangisinin çevre uzunluğu 24 metredir?",
+            "answer_options": [
+                {
+                    "text": "Kenar uzunlukları 4 metre ve 8 metre olan dikdörtgen"
+                },
+                {
+                    "text": "Kenar uzunlukları 6 metre ve 6 metre olan dikdörtgen"
+                },
+                {
+                    "text": "Kenar uzunlukları 3 metre ve 9 metre olan dikdörtgen"
+                },
+                {
+                    "text": "Hepsi"
+                }
+            ],
+            "correct_answer": "Hepsi",
+            "rationale": "Çevre uzunlukları: 2x(4+8)=24 m, 2x(6+6)=24 m, 2x(3+9)=24 m. Hepsinin çevre uzunluğu 24 metredir."
+        },
+        {
+            "question": "Kenar uzunlukları 10 cm ve 15 cm olan dikdörtgenin alanı kaç santimetrekaredir?",
+            "answer_options": [
+                {
+                    "text": "25 cm²"
+                },
+                {
+                    "text": "50 cm²"
+                },
+                {
+                    "text": "150 cm²"
+                },
+                {
+                    "text": "300 cm²"
+                }
+            ],
+            "correct_answer": "150 cm²",
+            "rationale": "Dikdörtgenin alanı = 10 x 15 = 150 cm²"
+        },
+        {
+            "question": "Kenar uzunlukları 10 cm ve 15 cm olan dikdörtgenin çevre uzunluğu kaç santimetredir?",
+            "answer_options": [
+                {
+                    "text": "25 cm"
+                },
+                {
+                    "text": "50 cm"
+                },
+                {
+                    "text": "150 cm"
+                },
+                {
+                    "text": "300 cm"
+                }
+            ],
+            "correct_answer": "50 cm",
+            "rationale": "Dikdörtgenin çevre uzunluğu = 2 x (10 + 15) = 2 x 25 = 50 cm"
+        }
+    ]
+} 

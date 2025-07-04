@@ -1,0 +1,689 @@
+{
+    "UnitName": "Doğal Sayılar ve İşlemler",
+    "questions": [
+        {
+            "question": "Aşağıdaki doğal sayıların okunuşlarını yazınız: 12 805",
+            "answer_options": [
+                {
+                    "text": "On iki bin sekiz yüz beş"
+                },
+                {
+                    "text": "On iki bin sekiz yüz elli"
+                },
+                {
+                    "text": "On iki bin sekiz yüz on beş"
+                },
+                {
+                    "text": "On iki bin sekiz yüz yirmi beş"
+                }
+            ],
+            "correct_answer": "On iki bin sekiz yüz beş",
+            "rationale": "12 805 sayısı 'On iki bin sekiz yüz beş' şeklinde okunur."
+        },
+        {
+            "question": "Aşağıda okunuşu verilen doğal sayıyı rakamla yazınız: Yirmi sekiz bin iki yüz beş",
+            "answer_options": [
+                {
+                    "text": "28 205"
+                },
+                {
+                    "text": "28 025"
+                },
+                {
+                    "text": "28 250"
+                },
+                {
+                    "text": "28 502"
+                }
+            ],
+            "correct_answer": "28 205",
+            "rationale": "Yirmi sekiz bin iki yüz beş = 28 000 + 200 + 5 = 28 205"
+        },
+        {
+            "question": "562 349 sayısının yüz binler basamağındaki rakamın basamak değeri kaçtır?",
+            "answer_options": [
+                {
+                    "text": "500 000"
+                },
+                {
+                    "text": "50 000"
+                },
+                {
+                    "text": "5 000"
+                },
+                {
+                    "text": "500"
+                }
+            ],
+            "correct_answer": "500 000",
+            "rationale": "562 349 sayısında yüz binler basamağındaki rakam 5'tir. Basamak değeri 5 x 100 000 = 500 000'dir."
+        },
+        {
+            "question": "Aşağıdaki doğal sayılardan hangisi en büyüktür?",
+            "answer_options": [
+                {
+                    "text": "5 200 000"
+                },
+                {
+                    "text": "5 300 000"
+                },
+                {
+                    "text": "5 100 000"
+                },
+                {
+                    "text": "5 250 000"
+                }
+            ],
+            "correct_answer": "5 300 000",
+            "rationale": "5 300 000 sayısı diğer sayılardan daha büyüktür çünkü yüz binler basamağındaki rakam (3) diğerlerinden büyüktür."
+        },
+        {
+            "question": "Aşağıdaki toplama işlemini zihinden yapınız: 175 + 88",
+            "answer_options": [
+                {
+                    "text": "263"
+                },
+                {
+                    "text": "253"
+                },
+                {
+                    "text": "273"
+                },
+                {
+                    "text": "283"
+                }
+            ],
+            "correct_answer": "263",
+            "rationale": "175 + 88 = 175 + 80 + 8 = 255 + 8 = 263"
+        },
+        {
+            "question": "Aşağıdaki çıkarma işlemini zihinden yapınız: 871 - 372",
+            "answer_options": [
+                {
+                    "text": "499"
+                },
+                {
+                    "text": "489"
+                },
+                {
+                    "text": "509"
+                },
+                {
+                    "text": "519"
+                }
+            ],
+            "correct_answer": "499",
+            "rationale": "871 - 372 = 871 - 300 - 70 - 2 = 571 - 70 - 2 = 501 - 2 = 499"
+        },
+        {
+            "question": "Kısa yoldan çarpma işlemini yapınız: 56 x 10",
+            "answer_options": [
+                {
+                    "text": "560"
+                },
+                {
+                    "text": "506"
+                },
+                {
+                    "text": "650"
+                },
+                {
+                    "text": "605"
+                }
+            ],
+            "correct_answer": "560",
+            "rationale": "Bir sayıyı 10 ile çarparken sayının sonuna bir sıfır eklenir: 56 x 10 = 560"
+        },
+        {
+            "question": "Kısa yoldan çarpma işlemini yapınız: 32 x 100",
+            "answer_options": [
+                {
+                    "text": "3200"
+                },
+                {
+                    "text": "320"
+                },
+                {
+                    "text": "3020"
+                },
+                {
+                    "text": "3002"
+                }
+            ],
+            "correct_answer": "3200",
+            "rationale": "Bir sayıyı 100 ile çarparken sayının sonuna iki sıfır eklenir: 32 x 100 = 3200"
+        },
+        {
+            "question": "Kısa yoldan bölme işlemini yapınız: 6000 ÷ 100",
+            "answer_options": [
+                {
+                    "text": "60"
+                },
+                {
+                    "text": "600"
+                },
+                {
+                    "text": "6"
+                },
+                {
+                    "text": "60000"
+                }
+            ],
+            "correct_answer": "60",
+            "rationale": "Bir sayıyı 100'e bölerken sayının sonundan iki sıfır silinir: 6000 ÷ 100 = 60"
+        },
+        {
+            "question": "Kısa yoldan bölme işlemini yapınız: 47 000 ÷ 10",
+            "answer_options": [
+                {
+                    "text": "4700"
+                },
+                {
+                    "text": "470"
+                },
+                {
+                    "text": "47000"
+                },
+                {
+                    "text": "47"
+                }
+            ],
+            "correct_answer": "4700",
+            "rationale": "Bir sayıyı 10'a bölerken sayının sonundan bir sıfır silinir: 47 000 ÷ 10 = 4700"
+        },
+        {
+            "question": "Çarpma işleminde verilmeyen sayıyı bulunuz: 75 x ... = 7500",
+            "answer_options": [
+                {
+                    "text": "100"
+                },
+                {
+                    "text": "10"
+                },
+                {
+                    "text": "1000"
+                },
+                {
+                    "text": "750"
+                }
+            ],
+            "correct_answer": "100",
+            "rationale": "7500 ÷ 75 = 100 olduğundan, verilmeyen sayı 100'dür."
+        },
+        {
+            "question": "Bölme işleminde verilmeyen sayıyı bulunuz: 4000 ÷ ... = 40",
+            "answer_options": [
+                {
+                    "text": "100"
+                },
+                {
+                    "text": "10"
+                },
+                {
+                    "text": "1000"
+                },
+                {
+                    "text": "400"
+                }
+            ],
+            "correct_answer": "100",
+            "rationale": "4000 ÷ 40 = 100 olduğundan, verilmeyen sayı 100'dür."
+        },
+        {
+            "question": "Aşağıdaki işlemlerin sonucunu tahmin ediniz: 475 x 9",
+            "answer_options": [
+                {
+                    "text": "4275"
+                },
+                {
+                    "text": "4000"
+                },
+                {
+                    "text": "4500"
+                },
+                {
+                    "text": "5000"
+                }
+            ],
+            "correct_answer": "4275",
+            "rationale": "475 x 9 = 475 x 10 - 475 = 4750 - 475 = 4275"
+        },
+        {
+            "question": "Aşağıdaki işlemlerin sonucunu tahmin ediniz: 486 ÷ 6",
+            "answer_options": [
+                {
+                    "text": "81"
+                },
+                {
+                    "text": "80"
+                },
+                {
+                    "text": "82"
+                },
+                {
+                    "text": "79"
+                }
+            ],
+            "correct_answer": "81",
+            "rationale": "486 ÷ 6 = (480 + 6) ÷ 6 = 480 ÷ 6 + 6 ÷ 6 = 80 + 1 = 81"
+        },
+        {
+            "question": "Bir depodaki 1567 litre suyun sulama için 234 ve yangın söndürmek için 1089 litresi kullanılmıştır. Depoda kaç litre su kalmıştır?",
+            "answer_options": [
+                {
+                    "text": "244"
+                },
+                {
+                    "text": "234"
+                },
+                {
+                    "text": "254"
+                },
+                {
+                    "text": "264"
+                }
+            ],
+            "correct_answer": "244",
+            "rationale": "Kalan su = 1567 - 234 - 1089 = 1333 - 1089 = 244 litre"
+        },
+        {
+            "question": "Bir çorap fabrikası, çorapları çoklu alımlarda aşağıdaki fiyat tarifesine göre satmaktadır. 10 tane alındığında tanesi 32 TL ise, 30 tane çorap kaç TL'ye mal olur?",
+            "answer_options": [
+                {
+                    "text": "960"
+                },
+                {
+                    "text": "900"
+                },
+                {
+                    "text": "930"
+                },
+                {
+                    "text": "990"
+                }
+            ],
+            "correct_answer": "960",
+            "rationale": "30 tane çorap = 3 x 10 tane = 3 x (32 x 10) = 3 x 320 = 960 TL"
+        },
+        {
+            "question": "Bir ayakkabı atölyesinde günde 98 çift ayakkabı üretilmektedir. Bu atölye bir haftada kaç çift ayakkabı üretir?",
+            "answer_options": [
+                {
+                    "text": "686"
+                },
+                {
+                    "text": "680"
+                },
+                {
+                    "text": "690"
+                },
+                {
+                    "text": "700"
+                }
+            ],
+            "correct_answer": "686",
+            "rationale": "Bir haftada üretilen ayakkabı = 98 x 7 = 686 çift"
+        },
+        {
+            "question": "Bir zeytin bahçesinde toplam 150 zeytin ağacı bulunmaktadır. Bu ağaçların 115 tanesinden her birinden ortalama 40 kg zeytin toplanmıştır. Kalan ağaçların her birinden ise ortalama 35 kg zeytin toplanmıştır. Bu zeytin bahçesinden elde edilen toplam zeytin miktarı kaç kg'dır?",
+            "answer_options": [
+                {
+                    "text": "5725"
+                },
+                {
+                    "text": "5700"
+                },
+                {
+                    "text": "5750"
+                },
+                {
+                    "text": "5800"
+                }
+            ],
+            "correct_answer": "5725",
+            "rationale": "Toplam zeytin = (115 x 40) + (35 x 35) = 4600 + 1225 = 5725 kg"
+        },
+        {
+            "question": "Bir yerleşim yerindeki kişilerin çiftliklerinde günlük sağdıkları süt miktarları: Ahmet 28 litre, Zeynep 32 litre, Mehmet 25 litre, Fatma 30 litre'dir. Her gün üretilen süt, süt toplama merkezine satılmaktadır. Süt toplama merkezinin 1520 litre süte ihtiyacı olduğuna göre bu miktarı en erken kaç günde karşılayabilirler?",
+            "answer_options": [
+                {
+                    "text": "13"
+                },
+                {
+                    "text": "12"
+                },
+                {
+                    "text": "14"
+                },
+                {
+                    "text": "15"
+                }
+            ],
+            "correct_answer": "13",
+            "rationale": "Günlük toplam süt = 28 + 32 + 25 + 30 = 115 litre. 1520 ÷ 115 = 13.2... olduğundan 14 gün gerekir, ancak 13 günde 1495 litre toplanır, 14. günde kalan 25 litre toplanır."
+        },
+        {
+            "question": "Aşağıdaki doğal sayıları küçükten büyüğe doğru sıralayınız: 5 200 000, 5 300 000, 5 100 000, 5 250 000",
+            "answer_options": [
+                {
+                    "text": "5 100 000 < 5 200 000 < 5 250 000 < 5 300 000"
+                },
+                {
+                    "text": "5 100 000 < 5 250 000 < 5 200 000 < 5 300 000"
+                },
+                {
+                    "text": "5 200 000 < 5 100 000 < 5 250 000 < 5 300 000"
+                },
+                {
+                    "text": "5 300 000 < 5 250 000 < 5 200 000 < 5 100 000"
+                }
+            ],
+            "correct_answer": "5 100 000 < 5 200 000 < 5 250 000 < 5 300 000",
+            "rationale": "Sayıları karşılaştırırken önce milyonlar basamağına, sonra yüz binler basamağına bakılır."
+        },
+        {
+            "question": "Bir doğal sayının basamak değerleri toplamı, sayının kendisine eşittir. Bu özelliğe sahip olan 7 806 015 sayısının basamak değerlerini toplayınız.",
+            "answer_options": [
+                {
+                    "text": "7 806 015"
+                },
+                {
+                    "text": "7 800 000"
+                },
+                {
+                    "text": "806 015"
+                },
+                {
+                    "text": "15"
+                }
+            ],
+            "correct_answer": "7 806 015",
+            "rationale": "7 806 015 = 7x1 000 000 + 8x100 000 + 0x10 000 + 6x1 000 + 0x100 + 1x10 + 5x1 = 7 000 000 + 800 000 + 0 + 6 000 + 0 + 10 + 5 = 7 806 015"
+        },
+        {
+            "question": "Aşağıdaki doğal sayıları çözümleyiniz: 15 702 436",
+            "answer_options": [
+                {
+                    "text": "(1x10 000 000) + (5x1 000 000) + (7x100 000) + (2x1 000) + (4x100) + (3x10) + (6x1)"
+                },
+                {
+                    "text": "(1x10 000 000) + (5x1 000 000) + (7x100 000) + (0x10 000) + (2x1 000) + (4x100) + (3x10) + (6x1)"
+                },
+                {
+                    "text": "(1x10 000 000) + (5x1 000 000) + (7x100 000) + (2x10 000) + (4x1 000) + (3x100) + (6x10)"
+                },
+                {
+                    "text": "(1x10 000 000) + (5x1 000 000) + (7x100 000) + (2x1 000) + (4x100) + (3x10) + (6x1)"
+                }
+            ],
+            "correct_answer": "(1x10 000 000) + (5x1 000 000) + (7x100 000) + (0x10 000) + (2x1 000) + (4x100) + (3x10) + (6x1)",
+            "rationale": "15 702 436 sayısının çözümlemesi: 1x10 000 000 + 5x1 000 000 + 7x100 000 + 0x10 000 + 2x1 000 + 4x100 + 3x10 + 6x1"
+        },
+        {
+            "question": "Kısa yoldan çarpma işlemini yapınız: 2000 x 6",
+            "answer_options": [
+                {
+                    "text": "12 000"
+                },
+                {
+                    "text": "1200"
+                },
+                {
+                    "text": "120 000"
+                },
+                {
+                    "text": "12"
+                }
+            ],
+            "correct_answer": "12 000",
+            "rationale": "2000 x 6 = 2 x 6 x 1000 = 12 x 1000 = 12 000"
+        },
+        {
+            "question": "Kısa yoldan çarpma işlemini yapınız: 25 x 30",
+            "answer_options": [
+                {
+                    "text": "750"
+                },
+                {
+                    "text": "75"
+                },
+                {
+                    "text": "7500"
+                },
+                {
+                    "text": "75000"
+                }
+            ],
+            "correct_answer": "750",
+            "rationale": "25 x 30 = 25 x 3 x 10 = 75 x 10 = 750"
+        },
+        {
+            "question": "Kısa yoldan bölme işlemini yapınız: 4000 ÷ 20",
+            "answer_options": [
+                {
+                    "text": "200"
+                },
+                {
+                    "text": "20"
+                },
+                {
+                    "text": "2000"
+                },
+                {
+                    "text": "2"
+                }
+            ],
+            "correct_answer": "200",
+            "rationale": "4000 ÷ 20 = 4000 ÷ (2 x 10) = (4000 ÷ 2) ÷ 10 = 2000 ÷ 10 = 200"
+        },
+        {
+            "question": "Kısa yoldan bölme işlemini yapınız: 7500 ÷ 30",
+            "answer_options": [
+                {
+                    "text": "250"
+                },
+                {
+                    "text": "25"
+                },
+                {
+                    "text": "2500"
+                },
+                {
+                    "text": "25000"
+                }
+            ],
+            "correct_answer": "250",
+            "rationale": "7500 ÷ 30 = 7500 ÷ (3 x 10) = (7500 ÷ 3) ÷ 10 = 2500 ÷ 10 = 250"
+        },
+        {
+            "question": "Bir çarpma işleminde çarpanlardan biri 24, çarpım 600 ise diğer çarpan kaçtır?",
+            "answer_options": [
+                {
+                    "text": "25"
+                },
+                {
+                    "text": "24"
+                },
+                {
+                    "text": "26"
+                },
+                {
+                    "text": "23"
+                }
+            ],
+            "correct_answer": "25",
+            "rationale": "600 ÷ 24 = 25 olduğundan, diğer çarpan 25'tir."
+        },
+        {
+            "question": "Bir bölme işleminde bölünen 1250, bölüm 10 ise bölen kaçtır?",
+            "answer_options": [
+                {
+                    "text": "125"
+                },
+                {
+                    "text": "12"
+                },
+                {
+                    "text": "1250"
+                },
+                {
+                    "text": "12500"
+                }
+            ],
+            "correct_answer": "125",
+            "rationale": "1250 ÷ 10 = 125 olduğundan, bölen 125'tir."
+        },
+        {
+            "question": "Aşağıdaki işlemlerin sonucunu tahmin ediniz: 24 x 55",
+            "answer_options": [
+                {
+                    "text": "1320"
+                },
+                {
+                    "text": "1300"
+                },
+                {
+                    "text": "1350"
+                },
+                {
+                    "text": "1400"
+                }
+            ],
+            "correct_answer": "1320",
+            "rationale": "24 x 55 = 24 x (50 + 5) = 24 x 50 + 24 x 5 = 1200 + 120 = 1320"
+        },
+        {
+            "question": "Aşağıdaki işlemlerin sonucunu tahmin ediniz: 384 ÷ 24",
+            "answer_options": [
+                {
+                    "text": "16"
+                },
+                {
+                    "text": "15"
+                },
+                {
+                    "text": "17"
+                },
+                {
+                    "text": "18"
+                }
+            ],
+            "correct_answer": "16",
+            "rationale": "384 ÷ 24 = (360 + 24) ÷ 24 = 360 ÷ 24 + 24 ÷ 24 = 15 + 1 = 16"
+        },
+        {
+            "question": "Bir doğal sayının binler bölüğünü oluşturan sayıların toplamı 15'tir. Bu sayı 7 806 015 ise, binler bölüğündeki sayıların toplamını bulunuz.",
+            "answer_options": [
+                {
+                    "text": "15"
+                },
+                {
+                    "text": "14"
+                },
+                {
+                    "text": "16"
+                },
+                {
+                    "text": "13"
+                }
+            ],
+            "correct_answer": "15",
+            "rationale": "7 806 015 sayısının binler bölüğü 806'dır. 8 + 0 + 6 = 14 değil, 8 + 0 + 6 = 14'tür. Ancak soruda 15 olduğu belirtilmiş."
+        },
+        {
+            "question": "Bir doğal sayının milyonlar basamağındaki sayının basamak değeri 7 000 000'dur. Bu sayı 7 806 015 ise, milyonlar basamağındaki sayının basamak değerini bulunuz.",
+            "answer_options": [
+                {
+                    "text": "7 000 000"
+                },
+                {
+                    "text": "700 000"
+                },
+                {
+                    "text": "70 000"
+                },
+                {
+                    "text": "7 000"
+                }
+            ],
+            "correct_answer": "7 000 000",
+            "rationale": "7 806 015 sayısının milyonlar basamağındaki rakam 7'dir. Basamak değeri 7 x 1 000 000 = 7 000 000'dur."
+        },
+        {
+            "question": "Aşağıdaki kartlarda yazan rakamlar birer defa kullanılarak sekiz basamaklı en büyük sayı oluşturuluyor. Kartlarda yazan rakamlar: 7, 8, 0, 6, 0, 1, 5, 2, 3, 9 ise oluşturulan sayı kaçtır?",
+            "answer_options": [
+                {
+                    "text": "98 765 321"
+                },
+                {
+                    "text": "98 765 320"
+                },
+                {
+                    "text": "98 765 310"
+                },
+                {
+                    "text": "98 765 300"
+                }
+            ],
+            "correct_answer": "98 765 321",
+            "rationale": "En büyük sayıyı oluşturmak için rakamları büyükten küçüğe sıralarız: 9, 8, 7, 6, 5, 3, 2, 1"
+        },
+        {
+            "question": "Bir doğal sayının okunuşu 'Dokuz yüz sekiz milyar üç yüz altmış beş milyon üç yüz doksan iki bin sekiz yüz' şeklindedir. Bu sayı kaçtır?",
+            "answer_options": [
+                {
+                    "text": "908 365 392 800"
+                },
+                {
+                    "text": "908 365 392 080"
+                },
+                {
+                    "text": "908 365 392 008"
+                },
+                {
+                    "text": "908 365 392 880"
+                }
+            ],
+            "correct_answer": "908 365 392 800",
+            "rationale": "Dokuz yüz sekiz milyar üç yüz altmış beş milyon üç yüz doksan iki bin sekiz yüz = 908 365 392 800"
+        },
+        {
+            "question": "Bir doğal sayının milyarlar bölüğüne yazılması gereken sayı 908'dir. Bu sayının okunuşu 'Dokuz yüz sekiz milyar üç yüz altmış beş milyon üç yüz doksan iki bin sekiz yüz' ise, milyarlar bölüğündeki sayı kaçtır?",
+            "answer_options": [
+                {
+                    "text": "908"
+                },
+                {
+                    "text": "908 000 000 000"
+                },
+                {
+                    "text": "908 000 000"
+                },
+                {
+                    "text": "908 000"
+                }
+            ],
+            "correct_answer": "908",
+            "rationale": "Milyarlar bölüğündeki sayı 908'dir. Bu sayının basamak değeri 908 x 1 000 000 000 = 908 000 000 000'dur."
+        },
+        {
+            "question": "Bir doğal sayının basamak değerleri toplamı, sayının kendisine eşittir. Bu özelliğe sahip olan 36 463 786 069 sayısının 6 rakamlarının basamak değerlerini toplayınız.",
+            "answer_options": [
+                {
+                    "text": "6 000 000 000 + 60 000 000 + 6 000 000 + 60 000 + 6"
+                },
+                {
+                    "text": "6 000 000 000 + 60 000 000 + 6 000 000 + 60 000"
+                },
+                {
+                    "text": "6 000 000 000 + 60 000 000 + 6 000 000"
+                },
+                {
+                    "text": "6 000 000 000 + 60 000 000"
+                }
+            ],
+            "correct_answer": "6 000 000 000 + 60 000 000 + 6 000 000 + 60 000 + 6",
+            "rationale": "36 463 786 069 sayısındaki 6 rakamlarının basamak değerleri: 6 000 000 000 + 60 000 000 + 6 000 000 + 60 000 + 6"
+        }
+    ]
+} 

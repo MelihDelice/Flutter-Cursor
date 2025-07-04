@@ -1,0 +1,1471 @@
+
+    {
+        "UnitName": "Geometrik Şekiller",
+        "questions": [
+            {
+                "question": "Eni, boyu ve derinliği olmayan, kalemin kağıda bir defa dokunmasıyla oluşan iz modeline ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Doğru"
+                  },
+                  {
+                    "text": "Işın"
+                  },
+                  {
+                    "text": "Nokta"
+                  },
+                  {
+                    "text": "Doğru Parçası"
+                  }
+                ],
+                "correct_answer": "Nokta",
+                "rationale": "Tanım olarak, eni, boyu ve derinliği olmayan, sadece konum belirten geometrik ögeye nokta denir."
+              },
+              {
+                "question": "İki nokta arasında düz bir şekilde hizalanmış noktaların oluşturduğu, başlangıcı ve sonu belirli olan şekle ne ad verilir?",
+                "answer_options": [
+                  {
+                    "text": "Doğru"
+                  },
+                  {
+                    "text": "Doğru Parçası"
+                  },
+                  {
+                    "text": "Işın"
+                  },
+                  {
+                    "text": "Nokta"
+                  }
+                ],
+                "correct_answer": "Doğru Parçası",
+                "rationale": "Doğru parçası, bir doğru üzerindeki iki nokta ve bu iki nokta arasındaki tüm noktaların kümesidir."
+              },
+              {
+                "question": "Bir noktadan başlayarak aynı hizada sonsuza kadar giden noktaların oluşturduğu şekle ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Doğru"
+                  },
+                  {
+                    "text": "Doğru Parçası"
+                  },
+                  {
+                    "text": "Işın"
+                  },
+                  {
+                    "text": "Nokta"
+                  }
+                ],
+                "correct_answer": "Işın",
+                "rationale": "Işın, bir başlangıç noktası olan ve bir yönde sonsuza uzanan düz bir çizgidir."
+              },
+              {
+                "question": "İki ucu da sonsuza kadar giden, düz bir şekilde hizalanmış noktaların oluşturduğu şekle ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Doğru"
+                  },
+                  {
+                    "text": "Doğru Parçası"
+                  },
+                  {
+                    "text": "Işın"
+                  },
+                  {
+                    "text": "Nokta"
+                  }
+                ],
+                "correct_answer": "Doğru",
+                "rationale": "Doğru, her iki yönde de sınırsızca uzanan, genişliği olmayan düz bir çizgidir."
+              },
+              {
+                "question": "Bir ışının dönme miktarı olarak tanımlanan ve başlangıç noktaları aynı olan iki ışının oluşturduğu şekle ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Nokta"
+                  },
+                  {
+                    "text": "Doğru"
+                  },
+                  {
+                    "text": "Açı"
+                  },
+                  {
+                    "text": "Çember"
+                  }
+                ],
+                "correct_answer": "Açı",
+                "rationale": "Açı, aynı başlangıç noktasına sahip iki ışının (açının kolları) arasında kalan düzlem parçasıdır."
+              },
+              {
+                "question": "Açıyı oluşturan ışınlara ne ad verilir?",
+                "answer_options": [
+                  {
+                    "text": "Açının köşesi"
+                  },
+                  {
+                    "text": "Açının kolları"
+                  },
+                  {
+                    "text": "Açının yayı"
+                  },
+                  {
+                    "text": "Açının merkezi"
+                  }
+                ],
+                "correct_answer": "Açının kolları",
+                "rationale": "Bir açıyı oluşturan iki ışın, açının kenarları veya kolları olarak adlandırılır."
+              },
+              {
+                "question": "Açıyı oluşturan ışınların başlangıç noktasına ne ad verilir?",
+                "answer_options": [
+                  {
+                    "text": "Açının kolları"
+                  },
+                  {
+                    "text": "Açının yayı"
+                  },
+                  {
+                    "text": "Açının köşesi"
+                  },
+                  {
+                    "text": "Açının merkezi"
+                  }
+                ],
+                "correct_answer": "Açının köşesi",
+                "rationale": "Açıyı oluşturan ışınların birleştiği ortak başlangıç noktasına açının köşesi denir."
+              },
+              {
+                "question": "Bir tam açının ölçüsü kaç derecedir?",
+                "answer_options": [
+                  {
+                    "text": "90°"
+                  },
+                  {
+                    "text": "180°"
+                  },
+                  {
+                    "text": "270°"
+                  },
+                  {
+                    "text": "360°"
+                  }
+                ],
+                "correct_answer": "360°",
+                "rationale": "Bir tam çemberin veya bir tam dönüşün açısal ölçüsü 360 derecedir."
+              },
+              {
+                "question": "Bir doğru açının ölçüsü kaç derecedir?",
+                "answer_options": [
+                  {
+                    "text": "90°"
+                  },
+                  {
+                    "text": "180°"
+                  },
+                  {
+                    "text": "270°"
+                  },
+                  {
+                    "text": "360°"
+                  }
+                ],
+                "correct_answer": "180°",
+                "rationale": "Bir doğru üzerinde yer alan ve iki zıt ışının oluşturduğu açının ölçüsü 180 derecedir."
+              },
+              {
+                "question": "Dik açının ölçüsü kaç derecedir?",
+                "answer_options": [
+                  {
+                    "text": "45°"
+                  },
+                  {
+                    "text": "90°"
+                  },
+                  {
+                    "text": "180°"
+                  },
+                  {
+                    "text": "360°"
+                  }
+                ],
+                "correct_answer": "90°",
+                "rationale": "Birbirine dik olan iki ışının veya doğrunun oluşturduğu özel açının ölçüsü 90 derecedir."
+              },
+              {
+                "question": "Ölçüsü 0° ile 90° arasında olan açılara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Dik açı"
+                  },
+                  {
+                    "text": "Geniş açı"
+                  },
+                  {
+                    "text": "Dar açı"
+                  },
+                  {
+                    "text": "Doğru açı"
+                  }
+                ],
+                "correct_answer": "Dar açı",
+                "rationale": "Ölçüsü 0 dereceden büyük ve 90 dereceden küçük olan açılara dar açı denir."
+              },
+              {
+                "question": "Ölçüsü 90° ile 180° arasında olan açılara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Dik açı"
+                  },
+                  {
+                    "text": "Geniş açı"
+                  },
+                  {
+                    "text": "Dar açı"
+                  },
+                  {
+                    "text": "Doğru açı"
+                  }
+                ],
+                "correct_answer": "Geniş açı",
+                "rationale": "Ölçüsü 90 dereceden büyük ve 180 dereceden küçük olan açılara geniş açı denir."
+              },
+              {
+                "question": "Ölçüleri birbirine eşit olan açılara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Dik açılar"
+                  },
+                  {
+                    "text": "Geniş açılar"
+                  },
+                  {
+                    "text": "Eş açılar"
+                  },
+                  {
+                    "text": "Dar açılar"
+                  }
+                ],
+                "correct_answer": "Eş açılar",
+                "rationale": "Geometride, aynı ölçüye sahip olan açılar 'eş açılar' olarak adlandırılır."
+              },
+              {
+                "question": "İki doğrunun yalnız bir ortak noktası varsa bu doğrulara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Paralel doğrular"
+                  },
+                  {
+                    "text": "Çakışık doğrular"
+                  },
+                  {
+                    "text": "Kesişen doğrular"
+                  },
+                  {
+                    "text": "Dik doğrular"
+                  }
+                ],
+                "correct_answer": "Kesişen doğrular",
+                "rationale": "Düzlemde tek bir noktada birbirini geçen doğrulara kesişen doğrular denir."
+              },
+              {
+                "question": "İki doğrunun kesiştiği noktada oluşan açıların ölçüsü 90° ise bu doğrulara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Paralel doğrular"
+                  },
+                  {
+                    "text": "Dik doğrular"
+                  },
+                  {
+                    "text": "Kesişen doğrular"
+                  },
+                  {
+                    "text": "Çakışık doğrular"
+                  }
+                ],
+                "correct_answer": "Dik doğrular",
+                "rationale": "Kesişen iki doğru arasında 90 derecelik bir açı oluşuyorsa, bu doğrular birbirine diktir."
+              },
+              {
+                "question": "Düzlemde kesişmeyen doğrulara ne ad verilir?",
+                "answer_options": [
+                  {
+                    "text": "Kesişen doğrular"
+                  },
+                  {
+                    "text": "Dik doğrular"
+                  },
+                  {
+                    "text": "Çakışık doğrular"
+                  },
+                  {
+                    "text": "Paralel doğrular"
+                  }
+                ],
+                "correct_answer": "Paralel doğrular",
+                "rationale": "Düzlemde asla kesişmeyen ve aralarındaki mesafe sabit kalan doğrulara paralel doğrular denir."
+              },
+              {
+                "question": "Tüm noktaları ortak olan doğrulara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Paralel doğrular"
+                  },
+                  {
+                    "text": "Dik doğrular"
+                  },
+                  {
+                    "text": "Kesişen doğrular"
+                  },
+                  {
+                    "text": "Çakışık doğrular"
+                  }
+                ],
+                "correct_answer": "Çakışık doğrular",
+                "rationale": "Aynı düzlemde olup tüm noktaları birbirinin üzerinde olan doğrulara çakışık doğrular denir."
+              },
+              {
+                "question": "Birbirine komşu olan iki açının toplamı 90° ise bu açılara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Bütünler açılar"
+                  },
+                  {
+                    "text": "Tümler açılar"
+                  },
+                  {
+                    "text": "Ters açılar"
+                  },
+                  {
+                    "text": "Doğru açılar"
+                  }
+                ],
+                "correct_answer": "Tümler açılar",
+                "rationale": "Ölçüleri toplamı 90 derece olan iki açıya tümler açılar denir."
+              },
+              {
+                "question": "Birbirine komşu olan iki açının toplamı 180° ise bu açılara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Tümler açılar"
+                  },
+                  {
+                    "text": "Bütünler açılar"
+                  },
+                  {
+                    "text": "Dik açılar"
+                  },
+                  {
+                    "text": "Eş açılar"
+                  }
+                ],
+                "correct_answer": "Bütünler açılar",
+                "rationale": "Ölçüleri toplamı 180 derece olan iki açıya bütünler açılar denir."
+              },
+              {
+                "question": "Kesişen iki doğrunun oluşturduğu ve köşeleri ortak, yönleri zıt olan açılara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Komşu açılar"
+                  },
+                  {
+                    "text": "Ters açılar"
+                  },
+                  {
+                    "text": "İç açılar"
+                  },
+                  {
+                    "text": "Dış açılar"
+                  }
+                ],
+                "correct_answer": "Ters açılar",
+                "rationale": "Kesişen iki doğrunun karşılıklı olarak oluşturduğu ve ölçüleri eşit olan açılara ters açılar denir."
+              },
+              {
+                "question": "Bir çokgenin iç bölgesinde, iki kenar arasında kalan açılara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Dış açı"
+                  },
+                  {
+                    "text": "İç açı"
+                  },
+                  {
+                    "text": "Ters açı"
+                  },
+                  {
+                    "text": "Komşu açı"
+                  }
+                ],
+                "correct_answer": "İç açı",
+                "rationale": "Çokgenlerin komşu iki kenarının iç bölgede oluşturduğu açılara iç açı denir."
+              },
+              {
+                "question": "Bir çokgenin kenarlarından birinin uzantısıyla komşu kenar arasında dış bölgede oluşan açılara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "İç açı"
+                  },
+                  {
+                    "text": "Dış açı"
+                  },
+                  {
+                    "text": "Merkez açı"
+                  },
+                  {
+                    "text": "Çevre açı"
+                  }
+                ],
+                "correct_answer": "Dış açı",
+                "rationale": "Bir çokgenin bir köşesindeki iç açının bütünleyeni olan açıya dış açı denir."
+              },
+              {
+                "question": "Belirli bir noktaya eşit uzaklıktaki tüm noktaların kümesine ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Daire"
+                  },
+                  {
+                    "text": "Yarıçap"
+                  },
+                  {
+                    "text": "Çember"
+                  },
+                  {
+                    "text": "Çap"
+                  }
+                ],
+                "correct_answer": "Çember",
+                "rationale": "Çember, düzlemde sabit bir noktaya (merkez) eşit uzaklıktaki noktalar kümesidir."
+              },
+              {
+                "question": "Çemberin iç kısmını da kapsayan, yani çemberin kendisi ve iç bölgesindeki tüm noktalardan oluşan şekle ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Çember"
+                  },
+                  {
+                    "text": "Daire"
+                  },
+                  {
+                    "text": "Yarıçap"
+                  },
+                  {
+                    "text": "Çap"
+                  }
+                ],
+                "correct_answer": "Daire",
+                "rationale": "Daire, bir çember ile çemberin iç bölgesinin birleşiminden oluşan düzlemsel şekildir."
+              },
+              {
+                "question": "Çemberin merkezinden çember üzerindeki herhangi bir noktaya olan uzaklığa ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Çap"
+                  },
+                  {
+                    "text": "Kiriş"
+                  },
+                  {
+                    "text": "Merkez"
+                  },
+                  {
+                    "text": "Yarıçap"
+                  }
+                ],
+                "correct_answer": "Yarıçap",
+                "rationale": "Çemberin merkezinden çember üzerindeki herhangi bir noktaya çizilen doğru parçasına yarıçap denir."
+              },
+              {
+                "question": "Çemberin merkezinden geçen ve çember üzerindeki iki noktayı birleştiren doğru parçasına ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Yarıçap"
+                  },
+                  {
+                    "text": "Kiriş"
+                  },
+                  {
+                    "text": "Çap"
+                  },
+                  {
+                    "text": "Teğet"
+                  }
+                ],
+                "correct_answer": "Çap",
+                "rationale": "Çap, çemberin merkezinden geçen ve çemberi iki noktada kesen en uzun kiriştir. Uzunluğu iki yarıçapın toplamına eşittir."
+              },
+              {
+                "question": "En az üç doğru parçasının uç uca eklenmesiyle oluşan kapalı geometrik şekillere ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Çember"
+                  },
+                  {
+                    "text": "Üçgen"
+                  },
+                  {
+                    "text": "Çokgen"
+                  },
+                  {
+                    "text": "Açı"
+                  }
+                ],
+                "correct_answer": "Çokgen",
+                "rationale": "Düzlemde, üç veya daha fazla doğru parçasının uç uca birleşerek oluşturduğu kapalı şekillere çokgen denir."
+              },
+              {
+                "question": "Tüm kenar uzunlukları ve tüm iç açı ölçüleri birbirine eşit olan çokgene ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Kare"
+                  },
+                  {
+                    "text": "Dikdörtgen"
+                  },
+                  {
+                    "text": "Düzgün çokgen"
+                  },
+                  {
+                    "text": "Yamuk"
+                  }
+                ],
+                "correct_answer": "Düzgün çokgen",
+                "rationale": "Kenar uzunlukları ve iç açılarının ölçüleri eşit olan çokgenlere düzgün çokgen denir."
+              },
+              {
+                "question": "Bir iç açısının ölçüsü 90 dereceden küçük olan üçgene ne ad verilir?",
+                "answer_options": [
+                  {
+                    "text": "Dik açılı üçgen"
+                  },
+                  {
+                    "text": "Geniş açılı üçgen"
+                  },
+                  {
+                    "text": "Dar açılı üçgen"
+                  },
+                  {
+                    "text": "Eşkenar üçgen"
+                  }
+                ],
+                "correct_answer": "Dar açılı üçgen",
+                "rationale": "Üç iç açısının da ölçüsü 90 dereceden küçük olan üçgenlere dar açılı üçgen denir."
+              },
+              {
+                "question": "Bir iç açısının ölçüsü 90 derece olan üçgene ne ad verilir?",
+                "answer_options": [
+                  {
+                    "text": "Dar açılı üçgen"
+                  },
+                  {
+                    "text": "Geniş açılı üçgen"
+                  },
+                  {
+                    "text": "Dik açılı üçgen"
+                  },
+                  {
+                    "text": "İkizkenar üçgen"
+                  }
+                ],
+                "correct_answer": "Dik açılı üçgen",
+                "rationale": "Bir iç açısının ölçüsü tam olarak 90 derece olan üçgenlere dik açılı üçgen denir."
+              },
+              {
+                "question": "Bir iç açısının ölçüsü 90 dereceden büyük olan üçgene ne ad verilir?",
+                "answer_options": [
+                  {
+                    "text": "Dar açılı üçgen"
+                  },
+                  {
+                    "text": "Dik açılı üçgen"
+                  },
+                  {
+                    "text": "Geniş açılı üçgen"
+                  },
+                  {
+                    "text": "Eşkenar üçgen"
+                  }
+                ],
+                "correct_answer": "Geniş açılı üçgen",
+                "rationale": "Bir iç açısının ölçüsü 90 dereceden büyük olan üçgenlere geniş açılı üçgen denir."
+              },
+              {
+                "question": "Üçgenin iç açılarının toplamı kaç derecedir?",
+                "answer_options": [
+                  {
+                    "text": "90°"
+                  },
+                  {
+                    "text": "180°"
+                  },
+                  {
+                    "text": "270°"
+                  },
+                  {
+                    "text": "360°"
+                  }
+                ],
+                "correct_answer": "180°",
+                "rationale": "Üçgenin iç açılarının toplamı her zaman 180 derecedir."
+              },
+              {
+                "question": "Sonsuz sayıda nokta ve doğrudan oluşan, iki boyutlu ve sınırsız yüzeye ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Doğru"
+                  },
+                  {
+                    "text": "Uzay"
+                  },
+                  {
+                    "text": "Düzlem"
+                  },
+                  {
+                    "text": "Nokta"
+                  }
+                ],
+                "correct_answer": "Düzlem",
+                "rationale": "Düzlem, kalınlığı olmayan ve her yönde sonsuza uzayan düz bir yüzeydir."
+              },
+              {
+                "question": "Bir noktadan geçen kaç farklı doğru çizilebilir?",
+                "answer_options": [
+                  {
+                    "text": "Bir"
+                  },
+                  {
+                    "text": "İki"
+                  },
+                  {
+                    "text": "Sonsuz"
+                  },
+                  {
+                    "text": "Belirlenemez"
+                  }
+                ],
+                "correct_answer": "Sonsuz",
+                "rationale": "Tek bir noktadan sonsuz sayıda farklı doğru geçebilir."
+              },
+              {
+                "question": "İki farklı noktadan geçen kaç farklı doğru çizilebilir?",
+                "answer_options": [
+                  {
+                    "text": "Bir"
+                  },
+                  {
+                    "text": "İki"
+                  },
+                  {
+                    "text": "Sonsuz"
+                  },
+                  {
+                    "text": "Hiçbiri"
+                  }
+                ],
+                "correct_answer": "Bir",
+                "rationale": "Uzayda iki farklı noktadan sadece bir tane doğru geçer."
+              },
+              {
+                "question": "Açıları ölçmek için kullanılan standart birim nedir?",
+                "answer_options": [
+                  {
+                    "text": "Metre"
+                  },
+                  {
+                    "text": "Kilogram"
+                  },
+                  {
+                    "text": "Derece"
+                  },
+                  {
+                    "text": "Saniye"
+                  }
+                ],
+                "correct_answer": "Derece",
+                "rationale": "Açı ölçü birimi olarak genellikle derece kullanılır ve bir tam daire 360 derecedir."
+              },
+              {
+                "question": "Bir doğruyu kesen ve farklı noktalardan geçen diğer bir doğruya ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Paralel doğru"
+                  },
+                  {
+                    "text": "Dik doğru"
+                  },
+                  {
+                    "text": "Teğet doğru"
+                  },
+                  {
+                    "text": "Kesen doğru (Transversal)"
+                  }
+                ],
+                "correct_answer": "Kesen doğru (Transversal)",
+                "rationale": "İki veya daha fazla doğruyu farklı noktalarda kesen doğruya kesen (transversal) denir."
+              },
+              {
+                "question": "İki açının köşeleri ve birer kenarları ortak olup diğer kenarları zıt yönde olan açılara ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Ters açılar"
+                  },
+                  {
+                    "text": "Bütünler açılar"
+                  },
+                  {
+                    "text": "Komşu açılar"
+                  },
+                  {
+                    "text": "Tümler açılar"
+                  }
+                ],
+                "correct_answer": "Komşu açılar",
+                "rationale": "Köşeleri ortak ve birer kenarları ortak olan açılara komşu açılar denir."
+              },
+              {
+                "question": "Bir çemberin merkez noktasından en uzak nokta neresidir?",
+                "answer_options": [
+                  {
+                    "text": "Çapın uç noktaları"
+                  },
+                  {
+                    "text": "Yarıçapın uç noktaları"
+                  },
+                  {
+                    "text": "Herhangi bir nokta"
+                  },
+                  {
+                    "text": "Merkez noktası"
+                  }
+                ],
+                "correct_answer": "Çapın uç noktaları",
+                "rationale": "Çemberin merkezinden en uzak noktalar, çapın çember üzerindeki uç noktalarıdır."
+              },
+              {
+                "question": "Geometrik çizimlerde kullanılan ve açıları ölçmeye veya çizmeye yarayan araca ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Cetvel"
+                  },
+                  {
+                    "text": "Pergel"
+                  },
+                  {
+                    "text": "İletki (Açıölçer)"
+                  },
+                  {
+                    "text": "Gönye"
+                  }
+                ],
+                "correct_answer": "İletki (Açıölçer)",
+                "rationale": "Açıların ölçülmesinde ve belirli açılarla çizim yapılmasında kullanılan araca iletki veya açıölçer denir."
+              },
+              {
+                "question": "Bir düzlem parçasının etrafında dönme hareketiyle oluşan şekil genellikle neye benzer?",
+                "answer_options": [
+                  {
+                    "text": "Üçgen"
+                  },
+                  {
+                    "text": "Kare"
+                  },
+                  {
+                    "text": "Çember"
+                  },
+                  {
+                    "text": "Doğru"
+                  }
+                ],
+                "correct_answer": "Çember",
+                "rationale": "Düzlemde sabit bir nokta etrafında dönen bir doğru parçasının uç noktasının izlediği yol bir çember oluşturur."
+              },
+              {
+                "question": "Kare ve eşkenar üçgen hangi çokgen türüne örnektir?",
+                "answer_options": [
+                  {
+                    "text": "Düzgün olmayan çokgenler"
+                  },
+                  {
+                    "text": "Konveks çokgenler"
+                  },
+                  {
+                    "text": "Düzgün çokgenler"
+                  },
+                  {
+                    "text": "İçbükey çokgenler"
+                  }
+                ],
+                "correct_answer": "Düzgün çokgenler",
+                "rationale": "Kare ve eşkenar üçgen, tüm kenarları ve tüm açıları eşit olduğu için düzgün çokgenlere örnektir."
+              },
+              {
+                "question": "Bir üçgende bir dış açının ölçüsü, kendisine komşu olmayan iki iç açının ölçüleri toplamına eşittir. Bu ifade doğru mudur?",
+                "answer_options": [
+                  {
+                    "text": "Evet"
+                  },
+                  {
+                    "text": "Hayır"
+                  },
+                  {
+                    "text": "Bazen doğru, bazen yanlış"
+                  },
+                  {
+                    "text": "Üçgenin türüne göre değişir"
+                  }
+                ],
+                "correct_answer": "Evet",
+                "rationale": "Bu, üçgenlerde dış açı teoreminin temel kuralıdır."
+              },
+              {
+                "question": "Bir noktadan bir doğruya çizilen en kısa mesafe hangi doğru parçasıdır?",
+                "answer_options": [
+                  {
+                    "text": "Herhangi bir doğru parçası"
+                  },
+                  {
+                    "text": "Açıortay"
+                  },
+                  {
+                    "text": "Dikme"
+                  },
+                  {
+                    "text": "Kenarortay"
+                  }
+                ],
+                "correct_answer": "Dikme",
+                "rationale": "Bir noktadan bir doğruya olan en kısa uzaklık, noktadan doğruya indirilen dikme ile ölçülür."
+              },
+              {
+                "question": "İki paralel doğru bir kesenle kesildiğinde oluşan iç ters açılar hakkında ne söylenebilir?",
+                "answer_options": [
+                  {
+                    "text": "Ölçüleri farklıdır"
+                  },
+                  {
+                    "text": "Ölçüleri eşittir"
+                  },
+                  {
+                    "text": "Toplamları 90°'dir"
+                  },
+                  {
+                    "text": "Toplamları 180°'dir"
+                  }
+                ],
+                "correct_answer": "Ölçüleri eşittir",
+                "rationale": "Paralel iki doğruyu kesen bir doğru olduğunda, iç ters açıların ölçüleri her zaman eşittir."
+              },
+              {
+                "question": "İki paralel doğru bir kesenle kesildiğinde oluşan yöndeş açılar hakkında ne söylenebilir?",
+                "answer_options": [
+                  {
+                    "text": "Ölçüleri farklıdır"
+                  },
+                  {
+                    "text": "Ölçüleri eşittir"
+                  },
+                  {
+                    "text": "Toplamları 90°'dir"
+                  },
+                  {
+                    "text": "Toplamları 180°'dir"
+                  }
+                ],
+                "correct_answer": "Ölçüleri eşittir",
+                "rationale": "Paralel iki doğru bir kesenle kesildiğinde oluşan yöndeş açıların ölçüleri birbirine eşittir."
+              },
+              {
+                "question": "Çemberin çevresindeki herhangi iki noktayı birleştiren doğru parçasına ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Yarıçap"
+                  },
+                  {
+                    "text": "Çap"
+                  },
+                  {
+                    "text": "Kiriş"
+                  },
+                  {
+                    "text": "Teğet"
+                  }
+                ],
+                "correct_answer": "Kiriş",
+                "rationale": "Bir çemberin üzerindeki iki noktayı birleştiren doğru parçasına kiriş denir."
+              },
+              {
+                "question": "Bir çemberi sadece bir noktada kesen doğruya ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Kesen"
+                  },
+                  {
+                    "text": "Kiriş"
+                  },
+                  {
+                    "text": "Teğet"
+                  },
+                  {
+                    "text": "Normal"
+                  }
+                ],
+                "correct_answer": "Teğet",
+                "rationale": "Bir çemberle sadece tek bir ortak noktası olan doğruya teğet doğru denir."
+              },
+              {
+                "question": "Bir açının ölçüsünü iki eş parçaya bölen ışına ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Kenarortay"
+                  },
+                  {
+                    "text": "Yükseklik"
+                  },
+                  {
+                    "text": "Açıortay"
+                  },
+                  {
+                    "text": "Merkezil ışın"
+                  }
+                ],
+                "correct_answer": "Açıortay",
+                "rationale": "Açıortay, bir açıyı iki eş açıya bölen ışındır."
+              },
+              {
+                "question": "Bir doğru parçasına orta noktasından dik olan doğruya ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Paralel doğru"
+                  },
+                  {
+                    "text": "Açıortay"
+                  },
+                  {
+                    "text": "Kenar orta dikme"
+                  },
+                  {
+                    "text": "Kesen"
+                  }
+                ],
+                "correct_answer": "Kenar orta dikme",
+                "rationale": "Bir doğru parçasının orta noktasından geçip bu doğru parçasına dik olan doğruya kenar orta dikme denir."
+              },
+              {
+                "question": "Bir üçgende bir köşeden karşı kenara indirilen dikmeye ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Kenarortay"
+                  },
+                  {
+                    "text": "Açıortay"
+                  },
+                  {
+                    "text": "Yükseklik"
+                  },
+                  {
+                    "text": "Kenar orta dikme"
+                  }
+                ],
+                "correct_answer": "Yükseklik",
+                "rationale": "Bir üçgende bir köşeden karşı kenara veya uzantısına çizilen dik doğru parçasına yükseklik denir."
+              },
+              {
+                "question": "Bir üçgende bir köşeyi karşı kenarın orta noktasına birleştiren doğru parçasına ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Yükseklik"
+                  },
+                  {
+                    "text": "Açıortay"
+                  },
+                  {
+                    "text": "Kenarortay"
+                  },
+                  {
+                    "text": "Kenar orta dikme"
+                  }
+                ],
+                "correct_answer": "Kenarortay",
+                "rationale": "Bir üçgende bir köşeyi karşı kenarın orta noktasına birleştiren doğru parçasına kenarortay denir."
+              },
+              {
+                "question": "Bir üçgenin tüm kenar uzunlukları eşitse bu üçgene ne denir?",
+                "answer_options": [
+                  {
+                    "text": "İkizkenar üçgen"
+                  },
+                  {
+                    "text": "Çeşitkenar üçgen"
+                  },
+                  {
+                    "text": "Eşkenar üçgen"
+                  },
+                  {
+                    "text": "Dik üçgen"
+                  }
+                ],
+                "correct_answer": "Eşkenar üçgen",
+                "rationale": "Üç kenarının uzunluğu birbirine eşit olan üçgene eşkenar üçgen denir. İç açıları da 60 derecedir."
+              },
+              {
+                "question": "Bir üçgenin sadece iki kenar uzunluğu eşitse bu üçgene ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Eşkenar üçgen"
+                  },
+                  {
+                    "text": "Çeşitkenar üçgen"
+                  },
+                  {
+                    "text": "İkizkenar üçgen"
+                  },
+                  {
+                    "text": "Dik üçgen"
+                  }
+                ],
+                "correct_answer": "İkizkenar üçgen",
+                "rationale": "İki kenarının uzunluğu eşit olan üçgene ikizkenar üçgen denir."
+              },
+              {
+                "question": "Bir üçgenin tüm kenar uzunlukları birbirinden farklıysa bu üçgene ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Eşkenar üçgen"
+                  },
+                  {
+                    "text": "İkizkenar üçgen"
+                  },
+                  {
+                    "text": "Çeşitkenar üçgen"
+                  },
+                  {
+                    "text": "Dik üçgen"
+                  }
+                ],
+                "correct_answer": "Çeşitkenar üçgen",
+                "rationale": "Tüm kenar uzunlukları birbirinden farklı olan üçgene çeşitkenar üçgen denir."
+              },
+              {
+                "question": "Bir dairenin alanını hesaplamak için hangi bilgiye ihtiyaç duyulur?",
+                "answer_options": [
+                  {
+                    "text": "Çapın uzunluğu"
+                  },
+                  {
+                    "text": "Yarıçapın uzunluğu"
+                  },
+                  {
+                    "text": "Çevrenin uzunluğu"
+                  },
+                  {
+                    "text": "Merkez açının ölçüsü"
+                  }
+                ],
+                "correct_answer": "Yarıçapın uzunluğu",
+                "rationale": "Bir dairenin alanı πr² formülüyle hesaplanır, burada 'r' yarıçapın uzunluğunu temsil eder."
+              },
+              {
+                "question": "Bir çemberin çevresini hesaplamak için hangi bilgiye ihtiyaç duyulur?",
+                "answer_options": [
+                  {
+                    "text": "Dairenin alanı"
+                  },
+                  {
+                    "text": "Merkez açının ölçüsü"
+                  },
+                  {
+                    "text": "Yarıçapın veya çapın uzunluğu"
+                  },
+                  {
+                    "text": "Kirişin uzunluğu"
+                  }
+                ],
+                "correct_answer": "Yarıçapın veya çapın uzunluğu",
+                "rationale": "Bir çemberin çevresi 2πr veya πd formülüyle hesaplanır, burada 'r' yarıçapı, 'd' ise çapı temsil eder."
+              },
+              {
+                "question": "Köşeleri bir çember üzerinde bulunan çokgenlere ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Teğet çokgen"
+                  },
+                  {
+                    "text": "Düzgün çokgen"
+                  },
+                  {
+                    "text": "Kirişler dörtgeni"
+                  },
+                  {
+                    "text": "Kirişler çokgeni (Çembersel çokgen)"
+                  }
+                ],
+                "correct_answer": "Kirişler çokgeni (Çembersel çokgen)",
+                "rationale": "Tüm köşeleri bir çemberin üzerinde yer alan çokgenlere kirişler çokgeni veya çembersel çokgen denir."
+              },
+              {
+                "question": "Bir açının tümlerinin ölçüsü 30° ise bu açının kendisi kaç derecedir?",
+                "answer_options": [
+                  {
+                    "text": "30°"
+                  },
+                  {
+                    "text": "60°"
+                  },
+                  {
+                    "text": "90°"
+                  },
+                  {
+                    "text": "150°"
+                  }
+                ],
+                "correct_answer": "60°",
+                "rationale": "Tümler açılar, toplamları 90° olan açılardır. 90° - 30° = 60°."
+              },
+              {
+                "question": "Bir açının bütünlerinin ölçüsü 100° ise bu açının kendisi kaç derecedir?",
+                "answer_options": [
+                  {
+                    "text": "10°"
+                  },
+                  {
+                    "text": "80°"
+                  },
+                  {
+                    "text": "100°"
+                  },
+                  {
+                    "text": "180°"
+                  }
+                ],
+                "correct_answer": "80°",
+                "rationale": "Bütünler açılar, toplamları 180° olan açılardır. 180° - 100° = 80°."
+              },
+              {
+                "question": "Kare ve dikdörtgen gibi dört kenarı olan çokgenlere genel olarak ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Üçgen"
+                  },
+                  {
+                    "text": "Beşgen"
+                  },
+                  {
+                    "text": "Dörtgen"
+                  },
+                  {
+                    "text": "Altıgen"
+                  }
+                ],
+                "correct_answer": "Dörtgen",
+                "rationale": "Dört kenarı ve dört köşesi olan çokgenlere dörtgen denir."
+              },
+              {
+                "question": "Açı ölçü birimlerinden biri olan 'radyan' hakkında ne söylenebilir?",
+                "answer_options": [
+                  {
+                    "text": "Derece ile aynı anlama gelir."
+                  },
+                  {
+                    "text": "Sadece fizik dersinde kullanılır."
+                  },
+                  {
+                    "text": "Çemberin yarıçapı kadar yay uzunluğunu gören merkez açının ölçüsüdür."
+                  },
+                  {
+                    "text": "Türkiye'de kullanılmaz."
+                  }
+                ],
+                "correct_answer": "Çemberin yarıçapı kadar yay uzunluğunu gören merkez açının ölçüsüdür.",
+                "rationale": "Radyan, bir çemberde yarıçap uzunluğuna eşit yayı gören merkez açının ölçüsüdür. Yaklaşık 57.3 dereceye eşittir."
+              },
+              {
+                "question": "Bir doğru parçası, bir düzlemi kaç noktada keser?",
+                "answer_options": [
+                  {
+                    "text": "Hiçbir zaman kesmez"
+                  },
+                  {
+                    "text": "Bir noktada"
+                  },
+                  {
+                    "text": "İki noktada"
+                  },
+                  {
+                    "text": "Sonsuz noktada"
+                  }
+                ],
+                "correct_answer": "Bir noktada",
+                "rationale": "Bir doğru parçası, genellikle bir düzlemi sadece bir noktada keser (eğer doğru parçası düzlemin üzerinde değilse)."
+              },
+              {
+                "question": "Bir düzgün altıgenin her bir iç açısının ölçüsü kaç derecedir?",
+                "answer_options": [
+                  {
+                    "text": "90°"
+                  },
+                  {
+                    "text": "108°"
+                  },
+                  {
+                    "text": "120°"
+                  },
+                  {
+                    "text": "135°"
+                  }
+                ],
+                "correct_answer": "120°",
+                "rationale": "Bir düzgün n-genin her bir iç açısı (n-2) * 180 / n formülüyle bulunur. Altıgen için (6-2) * 180 / 6 = 4 * 180 / 6 = 720 / 6 = 120 derecedir."
+              },
+              {
+                "question": "Hangi geometrik şeklin tüm kenarları birbirine paralel değildir?",
+                "answer_options": [
+                  {
+                    "text": "Kare"
+                  },
+                  {
+                    "text": "Dikdörtgen"
+                  },
+                  {
+                    "text": "Paralelkenar"
+                  },
+                  {
+                    "text": "Üçgen"
+                  }
+                ],
+                "correct_answer": "Üçgen",
+                "rationale": "Üçgen, üç kenara sahip bir çokgendir ve kenarları birbirine paralel değildir. Paralelkenar, kare ve dikdörtgenin karşılıklı kenarları paraleldir."
+              },
+              {
+                "question": "Bir noktanın koordinat düzlemindeki yerini belirlemek için kaç bilgiye ihtiyaç duyulur?",
+                "answer_options": [
+                  {
+                    "text": "Bir"
+                  },
+                  {
+                    "text": "İki"
+                  },
+                  {
+                    "text": "Üç"
+                  },
+                  {
+                    "text": "Dört"
+                  }
+                ],
+                "correct_answer": "İki",
+                "rationale": "İki boyutlu bir koordinat düzleminde bir noktanın yerini belirlemek için x ve y koordinatlarına ihtiyaç duyulur."
+              },
+              {
+                "question": "Bir çemberin merkez açısının ölçüsü 90° ise, bu açının gördüğü yayın ölçüsü kaç derecedir?",
+                "answer_options": [
+                  {
+                    "text": "45°"
+                  },
+                  {
+                    "text": "90°"
+                  },
+                  {
+                    "text": "180°"
+                  },
+                  {
+                    "text": "360°"
+                  }
+                ],
+                "correct_answer": "90°",
+                "rationale": "Merkez açının ölçüsü, gördüğü yayın ölçüsüne eşittir."
+              },
+              {
+                "question": "Bir çemberde, merkezden geçmeyen bir kirişe ne ad verilir?",
+                "answer_options": [
+                  {
+                    "text": "Çap"
+                  },
+                  {
+                    "text": "Yarıçap"
+                  },
+                  {
+                    "text": "Basit kiriş"
+                  },
+                  {
+                    "text": "Merkezsiz kiriş"
+                  }
+                ],
+                "correct_answer": "Basit kiriş",
+                "rationale": "Merkezden geçen kiriş 'çap' olarak özel bir isme sahiptir. Merkezden geçmeyen diğer tüm kirişler basit kiriş olarak adlandırılır."
+              },
+              {
+                "question": "Düzlem geometrisinde bir doğru parçası, bir doğru ve bir ışın için ortak olan özellik nedir?",
+                "answer_options": [
+                  {
+                    "text": "Hepsi sınırlıdır."
+                  },
+                  {
+                    "text": "Hepsi sonsuzdur."
+                  },
+                  {
+                    "text": "Hepsi aynı noktadan başlar."
+                  },
+                  {
+                    "text": "Hepsi düzdür."
+                  }
+                ],
+                "correct_answer": "Hepsi düzdür.",
+                "rationale": "Nokta, doğru, doğru parçası ve ışın, Öklid geometrisinin temel düz öğeleridir."
+              },
+              {
+                "question": "Bir çokgenin kenar sayısı 'n' ise, bu çokgenin dış açıları toplamı kaç derecedir?",
+                "answer_options": [
+                  {
+                    "text": "180°"
+                  },
+                  {
+                    "text": "360°"
+                  },
+                  {
+                    "text": "(n-2) * 180°"
+                  },
+                  {
+                    "text": "n * 180°"
+                  }
+                ],
+                "correct_answer": "360°",
+                "rationale": "Tüm dışbükey çokgenlerin dış açılarının toplamı her zaman 360 derecedir."
+              },
+              {
+                "question": "Aynı düzlemde yer alıp da ortak noktaları olmayan iki şekle ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Kesişen"
+                  },
+                  {
+                    "text": "Çakışık"
+                  },
+                  {
+                    "text": "Ayrık"
+                  },
+                  {
+                    "text": "Komşu"
+                  }
+                ],
+                "correct_answer": "Ayrık",
+                "rationale": "Ortak elemanı veya ortak noktası bulunmayan kümelere veya geometrik şekillere ayrık denir."
+              },
+              {
+                "question": "Bir doğru üzerinde seçilen üç noktadan biri diğer ikisinin arasında ise, bu üç nokta için ne söylenebilir?",
+                "answer_options": [
+                  {
+                    "text": "Bir üçgen oluştururlar."
+                  },
+                  {
+                    "text": "Doğrusal değildirler."
+                  },
+                  {
+                    "text": "Doğrusaldırlar."
+                  },
+                  {
+                    "text": "Bir çember oluştururlar."
+                  }
+                ],
+                "correct_answer": "Doğrusaldırlar.",
+                "rationale": "Üç veya daha fazla noktanın aynı doğru üzerinde bulunmasına 'doğrusal' denir."
+              },
+              {
+                "question": "Bir çokgenin iç açılarının toplamı formülü nedir? (n: kenar sayısı)",
+                "answer_options": [
+                  {
+                    "text": "n * 180°"
+                  },
+                  {
+                    "text": "(n+2) * 180°"
+                  },
+                  {
+                    "text": "(n-2) * 180°"
+                  },
+                  {
+                    "text": "n * 360°"
+                  }
+                ],
+                "correct_answer": "(n-2) * 180°",
+                "rationale": "Bir çokgenin iç açılarının toplamı, kenar sayısından 2 çıkarılıp 180 ile çarpılarak bulunur."
+              },
+              {
+                "question": "Bir karenin tüm iç açıları kaç derecedir?",
+                "answer_options": [
+                  {
+                    "text": "60°"
+                  },
+                  {
+                    "text": "90°"
+                  },
+                  {
+                    "text": "120°"
+                  },
+                  {
+                    "text": "180°"
+                  }
+                ],
+                "correct_answer": "90°",
+                "rationale": "Kare, dört dik açıya sahip düzgün bir dörtgendir; dolayısıyla her bir iç açısı 90 derecedir."
+              },
+              {
+                "question": "Çemberin merkezinden geçmeyen en uzun kirişe ne denir?",
+                "answer_options": [
+                  {
+                    "text": "Yarıçap"
+                  },
+                  {
+                    "text": "Çap"
+                  },
+                  {
+                    "text": "Normal kiriş"
+                  },
+                  {
+                    "text": "Böyle bir kiriş yoktur"
+                  }
+                ],
+                "correct_answer": "Böyle bir kiriş yoktur",
+                "rationale": "Bir çemberdeki en uzun kiriş her zaman merkezden geçen çaptır. Merkezden geçmeyen bir kiriş, çaptan daha kısa olacaktır."
+              },
+              {
+                "question": "Bir küpün yüzeyleri hangi geometrik şekillerden oluşur?",
+                "answer_options": [
+                  {
+                    "text": "Üçgen"
+                  },
+                  {
+                    "text": "Dikdörtgen"
+                  },
+                  {
+                    "text": "Kare"
+                  },
+                  {
+                    "text": "Çember"
+                  }
+                ],
+                "correct_answer": "Kare",
+                "rationale": "Bir küp, altı eş karesel yüzden oluşan üç boyutlu bir cisimdir."
+              },
+              {
+                "question": "Açı ölçü birimlerinden biri olan 'grad' (gon) hakkında ne söylenebilir?",
+                "answer_options": [
+                  {
+                    "text": "Bir tam açı 100 graddır."
+                  },
+                  {
+                    "text": "Bir tam açı 200 graddır."
+                  },
+                  {
+                    "text": "Bir tam açı 400 graddır."
+                  },
+                  {
+                    "text": "Sadece denizcilikte kullanılır."
+                  }
+                ],
+                "correct_answer": "Bir tam açı 400 graddır.",
+                "rationale": "Grad (veya gon), açıyı 400 birime bölen bir ölçü birimidir. Bir tam açı 400 grad, bir dik açı ise 100 graddır."
+              }
+            
+        ]
+    }
+   
